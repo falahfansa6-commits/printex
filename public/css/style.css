@@ -1,0 +1,1532 @@
+/* ========================= */
+/* STYLE NAVBAR */
+/* ========================= */
+      /* --- 1. PENGATURAN WARNA & FONT --- */
+       :root {
+    --warna-tombol: #FF4500;
+    --warna-teks-tombol: #ffffff;
+    --warna-teks-menu: #333333;
+    --warna-garis: #e0e0e0;
+    --font-utama: Arial, sans-serif;
+}
+
+body {
+    margin: 0;
+    font-family: var(--font-utama);
+    background-color: #f9f9f9;
+}
+
+/* --- 2. STRUKTUR NAVBAR --- */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #ffffff;
+    padding: 1px 24px;
+    border-bottom: 1px solid var(--warna-garis);
+    height: 80px;          /* tinggi navbar tetap */
+    overflow: visible;
+}
+
+/* --- BAGIAN LOGO GAMBAR --- */
+.logo-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.logo-img {
+    height: 150px;
+    width: auto;
+    display: block;
+    object-fit: contain;
+
+    /* memperbesar tanpa mengubah navbar */
+    transform: scale(1.3);
+    transform-origin: left center;
+}
+
+        /* Kolom Pencarian */
+        .search-container {
+            flex: 1;
+            max-width: 400px; 
+            margin: 0 20px;
+        }
+
+        .search-input {
+            width: 90%;
+            padding: 8px 16px;
+            border: 1px solid #cccccc;
+            border-radius: 20px; 
+            font-size: 14px;
+            outline: none;
+        }
+
+        /* Menu dan Tombol Kanan */
+        .menu-container {
+            display: flex;
+            align-items: center;
+            gap: 20px; 
+        }
+
+        .menu-item {
+            text-decoration: none;
+            color: var(--warna-teks-menu);
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .menu-item:hover {
+            color: var(--warna-tombol); 
+        }
+
+        /* Tombol Utama */
+        .btn-utama {
+            background-color: var(--warna-tombol);
+            color: var(--warna-teks-tombol);
+            border: none;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .btn-utama:hover {
+            opacity: 0.9;
+        }
+ 
+/* SLIDER */
+
+.slider-container{
+    width:100%;
+    overflow:hidden;
+    position:relative;
+}
+
+.slider{
+    display:flex;
+    transition:0.5s;
+}
+
+.slide{
+    min-width:100%;
+}
+
+.slide img{
+    width:100%;
+    height:450px;
+    object-fit:cover;
+}
+
+.prev,
+.next{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    background:red;
+    color:white;
+    border:none;
+    padding:15px;
+    cursor:pointer;
+    font-size:20px;
+}
+
+.prev{
+    left:10px;
+}
+
+.next{
+    right:10px;
+}
+
+/* TENTANG */
+
+.container{
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.text{
+    width: 40%;
+    padding: 148px;
+    background: #f5f5f5;
+}
+
+.text h1{
+    color: red;
+    font-size: 60px;
+    line-height: 60px;
+}
+
+.text p{
+    font-size: 22px;
+    line-height: 35px;
+}
+
+.gambar{
+    width: 60%;
+}
+
+.gambar img{
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+}
+
+
+ /* --- CSS KHUSUS WIDGET OUR VALUES (ANTI-BENTROK) --- */
+        
+        .ov-section-wrapper {
+            font-family: 'Inter', sans-serif;
+            width: 100%;
+            background-color: #ffffff;
+            display: flex;
+        }
+
+        /* Reset lokal khusus di dalam wrapper */
+        .ov-section-wrapper *, 
+        .ov-section-wrapper *::before, 
+        .ov-section-wrapper *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* --- SISI KIRI: FOTO & JUDUL UTAMA --- */
+        .ov-left-side {
+            flex: 1;
+            max-width: 35%; /* Proporsi area kiri */
+            display: flex;
+            flex-direction: column;
+            background-color: #ffffff;
+        }
+
+        .ov-image-container {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 4 / 3; /* Menjaga proporsi foto mas-mas baju batik */
+            overflow: hidden;
+        }
+
+        .ov-profile-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .ov-title-container {
+            padding: 60px 40px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .ov-main-title {
+            color: #e11d24;
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            line-height: 1;
+        }
+
+        /* Tombol lingkaran merah dengan panah putih */
+        .ov-arrow-button {
+            background-color: #e11d24;
+            color: #ffffff;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        /* --- SISI KANAN: KONTEN MERAH (2 KOLOM VALUE) --- */
+        .ov-right-side {
+            flex: 2;
+            background-color: #e11d24; /* Background merah dominan */
+            color: #ffffff;
+            padding: 60px 50px;
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Membagi jadi 2 kolom */
+            gap: 40px 50px;
+            align-content: start;
+        }
+
+        /* Box untuk setiap poin value */
+        .ov-card {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        /* Mengatur agar poin ke-5 (Pelayanan Profesional) memanjang penuh jika dibutuhkan */
+        .ov-card-fullwidth {
+            grid-column: 1 / -1; /* Membentang 2 kolom */
+            max-width: 90%;
+        }
+
+        .ov-card-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .ov-card-text {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.9); /* Putih agak transparan agar nyaman dibaca */
+            text-align: justify;
+        }
+
+        /* Garis pemisah horizontal putih tipis */
+        .ov-divider {
+            grid-column: 1 / -1;
+            border: 0;
+            height: 1px;
+            background-color: rgba(255, 255, 255, 0.3);
+            margin: 10px 0;
+        }
+
+        /* --- RESPONSIVE UNTUK LAYAR HP / TABLET --- */
+        @media (max-width: 992px) {
+            .ov-section-wrapper {
+                flex-direction: column; /* Menjadi tumpukan vertikal ke bawah */
+            }
+            .ov-left-side {
+                max-width: 100%;
+            }
+            .ov-title-container {
+                padding: 40px 20px;
+            }
+            .ov-main-title {
+                font-size: 2.5rem;
+            }
+            .ov-right-side {
+                grid-template-columns: 1fr; /* Menjadi 1 kolom saja di HP */
+                padding: 40px 20px;
+                gap: 30px;
+            }
+            .ov-card-fullwidth {
+                max-width: 100%;
+            }
+            .ov-divider {
+                display: none; /* Menyembunyikan garis pembatas di HP agar tidak terlalu penuh */
+            }
+        }
+
+
+
+/*layanan*/
+ * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Mengisolasi reset dasar agar hanya berlaku di dalam container katalog */
+        .ks-full-page-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            width: 100%;
+            height: 100vh; /* 100% dari tinggi viewport */
+            background-color: #000000;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Reset lokal agar elemen di dalam tidak terpengaruh CSS global web Anda */
+        .ks-full-page-container *, 
+        .ks-full-page-container *::before, 
+        .ks-full-page-container *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* ==================== KIRI ATAS: GAMBAR MESIN ==================== */
+        .ks-box-top-left {
+            grid-column: 1 / 2;
+            grid-row: 1 / 2;
+            background-image: url('mesin.png'); 
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* ==================== KANAN ATAS: LIST PRODUK ==================== */
+        .ks-box-top-right {
+            grid-column: 2 / 3;
+            grid-row: 1 / 2;
+            background-color: #d31212; /* Merah sesuai brosur */
+            color: #ffffff;
+            padding: 5% 6%; /* Menggunakan persentase agar adaptif */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .ks-products-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: calc(1.2rem + 1vw); /* Teks dinamis sesuai ukuran layar */
+            font-weight: bold;
+            margin-bottom: 4%;
+            text-transform: lowercase;
+        }
+
+        /* Container gambar lingkaran */
+        .ks-arrow-image-container {
+            width: 60px;
+            height: 60px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .ks-arrow-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .ks-products-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4% 6%;
+        }
+
+        .ks-product-item h3 {
+            font-size: calc(0.9rem + 0.4vw);
+            margin-bottom: 6px;
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        .ks-product-item p {
+            font-size: calc(0.75rem + 0.2vw);
+            line-height: 1.4;
+            opacity: 0.9;
+            color: #ffffff;
+        }
+
+        /* ==================== KIRI BAWAH: DATA PROSES ==================== */
+        .ks-box-bottom-left {
+            grid-column: 1 / 2;
+            grid-row: 2 / 3;
+            background-color: #ffffff;
+            padding: 6% 8%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .ks-process-title h2 {
+            color: #d31212;
+            font-size: calc(1.8rem + 1vw);
+            font-weight: bold;
+            margin-bottom: 2px;
+            display: flex;
+            align-items: baseline;
+        }
+
+        .ks-process-title h2 span.ks-number {
+            font-size: calc(1rem + 0.5vw);
+            margin-right: 15px;
+            border-bottom: 2px solid #d31212;
+            padding-bottom: 2px;
+            color: #d31212;
+        }
+
+        .ks-capacity-text {
+            color: #d31212;
+            font-size: calc(0.8rem + 0.3vw);
+            font-weight: bold;
+            text-decoration: underline;
+            display: block;
+            margin-bottom: 4%;
+        }
+
+        .ks-process-desc {
+            color: #444444;
+            font-size: calc(0.85rem + 0.3vw);
+            line-height: 1.5;
+            max-width: 85%;
+        }
+
+        /* Menggeser isi footer proses ke ujung kanan area putih */
+        .ks-process-footer {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end; 
+            gap: 12px;
+        }
+
+        .ks-process-footer span {
+            color: #d31212;
+            font-size: calc(1.1rem + 0.5vw);
+            font-weight: bold;
+            text-transform: lowercase;
+        }
+
+        /* ==================== KANAN BAWAH: KOLASE HASIL PRODUK ==================== */
+        .ks-box-bottom-right {
+            grid-column: 2 / 3;
+            grid-row: 2 / 3;
+            background-image: url('baju.png'); 
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* ==================== RESPONSIVE KHUSUS MOBILE ==================== */
+        @media (max-width: 768px) {
+            .ks-full-page-container {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
+                height: auto;
+            }
+            .ks-box-top-left, .ks-box-bottom-right {
+                height: 45vh;
+            }
+            .ks-box-top-left { order: 1; }
+            .ks-box-top-right { order: 2; padding: 40px 30px; }
+            .ks-box-bottom-left { order: 3; padding: 40px 30px; gap: 40px; }
+            .ks-box-bottom-right { order: 4; }
+            
+            .ks-products-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+
+      /*pelayanan printex*/  
+      * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #ffffff;
+            color: #222;
+        }
+
+        /* ==========================================================================
+           SECTION 1: PRINTEX HERO & SERVICES
+           ========================================================================== */
+        .printex-section {
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            border: 3px solid #333; 
+            margin-bottom: 0; 
+        }
+
+        .printex-top {
+            flex: 1;
+            background: #f3f3f3;
+            padding: 60px 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 50px;
+            border-bottom: 3px solid #333; 
+        }
+
+        .printex-left {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .printex-logo {
+            width: 200px;
+            height: 200px;
+            margin-bottom: 40px;
+            border: 1px dashed #ccc; 
+            padding: 10px;
+        }
+
+        .printex-logo img {
+            width: 100%;
+            display: block;
+        }
+
+        .printex-title {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .printex-title h1 {
+            font-size: 90px;
+            line-height: 0.9;
+            color: #e00000;
+            font-weight: bold;
+        }
+
+        .printex-arrow {
+            width: 80px;
+            height: 80px;
+        }
+
+        .printex-arrow img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        .printex-right {
+            flex: 1;
+            min-width: 300px;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .printex-desc {
+            max-width: 420px;
+            color: #efefef;
+            font-size: 16px;
+            line-height: 2;
+            text-align: justify;
+            border-left: 3px solid #e00000; 
+            padding-left: 20px;
+        }
+
+        .printex-services {
+            background: #e00000;
+            padding: 70px 80px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 50px;
+        }
+
+        .printex-card {
+            color: #fff;
+            transition: 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.3); 
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .printex-card h3 {
+            font-size: 35px;
+            margin-bottom: 25px;
+            border-bottom: 2px solid #fff; 
+            padding-bottom: 10px;
+        }
+
+        .printex-card p {
+            font-size: 16px;
+            line-height: 2;
+            text-align: justify;
+        }
+
+        .printex-card:hover {
+            transform: translateY(-5px);
+            border-color: #fff; 
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* ==========================================================================
+           SECTION 2: KATALOG GRID (01 PRINT SUBLIM)
+           ========================================================================== */
+        .ks-full-page-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            width: 100%;
+            height: 100vh;
+            background-color: #333333;
+            border-left: 3px solid #333;
+            border-right: 3px solid #333;
+            border-bottom: 3px solid #333;
+            gap: 3px; 
+            margin-bottom: 0; 
+        }
+
+        .ks-box-top-left {
+            grid-column: 1 / 2;
+            grid-row: 1 / 2;
+            background-image: url('mesin.png'); 
+            background-size: cover;
+            background-position: center;
+        }
+
+        .ks-box-top-right {
+            grid-column: 2 / 3;
+            grid-row: 1 / 2;
+            background-color: #d31212;
+            color: #ffffff;
+            padding: 5% 6%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .ks-products-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: calc(1.2rem + 1vw);
+            font-weight: bold;
+            margin-bottom: 4%;
+            text-transform: lowercase;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+            padding-bottom: 10px;
+        }
+
+        .ks-arrow-image-container {
+            width: 60px;
+            height: 60px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .ks-arrow-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .ks-products-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4% 6%;
+        }
+
+        .ks-product-item {
+            border: 1px solid rgba(255, 255, 255, 0.2); 
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .ks-product-item h3 {
+            font-size: calc(0.9rem + 0.4vw);
+            margin-bottom: 6px;
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        .ks-product-item p {
+            font-size: calc(0.75rem + 0.2vw);
+            line-height: 1.4;
+            opacity: 0.9;
+            color: #ffffff;
+        }
+
+        .ks-box-bottom-left {
+            grid-column: 1 / 2;
+            grid-row: 2 / 3;
+            background-color: #ffffff;
+            padding: 6% 8%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .ks-process-title h2 {
+            color: #d31212;
+            font-size: calc(1.8rem + 1vw);
+            font-weight: bold;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: baseline;
+        }
+
+        .ks-process-title h2 span.ks-number {
+            font-size: calc(1rem + 0.5vw);
+            margin-right: 15px;
+            border-bottom: 2px solid #d31212;
+            padding-bottom: 2px;
+            color: #d31212;
+        }
+
+        .ks-process-desc {
+            color: #444444;
+            font-size: calc(0.85rem + 0.3vw);
+            line-height: 1.5;
+            max-width: 85%;
+            border-left: 2px solid #d31212;
+            padding-left: 15px;
+        }
+
+        .ks-process-footer {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end; 
+            gap: 12px;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+        }
+
+        .ks-process-footer span {
+            color: #d31212;
+            font-size: calc(1.1rem + 0.5vw);
+            font-weight: bold;
+            text-transform: lowercase;
+        }
+
+        .ks-box-bottom-right {
+            grid-column: 2 / 3;
+            grid-row: 2 / 3;
+            background-image: url('baju.png'); 
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* ==========================================================================
+           SECTION 3: WIDGET PROSES (02 SABLON DTF)
+           ========================================================================== */
+        .ptx-section-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr; 
+            width: 100%;
+            height: 100vh; 
+            background-color: #ffffff;
+            overflow: hidden;
+            border-left: 3px solid #333;
+            border-right: 3px solid #333;
+            border-bottom: 3px solid #333;
+            margin-bottom: 0; 
+        }
+
+        .ptx-left-side {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 60px 80px; 
+            background-color: #ffffff;
+            border-right: 3px solid #333; /* Border tebal tengah dipertahankan */
+        }
+
+        .ptx-header-wrapper {
+            display: flex;
+            justify-content: flex-end;
+            width: 100%;
+        }
+
+        .ptx-process-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .ptx-arrow-icon {
+            width: 36px;
+            height: 36px;
+            display: block;
+        }
+
+        .ptx-process-text {
+            font-size: 38px;
+            font-weight: bold;
+            color: #d10000;
+            letter-spacing: -1px;
+            line-height: 1;
+            text-transform: lowercase;
+        }
+
+        .ptx-content-body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-top: auto;   
+            margin-bottom: auto;
+        }
+
+        /* Grouping Judul dan Nomor Sejajar Sesuai Gambar Baru */
+        .ptx-title-group {
+            display: flex;
+            align-items: flex-end; /* Membuat nomor dan teks sejajar di dasar */
+            gap: 15px;
+            margin-bottom: 20px; /* Jarak proporsional langsung ke deskripsi */
+        }
+
+        .ptx-main-number {
+            font-size: 28px;
+            font-weight: bold;
+            color: #d10000;
+            line-height: 1.1;
+            border-bottom: 2px solid #d10000; 
+            padding-bottom: 2px;
+            flex-shrink: 0;
+        }
+
+        .ptx-main-title {
+            font-size: 55px; 
+            font-weight: bold;
+            color: #d10000;
+            line-height: 1;
+            letter-spacing: -1px;
+        }
+
+        .ptx-main-desc {
+            font-size: 18px;
+            color: #555555;
+            line-height: 1.8;
+            max-width: 460px;
+            font-weight: 400;
+            padding-left: 48px; /* Indentasi teks agar lurus dengan judul setelah nomor */
+            text-align: justify;
+        }
+
+        /* Sisi Kanan Gambar Berlatar Merah */
+        .ptx-right-side-image {
+            background-color: #d10000; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 50px;
+            height: 100%; 
+        }
+
+        .ptx-picture-holder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ptx-showcase-img {
+            max-width: 100%;
+            max-height: 90%; 
+            object-fit: contain;
+        }
+
+        /* ==========================================================================
+           SECTION 4: KAOS PREMIUM (03 KAOS PREMIUM)
+           ========================================================================== */
+        .kp-main-card-container {
+            display: grid; 
+            grid-template-columns: 1fr 1fr;
+            width: 100%;
+            height: 100vh; 
+            background-color: #ffffff;
+            overflow: hidden;
+            border-left: 3px solid #333;
+            border-right: 3px solid #333;
+            border-bottom: 3px solid #333;
+        }
+
+        .kp-text-section {
+            padding: 60px 80px; 
+            display: flex;
+            flex-direction: column;
+            justify-content: center; 
+            border-right: 3px solid #333; /* Border tebal tengah dipertahankan */
+        }
+
+        .kp-title-group {
+            display: flex;
+            align-items: flex-end;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .kp-badge-number {
+            font-size: 28px;
+            font-weight: bold;
+            color: #e11d24;
+            border-bottom: 2px solid #e11d24;
+            padding-bottom: 2px;
+            line-height: 1.1;
+            flex-shrink: 0;
+        }
+
+        .kp-main-title {
+            font-size: 55px; 
+            font-weight: bold;
+            color: #e11d24;
+            line-height: 1;
+            letter-spacing: -1px;
+        }
+
+        .kp-paragraph-desc {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #555555;
+            max-width: 460px;
+            padding-left: 48px; /* Disamakan skalanya dengan section DTF */
+            text-align: justify;
+        }
+
+        .kp-image-section {
+            background-color: #ffffff; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 50px;
+            height: 100%;
+        }
+
+        .kp-picture-holder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .kp-showcase-img {
+            max-width: 100%;
+            max-height: 90%; 
+            object-fit: contain;
+        }
+
+        /* ==========================================================================
+           RESPONSIVE BREAKPOINTS (MOBILE & TABLET FLAT)
+           ========================================================================== */
+        @media(max-width: 992px) {
+            .printex-top, .printex-services { padding: 50px; }
+            .printex-title h1 { font-size: 70px; }
+        }
+
+        @media (max-width: 768px) {
+            .printex-top { flex-direction: column; align-items: flex-start; padding: 40px 25px; }
+            .printex-services { padding: 40px 25px; }
+            .printex-title h1 { font-size: 52px; }
+            .printex-arrow { width: 60px; height: 60px; }
+            .printex-desc { max-width: 100%; font-size: 14px; }
+
+            .ks-full-page-container { grid-template-columns: 1fr; grid-template-rows: auto; height: auto; }
+            .ks-box-top-left, .ks-box-bottom-right { height: 45vh; }
+            .ks-box-top-right { padding: 40px 30px; }
+            .ks-box-bottom-left { padding: 40px 30px; gap: 40px; }
+            .ks-products-grid { grid-template-columns: 1fr; gap: 20px; }
+
+            .ptx-section-container, .kp-main-card-container { grid-template-columns: 1fr; height: auto; }
+            .ptx-left-side, .kp-text-section { padding: 40px 25px; border-right: none; }
+            .ptx-left-side { border-bottom: 3px solid #333; }
+            .kp-text-section { border-bottom: 3px solid #333; }
+            .ptx-main-desc, .kp-paragraph-desc { padding-left: 0; }
+            .ptx-header-wrapper { justify-content: flex-start; }
+            .ptx-right-side-image, .kp-image-section { height: 50vh; padding: 30px; }
+        }
+
+      
+       
+/* Lokasi*/
+  /* --- CSS KHUSUS WIDGET LOKASI KAMI (AMAN DARI BENTROK) --- */
+        
+        /* Memastikan font pembungkus utama menggunakan Inter tanpa merusak body global */
+        .lk-main-wrapper {
+            font-family: 'Inter', sans-serif;
+            background-color: #ffffff;
+            width: 100%;
+        }
+
+        /* Memastikan box-sizing aman untuk elemen di dalam wrapper */
+        .lk-main-wrapper *, 
+        .lk-main-wrapper *::before, 
+        .lk-main-wrapper *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* --- BAGIAN HEADER BANNER --- */
+        .lk-header-banner {
+            background-color: #e11d24; /* Warna merah dominan */
+            color: #ffffff;
+            padding: 40px 10%;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            width: 100%;
+        }
+
+        .lk-header-banner h1 {
+            color: #ffffff !important; /* Memaksa warna putih jika ada bentrok h1 global */
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -1px;
+        }
+
+        /* Lingkaran panah putih */
+        .lk-arrow-circle {
+            background-color: #ffffff;
+            color: #e11d24;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: bold;
+            transform: rotate(45deg);
+            flex-shrink: 0;
+        }
+
+        /* --- BAGIAN GRID LOKASI --- */
+        .lk-container {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        .lk-location-grid {
+            display: grid;
+            /* Membuat kolom sejajar otomatis responsif */
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 40px 30px;
+        }
+
+        .lk-location-item {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        /* Bagian Judul Kota (Icon + Nama) */
+        .lk-location-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #e11d24;
+            font-size: 1.6rem;
+            font-weight: 700;
+        }
+
+        /* Icon Pin Lokasi SVG */
+        .lk-pin-icon {
+            width: 24px;
+            height: 24px;
+            fill: #e11d24;
+            flex-shrink: 0;
+        }
+
+        /* Bagian Teks Alamat */
+        .lk-location-address {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: #222222;
+        }
+
+        /* Responsive khusus Handphone */
+        @media (max-width: 768px) {
+            .lk-header-banner {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 30px 5%;
+            }
+            .lk-header-banner h1 {
+                font-size: 2.5rem;
+            }
+            .lk-location-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        /*printing solution*/
+         .pts-section-container {
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            align-items: center;
+            width: 100%;
+            max-width: 1200px;
+            background-color: #ffffff;
+            margin: 40px auto;
+            padding: 40px 20px;
+            gap: 50px;
+        }
+
+        /* Reset lokal khusus di dalam kontainer PTS */
+        .pts-section-container *, 
+        .pts-section-container *::before, 
+        .pts-section-container *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* --- SISI KIRI: JUDUL UTAMA BESAR --- */
+        .pts-left-title {
+            flex: 1;
+            max-width: 40%;
+        }
+
+        .pts-main-heading {
+            color: #e11d24; /* Warna merah sesuai brand */
+            font-size: calc(2.5rem + 1vw); /* Ukuran teks dinamis dan proporsional */
+            font-weight: 800;
+            line-height: 1.05;
+            letter-spacing: -1.5px;
+        }
+
+        /* --- SISI KANAN: DESKRIPSI (TULISAN KECIL) --- */
+        .pts-right-description {
+            flex: 1.5;
+        }
+
+        .pts-small-text {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #000000; /* DIUBAH JADI HITAM sesuai permintaan Anda */
+            text-align: justify;
+        }
+
+        /* Gaya khusus untuk teks yang diberi garis bawah merah */
+        .pts-highlight-link {
+            color: #e11d24;
+            text-decoration: underline;
+            font-weight: 700;
+        }
+
+            /* --- CSS KHUSUS WIDGET KAOS PREMIUM (ANTI-BENTROK & TANPA BAYANGAN) --- */
+        
+       
+/* FOOTER */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+/* ========================= */
+/* FOOTER PRINTEX */
+/* ========================= */
+
+.printex-footer{
+    background:#0f1014;
+    color:#ffffff;
+    padding:50px 8%;
+    font-family:Arial, sans-serif;
+    position:relative;
+    overflow:hidden;
+}
+
+/* Background efek */
+
+.printex-footer::before{
+    content:"";
+    position:absolute;
+    width:400px;
+    height:400px;
+    border-radius:50%;
+    border:1px solid rgba(255,0,0,0.12);
+    left:-180px;
+    bottom:-180px;
+}
+
+.printex-footer::after{
+    content:"";
+    position:absolute;
+    width:260px;
+    height:260px;
+    background:
+    radial-gradient(red 2px, transparent 2px);
+    background-size:18px 18px;
+    opacity:0.08;
+    right:-80px;
+    top:0;
+}
+
+/* ========================= */
+/* CONTAINER */
+/* ========================= */
+
+.printex-container{
+    display:grid;
+    grid-template-columns:
+    1.5fr
+    1fr
+    1fr
+    1.2fr;
+
+    gap:55px;
+    position:relative;
+    z-index:2;
+}
+
+/* ========================= */
+/* LOGO */
+/* ========================= */
+
+.printex-logo{
+    width:90px;
+    margin-bottom:18px;
+}
+
+.printex-logo img{
+    width:100%;
+    display:block;
+    object-fit:contain;
+}
+
+/* ========================= */
+/* TEXT LOGO */
+/* ========================= */
+
+.printex-logo-text{
+    width:230px;
+    margin-bottom:15px;
+}
+
+.printex-logo-text img{
+    width:100%;
+    display:block;
+    object-fit:contain;
+}
+
+/* ========================= */
+/* DESKRIPSI */
+/* ========================= */
+
+.printex-desc{
+    color:#ffffff;
+    line-height:1.9;
+    margin-bottom:35px;
+    max-width:420px;
+}
+
+/* ========================= */
+/* FITUR */
+/* ========================= */
+
+.printex-feature{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:20px;
+}
+
+
+
+/* ========================= */
+/* JUDUL */
+/* ========================= */
+
+.printex-title{
+    font-size:28px;
+    margin-bottom:30px;
+    position:relative;
+}
+
+.printex-title::after{
+    content:"";
+    width:60px;
+    height:3px;
+    background:#ff0000;
+    position:absolute;
+    left:0;
+    bottom:-10px;
+}
+
+/* ========================= */
+/* MENU */
+/* ========================= */
+
+.printex-links{
+    list-style:none;
+}
+
+.printex-links li{
+    margin-bottom:18px;
+}
+
+.printex-links a{
+    color:#d8d8d8;
+    text-decoration:none;
+    transition:0.3s;
+}
+
+.printex-links a:hover{
+    color:#ff0000;
+    padding-left:8px;
+}
+
+/* ========================= */
+/* KONTAK */
+/* ========================= */
+
+.printex-contact{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
+.printex-contact-item{
+    display:flex;
+    gap:10px;
+    color:#d8d8d8;
+    line-height:1.7;
+}
+
+.printex-contact-item i{
+    color:#ff0000;
+    margin-top:5px;
+}
+
+/* ========================= */
+/* NEWSLETTER */
+/* ========================= */
+
+.printex-newsletter{
+    background:rgba(255,255,255,0.03);
+    border:1px solid rgba(255,255,255,0.08);
+    padding:30px;
+    border-radius:24px;
+    backdrop-filter:blur(8px);
+}
+
+.printex-newsletter p{
+    color:#bdbdbd;
+    line-height:1.8;
+    margin-bottom:25px;
+}
+
+.printex-form{
+    display:flex;
+    gap:12px;
+}
+
+.printex-form input{
+    flex:1;
+    height:55px;
+    border:none;
+    outline:none;
+    background:#1a1c22;
+    border-radius:12px;
+    padding:0 18px;
+    color:#fff;
+}
+
+.printex-form button{
+    border:none;
+    background:#ff0000;
+    color:#fff;
+    padding:0 28px;
+    border-radius:12px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.printex-form button:hover{
+    background:#d90000;
+}
+
+/* ========================= */
+/* BOTTOM */
+/* ========================= */
+
+.printex-bottom{
+    margin-top:60px;
+    padding-top:30px;
+    border-top:1px solid rgba(255,255,255,0.08);
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:20px;
+
+    position:relative;
+    z-index:2;
+}
+
+.printex-copy{
+    color:#9d9d9d;
+}
+
+.printex-social{
+    display:flex;
+    gap:15px;
+}
+
+.printex-social a{
+    width:45px;
+    height:45px;
+    background:#1a1c22;
+    color:#fff;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+    text-decoration:none;
+    transition:0.3s;
+}
+
+.printex-social a:hover{
+    background:#ff0000;
+    transform:translateY(-4px);
+}
+/* Styling untuk bungkus tautan (link) */
+.printex-social .social-item {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;         /* Lebar area ikon */
+    height: 45px;        /* Tinggi area ikon */
+    border-radius: 50%;  /* Membuat background menjadi bulat sempurna */
+    background-color: #f0f0f0; /* Warna background default sebelum di-hover */
+    transition: all 0.3s ease; /* Efek transisi halus saat di-hover */
+}
+
+/* Styling khusus untuk gambar di dalam link */
+.printex-social .social-item img {
+    width: 24px;         /* Ukuran lebar gambar/ikon */
+    height: 24px;        /* Ukuran tinggi gambar/ikon */
+    object-fit: contain; /* Memastikan gambar tidak penyet/distorsi */
+}
+
+/* Efek interaktif saat kursor diarahkan (Hover) */
+.printex-social .social-item:hover {
+    background-color: #ff0d0d; /* Berubah warna latar belakang saat di-hover */
+    transform: translateY(-3px); /* Efek sedikit terangkat ke atas */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Memberikan bayangan halus */
+}
+/* ========================= */
+/* RESPONSIVE */
+/* ========================= */
+
+@media(max-width:1100px){
+
+    .printex-container{
+        grid-template-columns:1fr 1fr;
+    }
+
+}
+
+@media(max-width:700px){
+
+    .printex-footer{
+        padding:60px 25px;
+    }
+
+    .printex-container{
+        grid-template-columns:1fr;
+    }
+
+    .printex-feature{
+        grid-template-columns:1fr;
+    }
+
+    .printex-form{
+        flex-direction:column;
+    }
+
+    .printex-form button{
+        height:55px;
+    }
+
+    .printex-bottom{
+        flex-direction:column;
+        text-align:center;
+    }
+
+}
