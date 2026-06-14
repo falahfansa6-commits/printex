@@ -1530,3 +1530,393 @@ body {
     }
 
 }
+    /* =========================================================================
+           1. CSS UNTUK SEKSI FORMULIR HUBUNGI KAMI 
+           ========================================================================== */
+        
+       .hk-section-wrapper {
+    font-family: 'Inter', sans-serif;
+    width: 100%;
+    max-width: 1200px;
+    margin: 40px auto 10px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    /* MEMBUAT KONTEN DI DALAMNYA RATA TENGAH */
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    text-align: center;
+}
+
+/* Reset lokal khusus di dalam struktur kelas form */
+.hk-section-wrapper *, 
+.hk-section-wrapper *::before, 
+.hk-section-wrapper *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Badge kecil atas "KONTAK KAMI" */
+.hk-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border: 1px solid #e0e0e0;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #0b2f23;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+}
+
+/* Titik hijau penanda aktif di dalam badge */
+.hk-badge::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background-color: #10b981;
+    border-radius: 50%;
+}
+
+/* Judul Utama "Hubungi Kami" */
+.hk-main-title {
+    font-size: 3rem;
+    font-weight: 800;
+    color: #0b2f23;
+    margin-bottom: 35px;
+    line-height: 1.1;
+    width: 100%;
+}
+
+/* Garis dekoratif hijau di bawah kata "Kami" */
+.hk-title-underline {
+    position: relative;
+    display: inline-block;
+}
+
+.hk-title-underline::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 4px;
+    width: 100%;
+    height: 4px;
+    background-color: #10b981;
+}
+
+/* Kotak Card Area Form */
+.hk-form-card {
+    background-color: #f8faf9;
+    border: 1px solid #eef2f0;
+    border-top: 3px solid #0b2f23;
+    border-radius: 12px;
+    padding: 30px;
+    width: 100%;
+    max-width: 650px; 
+    margin: 0 auto; /* MEMASTIKAN CARD FORM BERADA DI TENGAH */
+    text-align: left; /* Mengembalikan teks di dalam form agar tetap rata kiri demi kenyamanan membaca */
+}
+
+/* Group kolom input */
+.hk-input-group {
+    margin-bottom: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.hk-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #5c726a;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.hk-required {
+    color: #10b981;
+    margin-left: 2px;
+}
+
+.hk-optional {
+    color: #a3b3ac;
+    text-transform: lowercase;
+    font-weight: 400;
+}
+
+.hk-input-field,
+.hk-textarea-field {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid #d1ded8;
+    background-color: #ffffff;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    color: #0b2f23;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.hk-textarea-field {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.hk-input-field:focus,
+.hk-textarea-field:focus {
+    border-color: #10b981;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+.hk-input-field::placeholder,
+.hk-textarea-field::placeholder {
+    color: #b3c2bb;
+}
+
+.hk-form-note {
+    font-size: 0.8rem;
+    color: #788e85;
+    line-height: 1.4;
+    margin-top: 10px;
+}
+
+.hk-btn-submit {
+    width: 100%;
+    background-color: #0b2f23;
+    color: #ffffff;
+    border: none;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.2s ease;
+}
+
+.hk-btn-submit:hover {
+    background-color: #114735;
+}
+
+
+/* ==========================================================================
+   2. CSS UNTUK SEKSI GRID KARTU KONTAK (ANTI-BENTROK)
+   ========================================================================== */
+
+.ic-cards-section-wrapper {
+    font-family: 'Inter', sans-serif;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto 40px auto;
+    padding: 0 20px 20px 20px;
+    background-color: #ffffff;
+}
+
+/* Reset lokal khusus di dalam struktur kelas kartu kontak */
+.ic-cards-section-wrapper *, 
+.ic-cards-section-wrapper *::before, 
+.ic-cards-section-wrapper *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Sistem Grid Utama untuk 4 Kotak Kontak */
+.ic-cards-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 24px;
+}
+
+/* Desain Dasar Kartu Konten */
+.ic-contact-card {
+    background-color: #ffffff;
+    border: 1px solid #eef2f0;
+    border-radius: 16px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 200px;
+    text-align: left; /* Memastikan konten kartu kontak tetap rapi menghadap kiri */
+}
+
+.ic-contact-card.ic-featured-green {
+    background-color: #e11d24; /* Mengubah hijau gelap (#0b2f23) menjadi MERAH */
+    border: none;
+    color: #ffffff;
+}
+
+/* Kotak Bingkai Ikon Mini */
+.ic-card-icon-box {
+    width: 44px;
+    height: 44px;
+    background-color: #f3f7f5;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: #2f0b0b;
+    margin-bottom: 20px;
+}
+
+.ic-featured-green .ic-card-icon-box {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+}
+
+/* Judul Label Identitas (Email, Kantor, dll) */
+.ic-card-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #10b981;
+    margin-bottom: 6px;
+}
+
+/* Teks Alamat atau Informasi Inti */
+.ic-card-main-info {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #0b2f23;
+    line-height: 1.3;
+    margin-bottom: 8px;
+}
+
+.ic-featured-green .ic-card-main-info {
+    color: #ffffff;
+}
+
+/* Paragraf Keterangan Kecil */
+.ic-card-sub-desc {
+    font-size: 0.9rem;
+    color: #1a1d1c;
+    margin-bottom: 20px;
+    line-height: 1.4;
+}
+
+.ic-featured-green .ic-card-sub-desc {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Link Aksi Tautan di Kaki Kartu */
+.ic-card-action-link {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #0b2f23;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: auto;
+}
+
+.ic-card-action-link:hover {
+    text-decoration: underline;
+}
+
+.ic-featured-green .ic-card-action-link {
+    color: #10b981;
+}
+
+.ic-link-green {
+    color: #10b981 !important;
+}
+
+/* Bar Panjang Jam Operasional Kerja */
+.ic-operational-bar {
+    width: 100%;
+    background-color: #f8faf9;
+    border: 1px solid #eef2f0;
+    border-radius: 12px;
+    padding: 16px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ic-op-left-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.ic-op-icon {
+    font-size: 1.2rem;
+}
+
+.ic-op-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #2f0b0b;
+}
+
+.ic-op-hours {
+    font-size: 0.85rem;
+    color: #788e85;
+    margin-top: 2px;
+    text-align: left;
+}
+
+.ic-op-right-nav {
+    display: flex;
+    gap: 20px;
+}
+
+.ic-op-nav-item {
+    font-size: 0.85rem;
+    color: #788e85;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.ic-op-nav-item:hover {
+    color: #0b2f23;
+}
+
+
+/* ==========================================================================
+   3. MEDIA QUERIES (SISTEM RESPONSIVE LAYAR HP & TABLET)
+   ========================================================================== */
+
+@media (max-width: 768px) {
+    .hk-main-title {
+        font-size: 2.3rem;
+    }
+    .hk-form-card {
+        padding: 20px;
+        max-width: 100%;
+    }
+    .ic-cards-grid {
+        grid-template-columns: 1fr; /* Grid pecah menjadi baris tunggal di HP */
+        gap: 16px;
+    }
+    .ic-operational-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+        padding: 20px;
+    }
+    .ic-op-right-nav {
+        width: 100%;
+        justify-content: space-between;
+        border-top: 1px solid #eef2f0;
+        padding-top: 12px;
+    }
+}
+
+@media (max-width: 576px) {
+    .hk-section-wrapper {
+        padding: 10px;
+    }
+    .ic-cards-section-wrapper {
+        padding: 0 10px 20px 10px;
+    }
+}
