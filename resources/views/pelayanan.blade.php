@@ -366,7 +366,11 @@
 
    <div class="printex-social">
 
+<<<<<<< HEAD
    <a href="https://wa.me/6285196093295" class="social-item">
+=======
+    <a href="https://wa.me/6285196093295" class="social-item">
+>>>>>>> 510852399e85b7627056468ab77ba314e182c9d0
         <img src="{{ asset('img/logo-wa.png') }}" alt="WA">
     </a>
 
