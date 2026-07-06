@@ -44,10 +44,7 @@ button{
 
 <label>Nomor</label><br>
 
-<input
-type="text"
-name="nomor"
-value="{{ $data->nomor }}">
+
 
 <br>
 

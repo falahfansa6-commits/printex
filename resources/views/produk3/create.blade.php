@@ -36,11 +36,7 @@ button{
 
 @csrf
 
-<label>Nomor</label><br>
 
-<input type="text" name="nomor" placeholder="03">
-
-<br>
 
 <label>Judul</label><br>
 

@@ -65,7 +65,6 @@ Tambah Data
 
 <tr>
     <th>No</th>
-    <th>Nomor</th>
     <th>Judul</th>
     <th>Deskripsi</th>
     <th>Gambar</th>
@@ -78,7 +77,6 @@ Tambah Data
 
 <td>{{ $loop->iteration }}</td>
 
-<td>{{ $item->nomor }}</td>
 
 <td>{{ $item->judul }}</td>
 

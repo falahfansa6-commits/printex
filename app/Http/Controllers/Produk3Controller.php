@@ -32,7 +32,6 @@ class Produk3Controller extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nomor' => 'required|max:5',
             'judul' => 'required',
             'deskripsi' => 'required',
             'gambar' => 'required|image|mimes:jpg,jpeg,png,webp|max:2048',
@@ -47,7 +46,7 @@ class Produk3Controller extends Controller
         }
 
         Produk3::create([
-            'nomor' => $request->nomor,
+            
             'judul' => $request->judul,
             'deskripsi' => $request->deskripsi,
             'gambar' => $gambar,
@@ -81,7 +80,7 @@ class Produk3Controller extends Controller
     public function update(Request $request, Produk3 $produk3)
     {
         $request->validate([
-            'nomor' => 'required|max:5',
+            
             'judul' => 'required',
             'deskripsi' => 'required',
             'gambar' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
@@ -101,7 +100,7 @@ class Produk3Controller extends Controller
         }
 
         $produk3->update([
-            'nomor' => $request->nomor,
+            
             'judul' => $request->judul,
             'deskripsi' => $request->deskripsi,
             'gambar' => $gambar,
