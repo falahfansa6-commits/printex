@@ -24,3 +24,5 @@ Route::view('/kontak', 'kontak')
 Route::resource('slider', SliderController::class);
 
 Route::resource('location', LocationController::class);
+
+

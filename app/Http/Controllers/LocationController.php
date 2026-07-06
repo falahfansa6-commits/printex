@@ -57,23 +57,36 @@ class LocationController extends Controller
      */
     public function edit(Location $location)
     {
-        //
+        return view('location.edit', compact('location'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Location $location)
-    {
-        //
-    }
+  public function update(Request $request, Location $location)
+{
+    $request->validate([
+        'nama_kota' => 'required',
+        'alamat' => 'required'
+    ]);
+
+    $location->update([
+        'nama_kota' => $request->nama_kota,
+        'alamat' => $request->alamat,
+    ]);
+
+    return redirect()->route('location.index')
+        ->with('success', 'Lokasi berhasil diupdate');
+}
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Location $location)
-    {
-        return redirect()->route('location.index')
-                        ->with('success', 'Lokasi Berhasil Dihapus');
-    }
+{
+    $location->delete();
+
+    return redirect()->route('location.index')
+        ->with('success', 'Lokasi berhasil dihapus');
+}
 }

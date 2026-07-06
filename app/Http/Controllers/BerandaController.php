@@ -13,6 +13,6 @@ class BerandaController extends Controller
             ->orderBy('urutan', 'asc')
             ->get();
 
-        return view('beranda', compact('sliderBeranda'));
+        return view('index', compact('sliderBeranda'));
     }
 }
