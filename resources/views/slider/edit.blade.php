@@ -1,101 +1,169 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Edit slider</title>
+</head>
+<body>
+   
 
-@section('content')
+<link rel="stylesheet" href="{{ asset('css/slider.css') }}">
 
-<h2>Edit Slider</h2>
+<div class="container">
 
-<form action="{{ route('slider.update',$slider->id) }}"
-      method="POST"
-      enctype="multipart/form-data">
+    <div class="card">
 
-    @csrf
-    @method('PUT')
+        <h1>Edit Slider</h1>
 
-    <div>
-        <label>Judul</label>
+        @if ($errors->any())
 
-        <input type="text"
-               name="judul"
-               value="{{ $slider->judul }}">
+            <div class="alert-danger">
+
+                <ul>
+
+                    @foreach ($errors->all() as $error)
+
+                        <li>{{ $error }}</li>
+
+                    @endforeach
+
+                </ul>
+
+            </div>
+
+        @endif
+
+        <form action="{{ route('slider.update',$slider->id) }}"
+              method="POST"
+              enctype="multipart/form-data">
+
+            @csrf
+            @method('PUT')
+
+            <div class="form-group">
+
+                <label for="judul">Judul</label>
+
+                <input
+                    type="text"
+                    id="judul"
+                    name="judul"
+                    value="{{ old('judul',$slider->judul) }}"
+                    placeholder="Masukkan judul slider"
+                    required>
+
+            </div>
+
+            <div class="form-group">
+
+                <label for="posisi">Posisi</label>
+
+                <select id="posisi" name="posisi">
+
+                    <option value="beranda"
+                        {{ old('posisi',$slider->posisi)=='beranda' ? 'selected' : '' }}>
+                        Beranda
+                    </option>
+
+                    <option value="pelayanan"
+                        {{ old('posisi',$slider->posisi)=='pelayanan' ? 'selected' : '' }}>
+                        Pelayanan
+                    </option>
+
+                </select>
+
+            </div>
+
+            <div class="form-group">
+
+                <label for="status">Status</label>
+
+                <select id="status" name="status">
+
+                    <option value="1"
+                        {{ old('status',$slider->status)==1 ? 'selected' : '' }}>
+                        Aktif
+                    </option>
+
+                    <option value="0"
+                        {{ old('status',$slider->status)==0 ? 'selected' : '' }}>
+                        Tidak Aktif
+                    </option>
+
+                </select>
+
+            </div>
+
+            <div class="form-group">
+
+                <label for="urutan">Urutan</label>
+
+                <input
+                    type="number"
+                    id="urutan"
+                    name="urutan"
+                    min="1"
+                    value="{{ old('urutan',$slider->urutan) }}">
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Gambar Saat Ini</label>
+
+                <div class="image-preview">
+
+                    <img src="{{ asset('uploads/slider/'.$slider->gambar) }}"
+                         alt="Slider"
+                         class="preview">
+
+                </div>
+
+            </div>
+
+            <div class="form-group">
+
+                <label for="gambar">Ganti Gambar</label>
+
+                <input
+                    type="file"
+                    id="gambar"
+                    name="gambar"
+                    accept="image/*">
+
+                <small class="text-muted">
+                    Kosongkan jika tidak ingin mengganti gambar.
+                </small>
+
+            </div>
+
+            <div class="btn-group">
+
+                <a href="{{ route('slider.index') }}"
+                   class="btn btn-back">
+
+                    Kembali
+
+                </a>
+
+                <button
+                    type="submit"
+                    class="btn btn-save">
+
+                    Update
+
+                </button>
+
+            </div>
+
+        </form>
+
     </div>
 
-    <br>
+</div>
 
-    <div>
-        <label>Posisi</label>
 
-        <select name="posisi">
-
-           <option value="beranda"
-{{ $slider->posisi == 'beranda' ? 'selected' : '' }}>
-Beranda
-</option>
-
-<option value="pelayanan"
-{{ $slider->posisi == 'pelayanan' ? 'selected' : '' }}>
-Pelayanan
-</option>
-
-        </select>
-    </div>
-
-    <br>
-
-    <div>
-        <label>Status</label>
-
-        <select name="status">
-
-            <option value="1"
-            {{ $slider->status == 1 ? 'selected' : '' }}>
-            Aktif
-            </option>
-
-            <option value="0"
-            {{ $slider->status == 0 ? 'selected' : '' }}>
-            Tidak Aktif
-            </option>
-
-        </select>
-    </div>
-
-    <br>
-
-    <div>
-        <label>Urutan</label>
-
-        <input type="number"
-               name="urutan"
-               value="{{ $slider->urutan }}">
-    </div>
-
-    <br>
-
-    <div>
-        <label>Gambar Saat Ini</label>
-
-        <br>
-
-        <img
-        src="{{ asset('uploads/slider/'.$slider->gambar) }}"
-        width="300">
-    </div>
-
-    <br>
-
-    <div>
-        <label>Ganti Gambar</label>
-
-        <input type="file"
-               name="gambar">
-    </div>
-
-    <br>
-
-    <button type="submit">
-        Update Slider
-    </button>
-
-</form>
-
-@endsection
+</body>
+</html>

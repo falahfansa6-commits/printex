@@ -42,7 +42,7 @@ class LocationController extends Controller
 
         return redirect()->route('location.index')
                         ->with('success', 'Lokasi Berhasil ditambahkan');
-    }
+    } 
 
     /**
      * Display the specified resource.

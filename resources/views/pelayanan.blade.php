@@ -48,7 +48,7 @@
     </style>
   <title>PRINTEX</title>
 
-  <link rel="stylesheet" href="style.css">
+
 
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
@@ -63,7 +63,9 @@
             <img src="printex-merah.png" alt="Logo" class="logo-img">
         </a>
         <div class="search-container">
-            <input type="text" class="search-input" placeholder="Cari kebutuhanmu disini!...">
+           <form action="{{ route('search') }}" method="GET">
+    <input type="text" name="keyword" class="search-input"placeholder="Cari...">
+</form>
         </div>
 
         <div class="menu-container">
@@ -122,25 +124,33 @@
             </div>
             <div class="printex-right">
                 <div class="printex-desc">
+                    
                     Sebagai penyedia solusi cetak tekstil terpercaya, Printex menawarkan berbagai layanan dengan kualitas terbaik yang disesuaikan untuk kebutuhan industri fashion, konveksi, hingga bisnis skala kecil dan menengah. Dengan dukungan teknologi modern and tenaga profesional, kami siap membantu kebutuhan produksi tekstil secara cepat, presisi, dan berkualitas tinggi.
+                    
                 </div>
+                
             </div>
         </div>
 
         <div class="printex-services">
-            <div class="printex-card">
-                <h3>Printing Sublim</h3>
-                <p>Printing Sublim merupakan metode cetak digital menggunakan tinta khusus yang dipanaskan hingga berubah menjadi gas and menyatu secara permanen ke dalam serat kain sehingga menghasilkan warna yang tajam dan tahan lama.</p>
-            </div>
-            <div class="printex-card">
-                <h3>Sablon DTF</h3>
-                <p>Sablon DTF (Direct Transfer Film) adalah teknik pencetakan desain pada lapisan film khusus yang kemudian dipindahkan ke media kain menggunakan proses press panas dengan hasil cetak yang fleksibel dan tahan lama.</p>
-            </div>
-            <div class="printex-card">
-                <h3>Kaos Premium</h3>
-                <p>Menyediakan berbagai jenis kaos premium menggunakan bahan berkualitas seperti cotton combed 30s, 24s, dan material unggulan lainnya yang nyaman digunakan serta cocok untuk kebutuhan fashion maupun promosi.</p>
-            </div>
+
+    @forelse($services as $service)
+
+        <div class="printex-card">
+
+            <h3>{{ $service->judul }}</h3>
+
+            <p>{{ $service->deskripsi }}</p>
+
         </div>
+
+    @empty
+
+        <p>Belum ada layanan.</p>
+
+    @endforelse
+
+</div>
     </section>
 
     <div class="ks-full-page-container">
@@ -154,28 +164,21 @@
                 </div>
             </div>
             
-            <div class="ks-products-grid">
-                <div class="ks-product-item">
-                    <h3>Jersey Olahraga</h3>
-                    <p>berbagai jenis jersey olahraga seperti sepak bola, futsal, badminton, dan e-sports.</p>
-                </div>
-                <div class="ks-product-item">
-                    <h3>Totebag</h3>
-                    <p>keperluan merchandise, promosi, atau retail brand.</p>
-                </div>
-                <div class="ks-product-item">
-                    <h3>Kain Meteran Bermotif</h3>
-                    <p>kebutuhan industri fashion, seragam batik, home decor, dan kerajinan tekstil.</p>
-                </div>
-                <div class="ks-product-item">
-                    <h3>Bendera Spanduk Kain</h3>
-                    <p>kebutuhan branding acara, komunitas, atau keperluan instansi.</p>
-                </div>
-                <div class="ks-product-item">
-                    <h3>Scarf & Hijab</h3>
-                    <p>memenuhi detail dan warna gradasi untuk scarf dan hijab printing.</p>
-                </div>
-            </div>
+          <div class="ks-products-grid">
+
+    @forelse($theproduk as $item)
+        <div class="ks-product-item">
+            <h3>{{ $item->judul }}</h3>
+            <p>{{ $item->isi }}</p>
+        </div>
+    @empty
+        <div class="ks-product-item">
+            <h3>Belum Ada Produk</h3>
+            <p>Silakan tambahkan data melalui halaman admin.</p>
+        </div>
+    @endforelse
+
+</div>
         </div>
 
         <div class="ks-box-bottom-left">
@@ -247,141 +250,7 @@
     
 <footer class="printex-footer">
 
-<div class="printex-container">
-
-   
-    <div>
-
-        <div class="printex-logo-text">
-            <img src="printexlogo.png" alt="Printex">
-        </div>
-
-        <!-- DESKRIPSI -->
-        <p class="printex-desc">
-            Solusi cetak tekstil digital masa depan untuk kebutuhan fashion,
-            konveksi, dan bisnis modern.
-        </p>
-
-        <!-- FITUR -->
-        <div class="printex-feature">
-
-        
-
-          
-
-
-        </div>
-
-    </div>
-
-    
-    <div>
-
-        <h2 class="printex-title">
-            Perusahaan
-        </h2>
-
-        <ul class="printex-links">
-
-            <li>
-                <a href="about.html">Tentang Kami</a>
-            </li>
-
-            <li>
-                <a href="pelayanan.html">Layanan</a>
-            </li>
-
-           
-
-    </div>
-
-   
-    <div>
-
-        <h2 class="printex-title">
-            Kontak
-        </h2>
-
-        <div class="printex-contact">
-
-            <div class="printex-contact-item">
-                <i class="fa-solid fa-location-dot"></i>
-                <span>Tangerang, Indonesia</span>
-            </div>
-
-            <div class="printex-contact-item">
-                <i class="fa-solid fa-phone"></i>
-                <span>+62 851-9609-3295</span>
-            </div>
-
-            <div class="printex-contact-item">
-                <i class="fa-solid fa-envelope"></i>
-                <span>info@printex.co.id</span>
-            </div>
-
-            <div class="printex-contact-item">
-                <i class="fa-solid fa-clock"></i>
-                <span>Senin - jumat, 08.00 - 17.00 WIB <br>
-                       Sabtu, 08:00 - 14:00 WIB</span>
-            </div>
-
-        </div>
-
-    </div>
-
-   
-
-    <div class="printex-newsletter">
-
-        <h2 class="printex-title">
-            Newsletter
-        </h2>
-
-        <p>
-            Dapatkan update informasi produk dan promo terbaru dari kami.
-        </p>
-
-        <form class="printex-form">
-
-            <input type="email"
-            placeholder="Alamat Email">
-
-            <button type="submit">
-                Daftar
-            </button>
-
-        </form>
-
-    </div>
-
-</div>
-
-
-
-<div class="printex-bottom">
-
-    <div class="printex-copy">
-        © 2026 Printex — All Rights Reserved.
-    </div>
-
-   <div class="printex-social">
-
-   
-    <a href="https://wa.me/6285196093295" class="social-item">
-        <img src="{{ asset('img/logo-wa.png') }}" alt="WA">
-    </a>
-
-    <a href="https://www.instagram.com/printex.official?igsh=MTlqbjFnZXBsOHl4cg==" class="social-item">
-        <img src="{{ asset('img/logo-ig.png') }}" alt="IG">
-    </a>
-
-   
-   
-
-</div>
-
-</div>
-
+@include('layouts.footer')
 </footer>
    <script>
 

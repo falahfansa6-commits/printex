@@ -36,12 +36,12 @@
     <nav class="navbar">
         
         <a href="#" class="logo-container">
-            <img src="printex-merah.png" alt="Logo" class="logo-img">
+            <img src="{{ asset('img/printex-merah.png') }}" alt="Logo" class="logo-img">
         </a>
         <div class="search-container">
-            <input type="text" class="search-input" placeholder="Cari kebutuhanmu disini!...">
-        </div>
-
+             <form action="{{ route('search') }}" method="GET">
+    <input type="text" name="keyword" class="search-input"placeholder="Cari...">
+             </div>
         <div class="menu-container">
             <a href="{{ route('beranda') }}" class="menu-item">Beranda</a>
             <a href="{{ route('about') }}" class="menu-item">Tentang</a>
@@ -88,10 +88,16 @@
                 <div>
                     <div class="ic-card-icon-box">✉</div>
                     <div class="ic-card-label">Email</div>
-                    <h3 class="ic-card-main-info">info@printex.co.id</h3>
+                    <h3 class="ic-card-main-info">
+                        {{ $kontak->email ??''}}
+                    </h3>
                     <p class="ic-card-sub-desc">Kami akan merespons secepat mungkin.</p>
                 </div>
-                <a href="mailto:kapsynergy@gmail.com" class="ic-card-action-link">Kirim Email ↗</a>
+                <a href="mailto:{{ $kontak->link_email ??''}}" class="ic-card-action-link">Kirim Email ↗</a>
+                <a href="{{ route('admin.kontak') }}" class="btn-edit pts-edit-btn" style="margin-top: 10px;
+            padding: 10px 15px;">
+    Edit Email
+</a>
             </div>
 
             <div class="ic-contact-card">
@@ -108,12 +114,17 @@
                 <div>
                     <div class="ic-card-icon-box">📞</div>
                     <div class="ic-card-label">Telephone</div>
-                    <h3 class="ic-card-main-info">+62 851-9609-3295</h3>
+                    <h3 class="ic-card-main-info">
+                        {{ $telepon->nomor ??'' }}
+                    </h3>
                     <p class="ic-card-sub-desc">Tersedia Senin-Jumat, pukul 08:00 - 17:00 WIB. <br>
                      Sabtu, pukul 08:00 - 14:00 WIB
                     </p>
                 </div>
-                <a href="tel:+6285196093295" class="ic-card-action-link">Hubungi Sekarang ↗</a>
+                <a href="tel:{{ $telepon->link_whatsapp ??''}}" class="ic-card-action-link">Hubungi Sekarang ↗</a>
+                <a href="{{ route('admin.telepon') }}" class="btn-edit pts-edit-btn" style="margin-top: 10px; padding: 10px 15px;">
+    Edit Nomor Telepon
+</a>
             </div>
 
             <div class="ic-contact-card ic-featured-green">
@@ -148,158 +159,8 @@
     </div>
 
 
-    <footer class="printex-footer">
-
-<div class="printex-container">
-
-    <!-- ========================= -->
-    <!-- KOLOM 1 -->
-    <!-- ========================= -->
-
-    <div>
-
-        <!-- LOGO -->
-        
-
-        <!-- TEXT LOGO -->
-        <div class="printex-logo-text">
-            <img src="printexlogo.png" alt="Printex">
-        </div>
-
-        <!-- DESKRIPSI -->
-        <p class="printex-desc">
-            Solusi cetak tekstil digital masa depan untuk kebutuhan fashion,
-            konveksi, dan bisnis modern.
-        </p>
-
-        <!-- FITUR -->
-        <div class="printex-feature">
-
-        
-
-          
-
-
-        </div>
-
-    </div>
-
-    <!-- ========================= -->
-    <!-- KOLOM 2 -->
-    <!-- ========================= -->
-
-    <div>
-
-        <h2 class="printex-title">
-            Perusahaan
-        </h2>
-
-        <ul class="printex-links">
-
-            <li>
-                <a href="about.html">Tentang Kami</a>
-            </li>
-
-            <li>
-                <a href="pelayanan.html">Layanan</a>
-            </li>
-
-           
-
-    </div>
-
-    <!-- ========================= -->
-    <!-- KOLOM 3 -->
-    <!-- ========================= -->
-
-    <div>
-
-        <h2 class="printex-title">
-            Kontak
-        </h2>
-
-        <div class="printex-contact">
-
-            <div class="printex-contact-item">
-                <i class="fa-solid fa-location-dot"></i>
-                <span>Tangerang, Indonesia</span>
-            </div>
-
-            <div class="printex-contact-item">
-                <i class="fa-solid fa-phone"></i>
-                <span>+62 851-9609-3295</span>
-            </div>
-
-            <div class="printex-contact-item">
-                <i class="fa-solid fa-envelope"></i>
-                <span>info@printex.co.id</span>
-            </div>
-
-            <div class="printex-contact-item">
-                <i class="fa-solid fa-clock"></i>
-                <span>Senin - jumat, 08.00 - 17.00 WIB <br>
-                       Sabtu, 08:00 - 14:00 WIB</span>
-            </div>
-
-        </div>
-
-    </div>
-
-    <!-- ========================= -->
-    <!-- KOLOM 4 -->
-    <!-- ========================= -->
-
-    <div class="printex-newsletter">
-
-        <h2 class="printex-title">
-            Newsletter
-        </h2>
-
-        <p>
-            Dapatkan update informasi produk dan promo terbaru dari kami.
-        </p>
-
-        <form class="printex-form">
-
-            <input type="email"
-            placeholder="Alamat Email">
-
-            <button type="submit">
-                Daftar
-            </button>
-
-        </form>
-
-    </div>
-
-</div>
-
-<!-- ========================= -->
-<!-- BOTTOM -->
-<!-- ========================= -->
-
-<div class="printex-bottom">
-
-    <div class="printex-copy">
-        © 2026 Printex — All Rights Reserved.
-    </div>
-
-   <div class="printex-social">
-
-    <a href="https://wa.me/6285196093295" class="social-item">
-        <img src="logo-wa.png" alt="WA">
-    </a>
-
-    <a href="https://www.instagram.com/printex.official?igsh=MTlqbjFnZXBsOHl4cg==" class="social-item">
-        <img src="logo-ig.png" alt="IG">
-    </a>
-
-   
-   
-
-</div>
-
-</div>
+<footer class="printex-footer">
+@include('layouts.footer')
 
 </footer>
 
