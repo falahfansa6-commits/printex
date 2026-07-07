@@ -101,7 +101,7 @@
                 <div class="printex-title">
                     <h1>Produk<br>Layanan</h1>
                     <div class="printex-arrow">
-                        <img src="panahkebawah.png" alt="Panah">
+                        <img src="{{ asset('img/panahkebawah.png') }}" alt="Panah">
                     </div>
                 </div>
             </div>
@@ -145,7 +145,7 @@
             <div class="ks-products-header">
                 <span>the products</span>
                 <div class="ks-arrow-image-container">
-                    <img src="panahputih.png" alt="Arrow">
+                    <img src="{{ asset('img/panahputih.png') }}" alt="Arrow">
                 </div>
             </div>
             
@@ -183,7 +183,7 @@
             
             <div class="ks-process-footer">
                 <div class="ks-arrow-image-container">
-                    <img src="panahkeatas.png" alt="Arrow">
+                    <img src="{{ asset('img/panah ke atas.png') }}" alt="Arrow">
                 </div>
                 <span>the process</span>
             </div>

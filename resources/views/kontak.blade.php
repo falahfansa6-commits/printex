@@ -1,20 +1,3 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hubungi Kami & Informasi Kontak</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <style>
-    
-    </style>
-</head>
-<body>
-  <!-- NAVBAR -->
-   <!-- ========================= -->
-<!-- FILE : index.html -->
-<!-- ========================= -->
 
 <!DOCTYPE html>
 <html lang="id">
@@ -43,108 +26,196 @@
         <h2 class="hk-main-title">Hubungi <span class="hk-title-underline">Kami</span></h2>
         
         <div class="hk-form-card">
-            <form action="#" method="POST">
-                <div class="hk-input-group">
-                    <label class="hk-label">Nama<span class="hk-required">*</span></label>
-                    <input type="text" class="hk-input-field" placeholder="Nama kamu" required>
-                </div>
-                
-                <div class="hk-input-group">
-                    <label class="hk-label">No. WA / Email<span class="hk-required">*</span></label>
-                    <input type="text" class="hk-input-field" placeholder="Nomor WA atau alamat email" required>
-                </div>
-                
-                <div class="hk-input-group">
-                    <label class="hk-label">Ceritakan Kebutuhanmu <span class="hk-optional">(opsional)</span></label>
-                    <textarea class="hk-textarea-field" placeholder="Contoh: Saya butuh website company profile untuk usaha logistik, target selesai bulan depan."></textarea>
-                </div>
+           @if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
 
-                <button type="submit" class="hk-btn-submit">Kirim Pesan</button>
-                
-                <p class="hk-form-note">
-                    Formulir ini akan membuka WhatsApp dengan pesan yang sudah terisi.
+<form action="{{ route('hub_kami.store') }}" method="POST">
+    @csrf
+
+    <div class="hk-input-group">
+        <label class="hk-label">
+            Nama <span class="hk-required">*</span>
+        </label>
+
+        <input
+            type="text"
+            name="nama"
+            class="hk-input-field"
+            placeholder="Nama kamu"
+            value="{{ old('nama') }}"
+            required>
+
+        @error('nama')
+            <small style="color:red">{{ $message }}</small>
+        @enderror
+    </div>
+
+    <div class="hk-input-group">
+        <label class="hk-label">
+            No. WA <span class="hk-required">*</span>
+        </label>
+
+        <input
+            type="text"
+            name="no_wa"
+            class="hk-input-field"
+            placeholder="08xxxxxxxxxx"
+            value="{{ old('no_wa') }}"
+            required>
+
+        @error('no_wa')
+            <small style="color:red">{{ $message }}</small>
+        @enderror
+    </div>
+
+    <div class="hk-input-group">
+        <label class="hk-label">
+            Email <span class="hk-required">*</span>
+        </label>
+
+        <input
+            type="email"
+            name="email"
+            class="hk-input-field"
+            placeholder="contoh@gmail.com"
+            value="{{ old('email') }}"
+            required>
+
+        @error('email')
+            <small style="color:red">{{ $message }}</small>
+        @enderror
+    </div>
+
+    <div class="hk-input-group">
+        <label class="hk-label">
+            Ceritakan Kebutuhanmu
+            <span class="hk-optional">(Opsional)</span>
+        </label>
+
+        <textarea
+            name="des"
+            class="hk-textarea-field"
+            rows="5"
+            placeholder="Tulis kebutuhan Anda...">{{ old('des') }}</textarea>
+
+        @error('des')
+            <small style="color:red">{{ $message }}</small>
+        @enderror
+    </div>
+
+    <button type="submit" class="hk-btn-submit">
+        Kirim Pesan
+    </button>
+</form>
+        </div>
+    </div>
+
+   <div class="ic-cards-section-wrapper">
+    <div class="ic-cards-grid">
+
+        <!-- Email -->
+        <div class="ic-contact-card">
+            <div>
+                <div class="ic-card-icon-box">✉</div>
+                <div class="ic-card-label">Email</div>
+                <h3 class="ic-card-main-info">
+                    {{ $email->isi ?? '' }}
+                </h3>
+                <p class="ic-card-sub-desc">Kami akan merespons secepat mungkin.</p>
+            </div>
+
+            <a href="{{ $email->link ?? '#' }}" class="ic-card-action-link">
+                Kirim Email ↗
+            </a>
+
+        </div>
+
+        <!-- Kantor -->
+        <div class="ic-contact-card">
+            <div>
+                <div class="ic-card-icon-box">📍</div>
+                <div class="ic-card-label">Kantor</div>
+                <h3 class="ic-card-main-info">
+                    {{ $kantor->isi ?? '' }}
+                </h3>
+                <p class="ic-card-sub-desc">
+                    Mari ngobrol langsung dan temukan solusi sablon terbaik.
                 </p>
-            </form>
+            </div>
+
+            <a href="{{ $kantor->link ?? '#' }}" target="_blank" class="ic-card-action-link ic-link-green">
+                Buka Maps ↗
+            </a>
+
         </div>
+
+        <!-- Telepon -->
+        <div class="ic-contact-card">
+            <div>
+                <div class="ic-card-icon-box">📞</div>
+                <div class="ic-card-label">Telepon</div>
+                <h3 class="ic-card-main-info">
+                    {{ $telepon->isi ?? '' }}
+                </h3>
+                <p class="ic-card-sub-desc">
+                    Tersedia Senin-Jumat, pukul 08:00 - 17:00 WIB. <br>
+                    Sabtu, pukul 08:00 - 14:00 WIB
+                </p>
+            </div>
+
+            <a href="{{ $telepon->link ?? '#' }}" class="ic-card-action-link">
+                Hubungi Sekarang ↗
+            </a>
+
+        </div>
+
+        <!-- WhatsApp -->
+        <div class="ic-contact-card ic-featured-green">
+            <div>
+                <div class="ic-card-icon-box">💬</div>
+                <div class="ic-card-label">WhatsApp Chat</div>
+                <h3 class="ic-card-main-info">
+                    {{ $whatsapp->isi ?? '' }}
+                </h3>
+                <p class="ic-card-sub-desc">
+                    Butuh bantuan cepat? Tim support kami siap di sini.
+                </p>
+            </div>
+
+            <a href="{{ $whatsapp->link ?? '#' }}" target="_blank" class="ic-card-action-link">
+                Mulai Chat ↗
+            </a>
+
+        </div>
+
     </div>
 
-    <div class="ic-cards-section-wrapper">
-        <div class="ic-cards-grid">
-            
-            <div class="ic-contact-card">
-                <div>
-                    <div class="ic-card-icon-box">✉</div>
-                    <div class="ic-card-label">Email</div>
-                    <h3 class="ic-card-main-info">
-                        {{ $kontak->email ??''}}
-                    </h3>
-                    <p class="ic-card-sub-desc">Kami akan merespons secepat mungkin.</p>
-                </div>
-                <a href="mailto:{{ $kontak->link_email ??''}}" class="ic-card-action-link">Kirim Email ↗</a>
-                <a href="{{ route('admin.kontak') }}" class="btn-edit pts-edit-btn" style="margin-top: 10px;
-            padding: 10px 15px;">
-    Edit Email
-</a>
-            </div>
+    <div class="ic-operational-bar">
 
-            <div class="ic-contact-card">
-                <div>
-                    <div class="ic-card-icon-box">📍</div>
-                    <div class="ic-card-label">Kantor</div>
-                    <h3 class="ic-card-main-info"> jl. watubelang 1 noborejo kota salatiga jawa tengah</h3>
-                    <p class="ic-card-sub-desc">Mari ngobrol langsung dan temukan solusi sablon terbaik.</p>
-                </div>
-                <a href="https://www.google.com/maps/search/amazink+people+group+%E2%9B%89+jl.+watubelang+1+noborejo+kota+salatiga+jawa+tengah/@-7.3718145,110.4960024,15z/data=!3m1!4b1?entry=ttu&g_ep=EgoyMDI2MDUyMC4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="ic-card-action-link ic-link-green">Buka Maps ↗</a>
+        <div class="ic-op-left-info">
+            <span class="ic-op-icon">🕒</span>
+            <div>
+                <h4 class="ic-op-title">Jam Operasional</h4>
+                <p class="ic-op-hours">
+                    Senin - Jumat 08:00 - 17:00 WIB <br>
+                    Sabtu 08:00 - 14:00 WIB
+                </p>
             </div>
-
-            <div class="ic-contact-card">
-                <div>
-                    <div class="ic-card-icon-box">📞</div>
-                    <div class="ic-card-label">Telephone</div>
-                    <h3 class="ic-card-main-info">
-                        {{ $telepon->nomor ??'' }}
-                    </h3>
-                    <p class="ic-card-sub-desc">Tersedia Senin-Jumat, pukul 08:00 - 17:00 WIB. <br>
-                     Sabtu, pukul 08:00 - 14:00 WIB
-                    </p>
-                </div>
-                <a href="tel:{{ $telepon->link_whatsapp ??''}}" class="ic-card-action-link">Hubungi Sekarang ↗</a>
-                <a href="{{ route('admin.telepon') }}" class="btn-edit pts-edit-btn" style="margin-top: 10px; padding: 10px 15px;">
-    Edit Nomor Telepon
-</a>
-            </div>
-
-            <div class="ic-contact-card ic-featured-green">
-                <div>
-                    <div class="ic-card-icon-box">💬</div>
-                    <div class="ic-card-label">Whatsapp Chat</div>
-                    <h3 class="ic-card-main-info">Chat Langsung</h3>
-                    <p class="ic-card-sub-desc">Butuh bantuan cepat? Tim support kami siap di sini.</p>
-                </div>
-                <a href="https://wa.me/6285196093295" target="_blank" class="ic-card-action-link">Mulai Chat ↗</a>
-            </div>
-
         </div>
 
-        <div class="ic-operational-bar">
-            <div class="ic-op-left-info">
-                <span class="ic-op-icon">🕒</span>
-                <div>
-                    <h4 class="ic-op-title">Jam Operasional</h4>
-                    <p class="ic-op-hours">Senin - Jumat 08:00 - 17:00 WIB <br>
-                      Sabtu 08:00 - 14:00 WIB
-                    </p>
-                </div>
-            </div>
-            
-            <div class="ic-op-right-nav">
-                <a href="" class="ic-op-nav-item">Email</a>
-                <a href="https://wa.me/6285196093295" class="ic-op-nav-item">WhatsApp</a>
-                <a href="" class="ic-op-nav-item">Telepon</a>
-            </div>
+        <div class="ic-op-right-nav">
+            <a href="{{ $email->link ?? '#' }}" class="ic-op-nav-item">Email</a>
+            <a href="{{ $whatsapp->link ?? '#' }}" class="ic-op-nav-item">WhatsApp</a>
+            <a href="{{ $telepon->link ?? '#' }}" class="ic-op-nav-item">Telepon</a>
         </div>
+
+
     </div>
 
+</div>
 
 <footer class="printex-footer">
 @include('layouts.footer')

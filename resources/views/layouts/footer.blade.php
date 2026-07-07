@@ -19,7 +19,7 @@
                 <img src="{{ asset('img/printexlogo.png') }}" alt="Printex">
             </div>
 
-            <p class="printex-desc">
+            <p class="printex-desc11">
                 Solusi cetak tekstil digital masa depan untuk kebutuhan fashion,
                 konveksi, dan bisnis modern.
             </p>

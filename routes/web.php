@@ -26,6 +26,24 @@ use App\Http\Controllers\Admin\Mapscontroller as AdminMapsController;
 use App\Http\Controllers\MapsController;
 use App\Http\Controllers\TeleponController;
 use App\Http\Controllers\TheprodukimageController;
+use App\Http\Controllers\Admin\EmpatKontakController as AdminEmpatKontakControllerr;
+use App\Http\Controllers\HubKamiController;
+
+// Halaman kontak (form)
+Route::get('/kontak', function () {
+    return view('kontak');
+})->name('kontak');
+
+// Simpan data form
+Route::post('/hub_kami', [HubKamiController::class, 'store'])
+    ->name('hub_kami.store');
+
+// Halaman admin untuk melihat data
+Route::get('/hub_kami', [HubKamiController::class, 'index'])
+    ->name('hub.index');
+    Route::resource('Hub_kami', HubKamiController::class);
+
+
 
 Route::get('/', [BerandaController::class, 'index'])
     ->name('beranda');
@@ -56,6 +74,11 @@ Route::resource('secound', SecoundController::class);
 Route::resource('service', ServiceController::class);
 Route::resource('theproduk', TheprodukController::class);
 Route::resource('theprodukimage', TheprodukimageController::class);
+Route::resource('empatkontak', AdminEmpatKontakControllerr::class);
+
+
+
+
 
 Route::get('/admin/baru', [BaruController::class, 'index'])->name('admin.baru');
 Route::post('/admin/baru', [BaruController::class, 'store'])->name('admin.baru.store');

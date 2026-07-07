@@ -12,7 +12,7 @@
     <nav class="navbar">
         
         <a href="#" class="logo-container">
-            <img src="printex-merah.png" alt="Logo" class="logo-img">
+            <img src="{{ asset('img/printex-merah.png') }}" alt="Logo" class="logo-img">
         </a>
         <div class="search-container">
            <form action="{{ route('search') }}" method="GET">
