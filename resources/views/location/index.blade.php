@@ -72,7 +72,7 @@
         }
 
         thead{
-            background:#00c2f3;
+            background:#ec0000;
             color:white;
         }
 

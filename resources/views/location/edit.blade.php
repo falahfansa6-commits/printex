@@ -64,7 +64,7 @@
 
         input:focus,
         textarea:focus{
-            border-color:#2196f3;
+            border-color:#ff0000;
             box-shadow:0 0 8px rgba(33,150,243,.3);
         }
 
@@ -98,12 +98,12 @@
         }
 
         .btn-save{
-            background:#2196f3;
+            background:#bb0000;
             color:#fff;
         }
 
         .btn-save:hover{
-            background:#1976d2;
+            background:#ff0000;
             transform:translateY(-2px);
         }
 

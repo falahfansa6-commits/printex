@@ -17,13 +17,9 @@ use App\Http\Controllers\SecoundController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\TheprodukController;
 use App\Http\Controllers\Admin\BaruController;
-use App\Http\Controllers\Admin\KontakController as AdminKontakController;
 use App\Models\Location;
 use App\Models\Tentang;
-use App\Http\Controllers\Admin\TeleponController as AdminTeleponController;
 use App\Http\Controllers\SearchController;
-use App\Http\Controllers\Admin\Mapscontroller as AdminMapsController;
-use App\Http\Controllers\MapsController;
 use App\Http\Controllers\TeleponController;
 use App\Http\Controllers\TheprodukimageController;
 use App\Http\Controllers\Admin\EmpatKontakController;
@@ -85,45 +81,15 @@ Route::get('/admin/baru', [BaruController::class, 'index'])->name('admin.baru');
 Route::post('/admin/baru', [BaruController::class, 'store'])->name('admin.baru.store');
 Route::post('/admin/baru/update', [BaruController::class, 'update'])->name('admin.baru.update');
 
-Route::get('/admin/kontak', [AdminKontakController::class, 'index'])->name('admin.kontak');
-Route::put('/admin/kontak', [AdminKontakController::class, 'update'])->name('admin.kontak.update');
 
-Route::prefix('admin')->group(function () {
 
-    Route::get('/kontak', [AdminKontakController::class, 'index'])
-        ->name('admin.kontak');
 
-    Route::put('/kontak', [AdminKontakController::class, 'update'])
-        ->name('admin.kontak.update');
-
-});
 
 Route::get('/telepon', [TeleponController::class, 'index'])
     ->name('telepon');
 
-Route::prefix('admin')->group(function () {
 
-    Route::get('/telepon', [AdminTeleponController::class, 'index'])
-        ->name('admin.telepon');
 
-    Route::put('/telepon', [AdminTeleponController::class, 'update'])
-        ->name('admin.telepon.update');
-
-});
-
-//maps
-Route::get('/maps', [MapsController::class, 'index'])
-    ->name('maps');
-
-Route::prefix('admin')->group(function () {
-
-    Route::get('/maps', [AdminMapsController::class, 'index'])
-        ->name('admin.maps');
-
-    Route::put('/maps', [AdminMapsController::class, 'update'])
-        ->name('admin.maps.update');
-
-});
 
 //lohin
 Route::get('/login', [AuthManualController::class, 'index'])->name('login');

@@ -24,7 +24,7 @@
 
             </div>
 
-        @endif
+        @endif  
 
         <div class="table-responsive">
 
