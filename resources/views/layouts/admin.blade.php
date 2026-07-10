@@ -32,11 +32,11 @@
             </li>
 
             <li>
-                <a href="#">Tentang</a>
+                <a href="{{ route('admin.about') }}">Tentang</a>
             </li>
 
             <li>
-                <a href="#">Layanan</a>
+                <a href="{{ route('admin.layanan') }}">Layanan</a>
             </li>
 
             <li>

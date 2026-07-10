@@ -22,7 +22,7 @@ table{
 }
 
 thead{
-    background:#2196f3;
+    background:#ff0000;
     color:#fff;
 }
 
@@ -99,7 +99,7 @@ tbody tr:hover{
 }
 
 .btn-save{
-    background:#2196f3;
+    background:#ff0000;
     color:#fff;
 }
 

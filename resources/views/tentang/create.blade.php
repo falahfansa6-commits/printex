@@ -19,7 +19,7 @@
    BODY
 =========================== */
 body{
-    background: linear-gradient(135deg,#4facfe,#00f2fe);
+    background: linear-gradient(135deg,#ffffff,#ffffff);
     min-height: 100vh;
     padding: 40px 20px;
 }
@@ -85,7 +85,7 @@ select{
 input:focus,
 textarea:focus,
 select:focus{
-    border-color: #2196f3;
+    border-color: #ff0000;
     box-shadow: 0 0 8px rgba(33,150,243,.3);
 }
 
@@ -97,7 +97,7 @@ textarea{
    FILE INPUT
 =========================== */
 input[type=file]::file-selector-button{
-    background: #2196f3;
+    background: #ff0000;
     color: white;
     border: none;
     padding: 10px 18px;
@@ -108,7 +108,7 @@ input[type=file]::file-selector-button{
 }
 
 input[type=file]::file-selector-button:hover{
-    background: #1976d2;
+    background: #ff000d;
 }
 
 /* ===========================
@@ -130,12 +130,12 @@ input[type=file]::file-selector-button:hover{
 }
 
 .btn-save{
-    background: #2196f3;
+    background: #ff0000;
     color: white;
 }
 
 .btn-save:hover{
-    background: #1976d2;
+    background: #ff0000;
 }
 
 .btn-add{

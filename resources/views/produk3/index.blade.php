@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
+    @extends('layouts.admin')
+
+@section('title', 'Layanan')
+
+@section('content')
+
     <title>Data Produk 3</title>
 
     <style>
@@ -113,3 +119,4 @@ Hapus
 
 </body>
 </html>
+@endsection

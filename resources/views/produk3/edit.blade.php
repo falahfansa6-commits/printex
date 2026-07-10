@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+    @extends('layouts.admin')
+
+@section('title', 'Layanan')
+
+@section('content')
 
 <title>Edit Produk 3</title>
 
@@ -87,3 +92,4 @@ Update
 
 </body>
 </html>
+@endsection

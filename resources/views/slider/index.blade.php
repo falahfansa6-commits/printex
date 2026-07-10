@@ -1,11 +1,12 @@
 
 
+
 <link rel="stylesheet" href="{{ asset('css/slider.css') }}">
 
 <div class="container">
 
     <div class="card">
-
+  
         <h1>Data Slider</h1>
 
         <div class="top-bar">

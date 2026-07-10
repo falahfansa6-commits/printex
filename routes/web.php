@@ -25,6 +25,11 @@ use App\Http\Controllers\TheprodukimageController;
 use App\Http\Controllers\Admin\EmpatKontakController;
 use App\Http\Controllers\HubKamiController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\AboutController;
+use App\Http\Controllers\Admin\LayananController;
+
+
+
 
 // Halaman kontak (form)
 Route::get('/kontak', function () {
@@ -108,8 +113,17 @@ Route::prefix('admin')->group(function () {
 Route::get('/dashboard', [DashboardController::class,'index'])->name('admin.dashboard');
 });
 
+//About dashboard
+Route::prefix('admin')->group(function (){
+Route::get('/about', [AboutController::class, 'index'])->name('admin.about');
+});
 
+//layanan dashboard
+Route::prefix('admin')->group(function (){ 
+Route::get('/layanan', [LayananController::class, 'index'])->name('admin.layanan');
 
+}
+);
 
 
 

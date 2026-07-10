@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    @extends('layouts.admin')
+
+@section('title', 'Layanan')
+
+@section('content')
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tambah Layanan</title>
@@ -139,3 +145,4 @@ updateCounter();
 
 </body>
 </html>
+@endsection

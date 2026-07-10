@@ -1,6 +1,9 @@
-@extends('layouts.app')
+@extends('layouts.admin')
+
+@section('title', 'Layanan')
 
 @section('content')
+
 
 <div class="container">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
