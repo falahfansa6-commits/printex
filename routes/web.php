@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\AuthManualController;
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\BerandaController;
@@ -27,6 +27,7 @@ use App\Http\Controllers\HubKamiController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\AboutController;
 use App\Http\Controllers\Admin\LayananController;
+use App\Http\Controllers\AuthController;
 
 
 
@@ -96,10 +97,7 @@ Route::get('/telepon', [TeleponController::class, 'index'])
 
 
 
-//lohin
-Route::get('/login', [AuthManualController::class, 'index'])->name('login');
-Route::post('/login', [AuthManualController::class, 'loginproses'])->name('loginproses');
-Route::post('/logout', [AuthManualController::class, 'logout'])->name('logout');
+
 
 Route::get('/kontak', [KontakController::class, 'index'])
     ->name('kontak');
@@ -118,6 +116,7 @@ Route::prefix('admin')->group(function (){
 Route::get('/about', [AboutController::class, 'index'])->name('admin.about');
 });
 
+
 //layanan dashboard
 Route::prefix('admin')->group(function (){ 
 Route::get('/layanan', [LayananController::class, 'index'])->name('admin.layanan');
@@ -125,5 +124,10 @@ Route::get('/layanan', [LayananController::class, 'index'])->name('admin.layanan
 }
 );
 
+
+//login
+Route::get('/login', [AuthController::class, 'index'])->name('login');
+Route::post('/login', [AuthController::class, 'authenticate']);
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 

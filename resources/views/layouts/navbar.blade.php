@@ -15,6 +15,10 @@
             <a href="{{ route('pelayanan') }}" class="menu-item">Layanan</a>
             <a href="{{ route('kontak') }}" class="menu-item">Kontak</a>
             
-            <button class="btn-utama">Masuk atau Daftar</button>
+            <button
+    class="btn-utama"
+    onclick="window.location.href='{{ route('login') }}'">
+    Masuk atau Login
+</button>
         </div>
     </nav>

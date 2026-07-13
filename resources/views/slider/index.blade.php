@@ -1,154 +1,129 @@
-
-
-
+<!-- Tambahkan CDN FontAwesome jika belum ada di file layout utama Anda -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <link rel="stylesheet" href="{{ asset('css/slider.css') }}">
 
-<div class="container">
-
-    <div class="card">
-  
-        <h1>Data Slider</h1>
-
-        <div class="top-bar">
-
-            <a href="{{ route('slider.create') }}" class="btn btn-add">
-                + Tambah Slider
-            </a>
-
-        </div>
-
-        @if(session('success'))
-
-            <div class="alert-success">
-
-                {{ session('success') }}
-
+<div class="main-wrapper">
+    <div class="container">
+        <div class="card">
+            
+            <!-- Header Section -->
+            <div class="header-section">
+                <h1>Data Slider</h1>
+                <a href="{{ route('slider.create') }}" class="btn btn-add">
+                    <i class="fa-solid fa-plus"></i> Tambah Slider
+                </a>
             </div>
 
-        @endif  
+            @if(session('success'))
+                <div class="alert-success">
+                    <i class="fa-solid fa-circle-check"></i> {{ session('success') }}
+                </div>
+            @endif  
 
-        <div class="table-responsive">
+            <!-- Utilities: Search & Bulk Actions -->
+            <div class="utilities-bar">
+                <div class="search-box">
+                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                    <input type="text" placeholder="Cari slider...">
+                </div>
+                <div class="dropdown-box">
+                    <button class="btn-dropdown">
+                        Bulk Actions <i class="fa-solid fa-chevron-down text-xs"></i>
+                    </button>
+                </div>
+            </div>
 
-            <table class="admin-table">
+            <!-- Table Section -->
+            <div class="table-responsive">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Judul</th>
+                            <th>Gambar</th>
+                            <th>Posisi</th>
+                            <th>Status</th>
+                            <th>Urutan</th>
+                            <th width="220">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse($sliders as $slider)
+                        <tr>
+                            <td class="judul-text">{{ $slider->judul }}</td>
+                            <td>
+                                @if($slider->gambar)
+                                    <div class="image-wrapper">
+                                        <img src="{{ asset('uploads/slider/'.$slider->gambar) }}" alt="{{ $slider->judul }}" class="preview">
+                                        <!-- Quick Edit Button Overlay -->
+                                        <a href="{{ route('slider.edit',$slider->id) }}" class="quick-edit-overlay">
+                                            <i class="fa-solid fa-pen"></i>
+                                            <span>Edit</span>
+                                        </a>
+                                    </div>
+                                @else
+                                    <span class="no-image"><i class="fa-solid fa-image"></i></span>
+                                @endif
+                            </td>
+                            <td class="text-muted-row">{{ ucfirst($slider->posisi) }}</td>
+                            <td>
+                                @if($slider->status)
+                                    <span class="badge badge-success">Aktif</span>
+                                @else
+                                    <span class="badge badge-danger">Tidak Aktif</span>
+                                @endif
+                            </td>
+                            <td>
+                                <span class="order-number">{{ $slider->urutan }}</span>
+                            </td>
+                            <td>
+                                <div class="aksi">
+                                    <a href="{{ route('slider.edit',$slider->id) }}" class="btn btn-edit">
+                                        <i class="fa-solid fa-pen"></i> Edit
+                                    </a>
 
-                <thead>
+                                    <form action="{{ route('slider.destroy',$slider->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-delete" onclick="return confirm('Yakin ingin menghapus slider ini?')">
+                                            <i class="fa-solid fa-trash-can"></i> Hapus
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                        @empty
+                        <tr>
+                            <td colspan="6" class="empty-data">
+                                <i class="fa-solid fa-folder-open block mb-2" style="font-size: 24px; color: #ccc;"></i><br>
+                                Belum ada data slider.
+                            </td>
+                        </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
 
-                    <tr>
-
-                        <th>Judul</th>
-                        <th>Gambar</th>
-                        <th>Posisi</th>
-                        <th>Status</th>
-                        <th>Urutan</th>
-                        <th width="180">Aksi</th>
-
-                    </tr>
-
-                </thead>
-
-                <tbody>
-
-                    @forelse($sliders as $slider)
-
-                    <tr>
-
-                        <td>{{ $slider->judul }}</td>
-
-                        <td>
-
-                            @if($slider->gambar)
-
-                                <img
-                                    src="{{ asset('uploads/slider/'.$slider->gambar) }}"
-                                    alt="{{ $slider->judul }}"
-                                    class="preview"
-                                    width="150px">
-
-                            @else
-
-                                -
-
-                            @endif
-
-                        </td>
-
-                        <td>{{ ucfirst($slider->posisi) }}</td>
-
-                        <td>
-
-                            @if($slider->status)
-
-                                <span class="badge badge-success">
-                                    Aktif
-                                </span>
-
-                            @else
-
-                                <span class="badge badge-danger">
-                                    Tidak Aktif
-                                </span>
-
-                            @endif
-
-                        </td>
-
-                        <td>{{ $slider->urutan }}</td>
-
-                        <td>
-
-                            <div class="aksi">
-
-                                <a href="{{ route('slider.edit',$slider->id) }}"
-                                   class="btn btn-edit">
-
-                                    Edit
-
-                                </a>
-
-                                <form action="{{ route('slider.destroy',$slider->id) }}"
-                                      method="POST">
-
-                                    @csrf
-                                    @method('DELETE')
-
-                                    <button
-                                        type="submit"
-                                        class="btn btn-delete"
-                                        onclick="return confirm('Yakin ingin menghapus slider ini?')">
-
-                                        Hapus
-
-                                    </button>
-
-                                </form>
-
-                            </div>
-
-                        </td>
-
-                    </tr>
-
-                    @empty
-
-                    <tr>
-
-                        <td colspan="6" class="empty-data">
-
-                            Belum ada data slider.
-
-                        </td>
-
-                    </tr>
-
-                    @endforelse
-
-                </tbody>
-
-            </table>
+            <!-- Pagination Section -->
+            <div class="pagination-container">
+                <div class="pagination-info">1-2 of 50</div>
+                <div class="pagination-nav">
+                    <button class="btn-nav" disabled><i class="fa-solid fa-chevron-left"></i></button>
+                    <button class="btn-nav"><i class="fa-solid fa-chevron-right"></i></button>
+                </div>
+            </div>
 
         </div>
-
     </div>
 
+    <!-- Page Footer -->
+    <footer class="main-footer">
+        <div class="footer-links">
+            <a href="#">Dokumentasi</a>
+            <a href="#">Bantuan</a>
+            <a href="#">Cantast hara</a>
+        </div>
+        <div class="footer-copyright">
+            &copy; 2026 Admin. Intex
+        </div>
+    </footer>
 </div>
-

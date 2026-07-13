@@ -4,136 +4,112 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>tambah slider</title>
+    <title>Tambah Slider</title>
+    <!-- CDN FontAwesome untuk ikon tombol -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ asset('css/slider.css') }}">
 </head>
 <body>
-  
 
-<link rel="stylesheet" href="{{ asset('css/slider.css') }}">
+<div class="main-wrapper">
+    <div class="container" style="max-width: 800px;"> <!-- Membatasi lebar form agar proporsional -->
+        <div class="card">
 
-<div class="container">
-
-    <div class="card">
-
-        <h1>Tambah Slider</h1>
-
-        @if ($errors->any())
-
-            <div class="alert-danger">
-
-                <ul>
-
-                    @foreach ($errors->all() as $error)
-
-                        <li>{{ $error }}</li>
-
-                    @endforeach
-
-                </ul>
-
+            <div class="header-section" style="margin-bottom: 30px; border-bottom: 1px solid #e2e8f0; padding-bottom: 15px;">
+                <h1 style="font-size: 24px;"><i class="fa-solid fa-square-plus" style="color: #566270; margin-right: 8px;"></i>Tambah Slider</h1>
             </div>
 
-        @endif
+            @if ($errors->any())
+                <div class="alert-danger" style="background:#fef2f2; color:#991b1b; border: 1px solid #fca5a5; padding:14px 18px; border-radius:12px; margin-bottom:20px; font-size: 14px;">
+                    <ul style="margin-left: 20px;">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
 
-        <form action="{{ route('slider.store') }}"
-              method="POST"
-              enctype="multipart/form-data">
+            <form action="{{ route('slider.store') }}"
+                  method="POST"
+                  enctype="multipart/form-data">
 
-            @csrf
+                @csrf
 
-            <div class="form-group">
+                <div class="form-group">
+                    <label for="judul">Judul Slider</label>
+                    <input
+                        type="text"
+                        id="judul"
+                        name="judul"
+                        value="{{ old('judul') }}"
+                        placeholder="Masukkan judul slider"
+                        required>
+                </div>
 
-                <label for="judul">Judul</label>
+                <div class="form-group">
+                    <label for="gambar">Upload Gambar Slider</label>
+                    <input
+                        type="file"
+                        id="gambar"
+                        name="gambar"
+                        accept="image/*"
+                        required
+                        style="padding: 8px 12px;">
+                </div>
 
-                <input
-                    type="text"
-                    id="judul"
-                    name="judul"
-                    value="{{ old('judul') }}"
-                    placeholder="Masukkan judul slider"
-                    required>
+                <div class="form-group">
+                    <label for="posisi">Posisi Tampilan</label>
+                    <select id="posisi" name="posisi">
+                        <option value="beranda">Beranda</option>
+                        <option value="pelayanan">Pelayanan</option>
+                    </select>
+                </div>
 
-            </div>
+                <div class="form-group">
+                    <label for="status">Status Publikasi</label>
+                    <select id="status" name="status">
+                        <option value="1">Aktif</option>
+                        <option value="0">Tidak Aktif</option>
+                    </select>
+                </div>
 
-            <div class="form-group">
+                <div class="form-group">
+                    <label for="urutan">Urutan Tampilan</label>
+                    <input
+                        type="number"
+                        id="urutan"
+                        name="urutan"
+                        value="{{ old('urutan',1) }}"
+                        min="1">
+                </div>
 
-                <label for="gambar">Gambar</label>
+                <!-- Bagian Tombol Aksi Bawah -->
+                <div class="btn-group" style="display: flex; justify-content: space-between; gap: 15px; margin-top: 35px; border-top: 1px solid #e2e8f0; padding-top: 20px;">
+                    <a href="{{ route('slider.index') }}" class="btn btn-back" style="background: #64748b; color: #fff;">
+                        <i class="fa-solid fa-arrow-left"></i> Kembali
+                    </a>
 
-                <input
-                    type="file"
-                    id="gambar"
-                    name="gambar"
-                    accept="image/*"
-                    required>
+                    <button type="submit" class="btn btn-save" style="background: #10b981; color: #fff;">
+                        <i class="fa-solid fa-floppy-disk"></i> Simpan Data
+                    </button>
+                </div>
 
-            </div>
-
-            <div class="form-group">
-
-                <label for="posisi">Posisi</label>
-
-                <select id="posisi" name="posisi">
-
-                    <option value="beranda">Beranda</option>
-
-                    <option value="pelayanan">Pelayanan</option>
-
-                </select>
-
-            </div>
-
-            <div class="form-group">
-
-                <label for="status">Status</label>
-
-                <select id="status" name="status">
-
-                    <option value="1">Aktif</option>
-
-                    <option value="0">Tidak Aktif</option>
-
-                </select>
-
-            </div>
-
-            <div class="form-group">
-
-                <label for="urutan">Urutan</label>
-
-                <input
-                    type="number"
-                    id="urutan"
-                    name="urutan"
-                    value="{{ old('urutan',1) }}"
-                    min="1">
-
-            </div>
-
-            <div class="btn-group">
-
-                <a href="{{ route('slider.index') }}"
-                   class="btn btn-back">
-
-                    Kembali
-
-                </a>
-
-                <button
-                    type="submit"
-                    class="btn btn-save">
-
-                    Simpan
-
-                </button>
-
-            </div>
-
-        </form>
-
+            </form>
+        </div>
     </div>
 
+    <!-- Footer Konsisten -->
+    <footer class="main-footer">
+        <div class="footer-links">
+            <a href="#">Dokumentasi</a>
+            <a href="#">Bantuan</a>
+            <a href="#">Cantast hara</a>
+        </div>
+        <div class="footer-copyright">
+            &copy; 2026 Admin. Intex
+        </div>
+    </footer>
 </div>
-
 
 </body>
 </html>

@@ -1,217 +1,217 @@
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
+/* --- RESET & GLOBAL STYLES --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
 }
 
-body{
-    background:#f4f4f4;
+:root {
+    --primary-color: #bd091c;    /* Merah khas Printex */
+    --bg-light: #f8f9fa;         /* Background aplikasi abu-abu sangat lembut */
+    --text-dark: #2d3748;
+    --text-muted: #718096;
+    --border-color: #e2e8f0;
+    --radius: 12px;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
 }
 
-/* ===================== */
-/* WRAPPER */
-/* ===================== */
-
-.wrapper{
-    display:flex;
-    min-height:100vh;
+body {
+    background-color: var(--bg-light);
+    color: var(--text-dark);
 }
 
-/* ===================== */
-/* SIDEBAR */
-/* ===================== */
-
-.sidebar{
-    width:250px;
-    background:#ffffff;
-    border-right:2px solid #ececec;
-    display:flex;
-    flex-direction:column;
-    justify-content:space-between;
-    padding:25px;
-    box-shadow:0 0 15px rgba(0,0,0,.08);
+.wrapper {
+    display: flex;
+    min-height: 100vh;
 }
 
-/* Logo */
+/* --- SIDEBAR STYLE --- */
+.sidebar {
+    width: 260px;
+    background-color: #ffffff;
+    border-right: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    padding: 30px 20px;
+    position: fixed;
+    height: 100vh;
+    z-index: 100;
+}
 
-.logo{
+.logo {
+    margin-bottom: 35px;
+    padding: 0 10px;
+    text-align: center;
+}
+
+.logo-img {
+    max-width: 85%;
+    height: auto;
+    object-fit: contain;
+}
+
+.sidebar ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.sidebar ul li a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--text-muted);
+    text-decoration: none;
+    padding: 12px 18px;
+    border-radius: var(--radius);
+    font-size: 15px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.sidebar ul li a i {
+    font-size: 16px;
+    width: 20px;
+    text-align: center;
+}
+
+/* Hover & Active State Menu Sidebar */
+.sidebar ul li a:hover,
+.sidebar ul li.active a {
+    background-color: var(--primary-color);
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(189, 9, 28, 0.2);
+}
+
+/* Tombol Logout */
+.logout {
+    margin-top: auto; /* Memaksa form log out berada di paling bawah sidebar */
+    padding: 0 5px;
+}
+
+.logout button {
     width: 100%;
     display: flex;
-    justify-content: center;
     align-items: center;
+    gap: 12px;
+    background-color: transparent;
+    border: 1px solid var(--border-color);
+    color: #e53e3e;
+    cursor: pointer;
+    padding: 12px 18px;
+    border-radius: var(--radius);
+    font-size: 15px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    text-align: left;
+}
+
+.logout button:hover {
+    background-color: #fff5f5;
+    border-color: #feb2b2;
+}
+
+/* --- MAIN CONTENT STYLE --- */
+.content {
+    margin-left: 260px; /* Memberikan ruang agar konten tidak tertutup sidebar fixed */
+    flex: 1;
+    padding: 40px;
+}
+
+.topbar {
+    background-color: #ffffff;
+    padding: 24px 30px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
     margin-bottom: 30px;
-    overflow: hidden;
 }
 
-.logo-img{
-    display: block;
-    width: 140px !important;
-    max-width: 140px !important;
-    height: auto !important;
+.topbar h1 {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--primary-color);
 }
 
-/* ===================== */
-/* MENU */
-/* ===================== */
-
-.sidebar ul{
-    list-style:none;
+.main-body {
+    width: 100%;
 }
 
-.sidebar ul li{
-    margin-bottom:12px;
+/* --- STYLE UNTUK TABEL DI @YIELD('CONTENT') --- */
+/* (Terapkan class ini pada file konten dashboard Anda, misal index.blade.php) */
+.card-panel {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
 }
 
-.sidebar ul li a{
-    display:block;
-    text-decoration:none;
-    color:#444;
-    font-size:15px;
-    font-weight:500;
-    padding:14px 18px;
-    border-radius:10px;
-    transition:.3s;
+.card-panel h2 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
 }
 
-.sidebar ul li a:hover{
-    background:#c40018;
-    color:white;
+.card-panel p {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-bottom: 25px;
 }
 
-.sidebar ul li.active a{
-    background:#c40018;
-    color:white;
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
 }
 
-/* ===================== */
-/* LOGOUT */
-/* ===================== */
-
-.logout{
-    width:100%;
-    border:none;
-    background:#c40018;
-    color:white;
-    padding:14px;
-    border-radius:10px;
-    font-size:15px;
-    font-weight:600;
-    cursor:pointer;
-    transition:.3s;
+.table-admin {
+    width: 100%;
+    border-collapse: collapse;
 }
 
-.logout:hover{
-    background:#980012;
+.table-admin th {
+    background-color: #f7fafc;
+    color: var(--text-dark);
+    font-weight: 600;
+    font-size: 14px;
+    padding: 16px 20px;
+    text-align: left;
+    border-bottom: 2px solid var(--border-color);
 }
 
-/* ===================== */
-/* CONTENT */
-/* ===================== */
-
-.content{
-    flex:1;
-    padding:35px;
+.table-admin td {
+    padding: 16px 20px;
+    font-size: 14px;
+    border-bottom: 1px solid var(--border-color);
+    color: #4a5568;
+    vertical-align: middle;
 }
 
-.topbar{
-    background:white;
-    border-radius:15px;
-    padding:25px 30px;
-    box-shadow:0 3px 10px rgba(0,0,0,.08);
-    margin-bottom:30px;
+.table-admin tbody tr:hover {
+    background-color: #f8fafc;
 }
 
-.topbar h1{
-    color:#c40018;
-    font-size:30px;
+/* Style Tombol Aksi di Tabel */
+.btn-edit {
+    background-color: var(--primary-color);
+    color: #ffffff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    display: inline-block;
 }
 
-/* ===================== */
-/* CARD */
-/* ===================== */
-
-.card{
-    background:white;
-    border-radius:15px;
-    padding:25px;
-    box-shadow:0 3px 10px rgba(0,0,0,.08);
+.btn-edit:hover {
+    background-color: #9c0716;
+    box-shadow: 0 4px 10px rgba(189, 9, 28, 0.2);
 }
 
-.card-header{
-    margin-bottom:20px;
+.text-right {
+    text-align: right !important;
 }
 
-.card-header h2{
-    color:#c40018;
-}
-
-.card p{
-    color:#555;
-}
-
-/* ===================== */
-/* BUTTON */
-/* ===================== */
-
-.btn{
-    display:inline-block;
-    text-decoration:none;
-    background:#c40018;
-    color:white;
-    padding:10px 18px;
-    border-radius:8px;
-    transition:.3s;
-}
-
-.btn:hover{
-    background:#980012;
-}
-
-/* ===================== */
-/* TABLE */
-/* ===================== */
-
-table{
-    width:100%;
-    border-collapse:collapse;
-}
-
-table th{
-    background:#c40018;
-    color:white;
-    padding:15px;
-}
-
-table td{
-    padding:15px;
-    border-bottom:1px solid #eee;
-}
-
-table tr:hover{
-    background:#fafafa;
-}
-
-/* ===================== */
-/* RESPONSIVE */
-/* ===================== */
-
-@media(max-width:768px){
-
-.wrapper{
-    flex-direction:column;
-}
-
-.sidebar{
-    width:100%;
-}
-
-.content{
-    padding:20px;
-}
-
-.logo-img{
-    width:130px;
-}
-
-}

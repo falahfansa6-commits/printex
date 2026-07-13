@@ -1,94 +1,73 @@
 @extends('layouts.admin')
 
-@section('title', 'Layanan')
+@section('title', 'Dashboard')
 
 @section('content')
 
-<div class="card">
+<!-- Mengubah class "card" menjadi "card-panel" sesuai setelan CSS baru -->
+<div class="card-panel">
 
     <div class="card-header">
         <h2>Dashboard Admin</h2>
     </div>
 
-    <p style="margin-bottom:25px;">
+    <!-- inline style margin dihapus karena sudah di-handle oleh class .card-panel p di CSS -->
+    <p>
         Selamat datang di Dashboard Admin <b>Printex</b>. Silakan pilih menu yang ingin dikelola.
     </p>
 
-    <table>
+    <!-- Membungkus tabel agar responsive di layar kecil jika diperlukan -->
+    <div class="table-responsive">
+        <!-- Mengubah class table menjadi "table-admin" -->
+        <table class="table-admin">
+            <thead>
+                <tr>
+                    <th>Menu</th>
+                    <!-- Mengubah teks aksi menjadi rata kanan agar terlihat modern -->
+                    <th width="150" class="text-right">Aksi</th>
+                </tr>
+            </thead>
 
-        <thead>
-            <tr>
-                <th>Menu</th>
-                <th width="150">Aksi</th>
-            </tr>
-        </thead>
+            <tbody>
+                <tr>
+                    <td>Slider</td>
+                    <td class="text-right">
+                        <!-- Mengubah class menjadi "btn-edit" -->
+                        <a href="{{ route('slider.index') }}" class="btn-edit">
+                            <i class="fa-solid fa-pen"></i> Edit
+                        </a>
+                    </td>
+                </tr>
 
-        <tbody>
+                <tr>
+                    <td>Printing Solution</td>
+                    <td class="text-right">
+                        <a href="#" class="btn-edit">
+                            <i class="fa-solid fa-pen"></i> Edit
+                        </a>
+                    </td>
+                </tr>
 
-            <tr>
-                <td>Slider</td>
-                <td>
-                    <a href="{{ route('slider.index') }}" class="btn">
-                        Edit
-                    </a>
-                </td>
-            </tr>
+                <tr>
+                    <td>Gambar</td>
+                    <td class="text-right">
+                        <a href="#" class="btn-edit">
+                            <i class="fa-solid fa-pen"></i> Edit
+                        </a>
+                    </td>
+                </tr>
 
-            <tr>
-                <td>Produk</td>
-                <td>
-                    <a href="{{ route('service.index') }}" class="btn">
-                        Edit
-                    </a>
-                </td>
-            </tr>
-
-            <tr>
-                <td>Gambar</td>
-                <td>
-                    <a href="{{ route('theprodukimage.index') }}" class="btn">
-                        Edit
-                    </a>
-                </td>
-            </tr>
-
-            <tr>
-                <td>Produk</td>
-                <td>
-                    <a href="{{ route('theproduk.index') }}" class="btn">
-                        Edit
-                    </a>
-                </td>
-            </tr>
-            <tr>
-                <td>Produk 1</td>
-                <td>
-                    <a href="{{ route('produk1.index') }}" class="btn">
-                        Edit
-                    </a>
-                </td>
-            </tr>
-
-              <tr>
-                <td>Produk 2</td>
-                <td>
-                    <a href="{{ route('produk2.index') }}" class="btn">
-                        Edit
-                    </a>
-                </td>
-            </tr>
-              <tr>
-                <td>Produk 3</td>
-                <td>
-                    <a href="{{ route('produk3.index') }}" class="btn">
-                        Edit
-                    </a>
-                </td>
-            </tr>
-
-        </tbody>
-
-    </table>
+                <tr>
+                    <td>Our Value</td>
+                    <td class="text-right">
+                        <a href="#" class="btn-edit">
+                            <i class="fa-solid fa-pen"></i> Edit
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
 </div>
 
