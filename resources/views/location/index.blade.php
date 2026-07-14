@@ -3,221 +3,120 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Data Lokasi</title>
-
-    <style>
-        *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
-            font-family:Arial, Helvetica, sans-serif;
-        }
-
-        body{
-            background:linear-gradient(135deg,#f7f7f7,#f3f3f3);
-            min-height:100vh;
-            padding:40px;
-        }
-
-        .container{
-            max-width:1100px;
-            margin:auto;
-        }
-
-        .card{
-            background:#fff;
-            border-radius:15px;
-            padding:30px;
-            box-shadow:0 10px 30px rgba(0,0,0,.2);
-        }
-
-        h1{
-            color:#333;
-            margin-bottom:25px;
-            text-align:center;
-        }
-
-        .top-bar{
-            display:flex;
-            justify-content:flex-end;
-            margin-bottom:20px;
-        }
-
-        .btn{
-            display:inline-block;
-            text-decoration:none;
-            border:none;
-            padding:10px 18px;
-            border-radius:8px;
-            cursor:pointer;
-            font-size:14px;
-            transition:.3s;
-            color:#fff;
-        }
-
-        .btn-add{
-            background:#28a745;
-        }
-
-        .btn-add:hover{
-            background:#218838;
-            transform:translateY(-2px);
-        }
-
-        table{
-            width:100%;
-            border-collapse:collapse;
-            overflow:hidden;
-            border-radius:10px;
-        }
-
-        thead{
-            background:#ec0000;
-            color:white;
-        }
-
-        th,td{
-            padding:15px;
-            text-align:left;
-            border-bottom:1px solid #ddd;
-        }
-
-        tbody tr:nth-child(even){
-            background:#f8f9fa;
-        }
-
-        tbody tr:hover{
-            background:#eaf4ff;
-        }
-
-        .aksi{
-            display:flex;
-            gap:8px;
-            align-items:center;
-        }
-
-        .btn-edit{
-            background:#ffc107;
-            color:#000;
-        }
-
-        .btn-edit:hover{
-            background:#e0a800;
-        }
-
-        .btn-delete{
-            background:#dc3545;
-        }
-
-        .btn-delete:hover{
-            background:#c82333;
-        }
-
-        .btn-delete{
-            padding:10px 18px;
-        }
-
-        form{
-            display:inline;
-        }
-
-        @media(max-width:768px){
-
-            body{
-                padding:15px;
-            }
-
-            .card{
-                overflow-x:auto;
-            }
-
-            table{
-                min-width:700px;
-            }
-        }
-
-    </style>
-
+    <!-- Hubungkan ke FontAwesome untuk ikon modern -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ asset('css/slider.css') }}">
 </head>
 <body>
 
-<div class="container">
+<div class="main-wrapper">
+    <div class="container">
+        <div class="card">
+            
+            <!-- Header Section -->
+            <div class="header-section">
+                <h1>Data Lokasi</h1>
+                <a href="{{ route('location.create') }}" class="btn btn-add">
+                    <i class="fa-solid fa-plus"></i> Tambah Lokasi
+                </a>
+            </div>
 
-    <div class="card">
+            <!-- Pesan Sukses Alert (Opsional jika ada session flash data) -->
+            @if(session('success'))
+                <div class="alert-success">
+                    <i class="fa-solid fa-circle-check"></i> {{ session('success') }}
+                </div>
+            @endif  
 
-        <h1>Data Lokasi</h1>
+            <!-- Utilities: Search & Bulk Actions (Menjaga konsistensi layout) -->
+            <div class="utilities-bar">
+                <div class="search-box">
+                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                    <input type="text" placeholder="Cari lokasi...">
+                </div>
+                <div class="dropdown-box">
+                    <button class="btn-dropdown">
+                        Bulk Actions <i class="fa-solid fa-chevron-down text-xs"></i>
+                    </button>
+                </div>
+            </div>
 
-        <div class="top-bar">
-            <a href="{{ route('location.create') }}" class="btn btn-add">
-                + Tambah Lokasi
-            </a>
+            <!-- Table Section -->
+            <div class="table-responsive">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th width="80">No</th>
+                            <th>Nama Kota</th>
+                            <th>Alamat</th>
+                            <th width="220">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse($locations as $location)
+                        <tr>
+                            <td>
+                                <span class="order-number">{{ $loop->iteration }}</span>
+                            </td>
+                            <td class="judul-text" style="text-align: left; padding-left: 25px;">
+                                <i class="fa-solid fa-city" style="color: #94a3b8; margin-right: 8px;"></i>{{ $location->nama_kota }}
+                            </td>
+                            <td class="text-muted-row" style="text-align: left; max-width: 400px; word-wrap: break-word;">
+                                {{ $location->alamat }}
+                            </td>
+                            <td>
+                                <div class="aksi">
+                                    <a href="{{ route('location.edit', $location->id) }}" class="btn btn-edit">
+                                        <i class="fa-solid fa-pen"></i> Edit
+                                    </a>
+
+                                    <form action="{{ route('location.destroy', $location->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-delete" onclick="return confirm('Yakin ingin menghapus lokasi ini?')">
+                                            <i class="fa-solid fa-trash-can"></i> Hapus
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                        @empty
+                        <tr>
+                            <td colspan="4" class="empty-data">
+                                <i class="fa-solid fa-map-location-dot" style="font-size: 32px; color: #cbd5e1; margin-bottom: 10px; display: block;"></i>
+                                Data lokasi belum tersedia.
+                            </td>
+                        </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Pagination Section (Komponen Statis) -->
+            <div class="pagination-container">
+                <div class="pagination-info">Menampilkan {{ $locations->count() }} data</div>
+                <div class="pagination-nav">
+                    <button class="btn-nav" disabled><i class="fa-solid fa-chevron-left"></i></button>
+                    <button class="btn-nav" disabled><i class="fa-solid fa-chevron-right"></i></button>
+                </div>
+            </div>
+
         </div>
-
-        <table>
-
-            <thead>
-                <tr>
-                    <th width="70">No</th>
-                    <th>Nama Kota</th>
-                    <th>Alamat</th>
-                    <th width="180">Aksi</th>
-                </tr>
-            </thead>
-
-            <tbody>
-
-                @forelse($locations as $location)
-
-                <tr>
-                    <td>{{ $loop->iteration }}</td>
-                    <td>{{ $location->nama_kota }}</td>
-                    <td>{{ $location->alamat }}</td>
-
-                    <td>
-
-                        <div class="aksi">
-
-                            <a href="{{ route('location.edit', $location->id) }}"
-                               class="btn btn-edit">
-                                Edit
-                            </a>
-
-                            <form action="{{ route('location.destroy', $location->id) }}"
-                                  method="POST">
-
-                                @csrf
-                                @method('DELETE')
-
-                                <button type="submit"
-                                        class="btn btn-delete"
-                                        onclick="return confirm('Yakin ingin menghapus lokasi ini?')">
-                                    Hapus
-                                </button>
-
-                            </form>
-
-                        </div>
-
-                    </td>
-
-                </tr>
-
-                @empty
-
-                <tr>
-                    <td colspan="4" style="text-align:center;">
-                        Data lokasi belum tersedia.
-                    </td>
-                </tr>
-
-                @endforelse
-
-            </tbody>
-
-        </table>
-
     </div>
 
+    <!-- Footer Konsisten -->
+    <footer class="main-footer">
+        <div class="footer-links">
+            <a href="#">Dokumentasi</a>
+            <a href="#">Bantuan</a>
+            <a href="#">Cantast hara</a>
+        </div>
+        <div class="footer-copyright">
+            &copy; 2026 Admin. Intex
+        </div>
+    </footer>
 </div>
 
 </body>

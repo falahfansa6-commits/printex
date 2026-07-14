@@ -1,0 +1,201 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Ganti URL di bawah ini dengan path background suasana pabrik cetak tekstil Anda */
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), 
+                url('img/2.png') no-repeat center center;
+    background-size: cover;
+    padding: 20px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 440px;
+}
+
+/* Style Logo */
+.logo-container {
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.main-logo {
+    max-width: 240px;
+    height: auto;
+    filter: drop-shadow(0px 4px 8px rgba(0,0,0,0.3));
+}
+
+/* Kotak Login - Glassmorphism */
+.login-box {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.75); /* Putih transparan */
+    backdrop-filter: blur(14px); /* Efek blur kaca blur */
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 16px;
+    padding: 40px 32px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+    text-align: center;
+}
+
+.login-box h2 {
+    color: #8B0000; /* Warna merah gelap khas Printex */
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 28px;
+    letter-spacing: 0.5px;
+}
+
+/* Alert Error Laravel */
+.error-alert {
+    background-color: rgba(239, 68, 68, 0.2);
+    border: 1px solid #ef4444;
+    color: #b91c1c;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    text-align: left;
+}
+
+/* Form Layout */
+.input-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    font-size: 13px;
+    color: #333333;
+    font-weight: 500;
+    margin-bottom: 6px;
+}
+
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+/* Kolom Input */
+.input-wrapper input {
+    width: 100%;
+    padding: 12px 40px; /* Jarak untuk ikon */
+    background: rgba(235, 242, 255, 0.8); /* Warna background biru pastel tipis */
+    border: 1px solid rgba(210, 220, 240, 1);
+    border-radius: 8px;
+    font-size: 14px;
+    color: #222222;
+    transition: all 0.3s ease;
+}
+
+.input-wrapper input:focus {
+    outline: none;
+    border-color: #8B0000;
+    background: #ffffff;
+    box-shadow: 0 0 0 3px rgba(139, 0, 0, 0.15);
+}
+
+/* Ikon Input */
+.input-icon {
+    position: absolute;
+    left: 14px;
+    color: #777777;
+    display: flex;
+    align-items: center;
+    pointer-events: none;
+}
+
+/* Tombol Sembunyikan/Tampilkan Password */
+.toggle-password {
+    position: absolute;
+    right: 14px;
+    background: none;
+    border: none;
+    color: #777777;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 0;
+}
+
+.toggle-password:hover {
+    color: #222222;
+}
+
+/* Tombol Login Merah Marun Glossy */
+.btn-login {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(180deg, #A30000 0%, #8B0000 100%);
+    border: none;
+    border-radius: 24px; /* Sudut lebih melengkung bulat sesuai mockup */
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(139, 0, 0, 0.3);
+    transition: transform 0.1s ease, box-shadow 0.3s ease;
+    margin-top: 10px;
+}
+
+.btn-login:hover {
+    background: linear-gradient(180deg, #B50000 0%, #9C0000 100%);
+    box-shadow: 0 6px 16px rgba(139, 0, 0, 0.4);
+}
+
+.btn-login:active {
+    transform: scale(0.98);
+}
+
+/* Bagian Footer Bawah */
+.login-footer {
+    margin-top: 24px;
+    font-size: 13px;
+    color: #555555;
+    line-height: 1.6;
+}
+
+.footer-link {
+    text-decoration: none;
+    color: #444444;
+    display: inline-block;
+    margin-bottom: 8px;
+    transition: color 0.2s;
+}
+
+.footer-link:hover {
+    color: #8B0000;
+    text-decoration: underline;
+}
+
+.footer-link-highlight {
+    text-decoration: none;
+    color: #8B0000;
+    font-weight: 500;
+}
+
+.footer-link-highlight:hover {
+    text-decoration: underline;
+}
+
+/* Teks Hak Cipta paling bawah luar kotak */
+.copyright {
+    margin-top: 24px;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.6);
+    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+}

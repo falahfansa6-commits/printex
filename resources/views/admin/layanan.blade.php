@@ -4,71 +4,80 @@
 
 @section('content')
 
-<!-- Mengubah class "card" menjadi "card-panel" sesuai setelan CSS baru -->
-<div class="card-panel">
+<!-- Memanggil file CSS dan Icon FontAwesome agar gaya visual sama persis dengan halaman About -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="{{ asset('css/slider.css') }}">
 
-    <div class="card-header">
-        <h2>Dashboard Admin</h2>
+<!-- Menggunakan wrapper utama yang sama seperti halaman About agar layout konsisten -->
+<div class="main-wrapper">
+    <div class="container">
+        <div class="card">
+
+            <div class="header-section">
+                <h2>Dashboard Admin</h2>
+            </div>
+
+            <p style="margin-bottom: 25px; color: #475569; font-size: 14px;">
+                Selamat datang di Dashboard Admin <b>Printex</b>. Silakan pilih menu yang ingin dikelola.
+            </p>
+
+            <!-- Menggunakan pembungkus responsif dan kelas tabel admin-table agar sama dengan About -->
+            <div class="table-responsive">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Menu</th>
+                            <th width="150">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <!-- Menggunakan kelas judul-text agar teks tebal dan rata kiri seperti About -->
+                            <td class="judul-text">Slider</td>
+                            <td>
+                                <div class="aksi">
+                                    <a href="{{ route('slider.index') }}" class="btn btn-edit">
+                                        <i class="fa-solid fa-pen"></i> Edit
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="judul-text">Printing Solution</td>
+                            <td>
+                                <div class="aksi">
+                                    <a href="#" class="btn btn-edit">
+                                        <i class="fa-solid fa-pen"></i> Edit
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="judul-text">Gambar</td>
+                            <td>
+                                <div class="aksi">
+                                    <a href="#" class="btn btn-edit">
+                                        <i class="fa-solid fa-pen"></i> Edit
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="judul-text">Our Value</td>
+                            <td>
+                                <div class="aksi">
+                                    <a href="#" class="btn btn-edit">
+                                        <i class="fa-solid fa-pen"></i> Edit
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
     </div>
-
-    <!-- inline style margin dihapus karena sudah di-handle oleh class .card-panel p di CSS -->
-    <p>
-        Selamat datang di Dashboard Admin <b>Printex</b>. Silakan pilih menu yang ingin dikelola.
-    </p>
-
-    <!-- Membungkus tabel agar responsive di layar kecil jika diperlukan -->
-    <div class="table-responsive">
-        <!-- Mengubah class table menjadi "table-admin" -->
-        <table class="table-admin">
-            <thead>
-                <tr>
-                    <th>Menu</th>
-                    <!-- Mengubah teks aksi menjadi rata kanan agar terlihat modern -->
-                    <th width="150" class="text-right">Aksi</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                <tr>
-                    <td>Slider</td>
-                    <td class="text-right">
-                        <!-- Mengubah class menjadi "btn-edit" -->
-                        <a href="{{ route('slider.index') }}" class="btn-edit">
-                            <i class="fa-solid fa-pen"></i> Edit
-                        </a>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>Printing Solution</td>
-                    <td class="text-right">
-                        <a href="#" class="btn-edit">
-                            <i class="fa-solid fa-pen"></i> Edit
-                        </a>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>Gambar</td>
-                    <td class="text-right">
-                        <a href="#" class="btn-edit">
-                            <i class="fa-solid fa-pen"></i> Edit
-                        </a>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>Our Value</td>
-                    <td class="text-right">
-                        <a href="#" class="btn-edit">
-                            <i class="fa-solid fa-pen"></i> Edit
-                        </a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
 </div>
 
 @endsection

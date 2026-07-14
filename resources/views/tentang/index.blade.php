@@ -3,285 +3,135 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Data Tentang Kami</title>
-<style>
-    /* ===========================
-   TABLE RESPONSIVE
-=========================== */
-
-.table-responsive{
-    width:100%;
-    overflow-x:auto;
-}
-
-table{
-    width:100%;
-    min-width:800px;
-    border-collapse:collapse;
-    margin-top:20px;
-}
-
-thead{
-    background:#ff0000;
-    color:#fff;
-}
-
-th,
-td{
-    padding:15px;
-    border-bottom:1px solid #ddd;
-    text-align:left;
-    vertical-align:middle;
-}
-
-tbody tr:nth-child(even){
-    background:#f8f9fa;
-}
-
-tbody tr:hover{
-    background:#eef6ff;
-}
-
-/* ===========================
-   GAMBAR
-=========================== */
-
-.preview{
-    width:100px;
-    height:80px;
-    object-fit:cover;
-    border-radius:8px;
-    border:1px solid #ddd;
-}
-
-/* ===========================
-   AKSI
-=========================== */
-
-.aksi{
-    display:flex;
-    gap:8px;
-    align-items:center;
-}
-
-.aksi form{
-    display:inline;
-
-}
-.btn{
-    display:inline-block;
-    padding:10px 20px;
-    border:none;
-    border-radius:8px;
-    text-decoration:none;
-    cursor:pointer;
-    transition:.3s;
-    font-size:15px;
-}
-
-.btn:hover{
-    transform:translateY(-2px);
-}
-
-.btn-add{
-    background:#28a745;
-    color:#fff;
-}
-
-.btn-edit{
-    background:#ffc107;
-    color:#000;
-}
-
-.btn-delete{
-    background:#dc3545;
-    color:#fff;
-}
-
-.btn-save{
-    background:#ff0000;
-    color:#fff;
-}
-
-.btn-back{
-    background:#6c757d;
-    color:#fff;
-}
-
-/* ===========================
-   RESPONSIVE
-=========================== */
-
-@media (max-width:992px){
-
-    .container{
-        max-width:95%;
-    }
-
-}
-
-@media (max-width:768px){
-
-    body{
-        padding:20px;
-    }
-
-    .card{
-        padding:25px;
-    }
-
-    h1{
-        font-size:28px;
-    }
-
-    .top-bar{
-        justify-content:center;
-    }
-
-    .aksi{
-        flex-direction:column;
-        align-items:stretch;
-    }
-
-    .aksi .btn{
-        width:100%;
-        text-align:center;
-    }
-
-}
-
-@media (max-width:576px){
-
-    body{
-        padding:15px;
-    }
-
-    .card{
-        padding:18px;
-    }
-
-    h1{
-        font-size:24px;
-    }
-
-    .preview{
-        width:80px;
-        height:65px;
-    }
-
-}
-
-@media (max-width:400px){
-
-    h1{
-        font-size:22px;
-    }
-
-}
-</style>
+    <!-- Hubungkan ke FontAwesome untuk ikon modern -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ asset('css/slider.css') }}">
 </head>
 <body>
 
-<div class="container">
+<div class="main-wrapper">
+    <div class="container">
+        <div class="card">
+            
+            <!-- Header Section -->
+            <div class="header-section">
+                <h1>Data Tentang Kami</h1>
+                <a href="{{ route('tentang.create') }}" class="btn btn-add">
+                    <i class="fa-solid fa-plus"></i> Tambah Data
+                </a>
+            </div>
 
-    <div class="card">
+            <!-- Pesan Sukses Alert -->
+            @if(session('success'))
+                <div class="alert-success">
+                    <i class="fa-solid fa-circle-check"></i> {{ session('success') }}
+                </div>
+            @endif  
 
-        <h1>Data Tentang Kami</h1>
+            <!-- Utilities: Search & Bulk Actions -->
+            <div class="utilities-bar">
+                <div class="search-box">
+                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                    <input type="text" placeholder="Cari data...">
+                </div>
+                <div class="dropdown-box">
+                    <button class="btn-dropdown">
+                        Bulk Actions <i class="fa-solid fa-chevron-down text-xs"></i>
+                    </button>
+                </div>
+            </div>
 
-        <div class="top-bar">
-            <a href="{{ route('tentang.create') }}" class="btn btn-add">
-                + Tambah Data
-            </a>
+            <!-- Table Section -->
+            <div class="table-responsive">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th width="80">No</th>
+                            <th width="180">Gambar</th>
+                            <th>Judul</th>
+                            <th>Isi Konten</th>
+                            <th width="220">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse($tentang as $item)
+                        <tr>
+                            <td>
+                                <span class="order-number">{{ $loop->iteration }}</span>
+                            </td>
+                            <td>
+                                @if($item->gambar)
+                                    <div class="image-wrapper">
+                                        <img src="{{ asset($item->gambar) }}" alt="{{ $item->judul }}" class="preview">
+                                        <!-- Quick Edit Button Overlay -->
+                                        <a href="{{ route('tentang.edit',$item->id) }}" class="quick-edit-overlay">
+                                            <i class="fa-solid fa-pen"></i>
+                                            <span>Edit</span>
+                                        </a>
+                                    </div>
+                                @else
+                                    <span class="no-image"><i class="fa-solid fa-image"></i></span>
+                                @endif
+                            </td>
+                            <td class="judul-text" style="text-align: left; padding-left: 15px;">
+                                {{ $item->judul }}
+                            </td>
+                            <td class="text-muted-row" style="text-align: left; max-width: 350px; word-wrap: break-word;">
+                                {{ Str::limit($item->isi, 100) }}
+                            </td>
+                            <td>
+                                <div class="aksi">
+                                    <a href="{{ route('tentang.edit',$item->id) }}" class="btn btn-edit">
+                                        <i class="fa-solid fa-pen"></i> Edit
+                                    </a>
+
+                                    <form action="{{ route('tentang.destroy',$item->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-delete" onclick="return confirm('Yakin hapus data?')">
+                                            <i class="fa-solid fa-trash-can"></i> Hapus
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                        @empty
+                        <tr>
+                            <td colspan="5" class="empty-data">
+                                <i class="fa-solid fa-address-card" style="font-size: 32px; color: #cbd5e1; margin-bottom: 10px; display: block;"></i>
+                                Data belum tersedia.
+                            </td>
+                        </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Pagination Section -->
+            <div class="pagination-container">
+                <div class="pagination-info">Menampilkan {{ $tentang->count() }} data</div>
+                <div class="pagination-nav">
+                    <button class="btn-nav" disabled><i class="fa-solid fa-chevron-left"></i></button>
+                    <button class="btn-nav" disabled><i class="fa-solid fa-chevron-right"></i></button>
+                </div>
+            </div>
+
         </div>
-
-        <div class="table-responsive">
-
-            <table>
-
-                <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Gambar</th>
-                        <th>Judul</th>
-                        <th>Isi</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-
-                @forelse($tentang as $item)
-
-                    <tr>
-
-                        <td>{{ $loop->iteration }}</td>
-
-                        <td>
-
-                            @if($item->gambar)
-
-                                <img src="{{ asset($item->gambar) }}"
-                                     class="preview">
-
-                            @else
-
-                                Tidak ada gambar
-
-                            @endif
-
-                        </td>
-
-                        <td>{{ $item->judul }}</td>
-
-                        <td>{{ Str::limit($item->isi,100) }}</td>
-
-                        <td>
-
-                            <div class="aksi">
-
-                                <a href="{{ route('tentang.edit',$item->id) }}"
-                                   class="btn btn-edit">
-                                    Edit
-                                </a>
-
-                                <form action="{{ route('tentang.destroy',$item->id) }}"
-                                      method="POST">
-
-                                    @csrf
-                                    @method('DELETE')
-
-                                    <button type="submit"
-                                            class="btn btn-delete"
-                                            onclick="return confirm('Yakin hapus data?')">
-                                        Hapus
-                                    </button>
-
-                                </form>
-
-                            </div>
-
-                        </td>
-
-                    </tr>
-
-                @empty
-
-                    <tr>
-                        <td colspan="5" style="text-align:center;">
-                            Data belum tersedia.
-                        </td>
-                    </tr>
-
-                @endforelse
-
-                </tbody>
-
-            </table>
-
-        </div>
-
     </div>
 
+    <!-- Footer Konsisten -->
+    <footer class="main-footer">
+        <div class="footer-links">
+            <a href="#">Dokumentasi</a>
+            <a href="#">Bantuan</a>
+            <a href="#">Cantast hara</a>
+        </div>
+        <div class="footer-copyright">
+            &copy; 2026 Admin. Intex
+        </div>
+    </footer>
 </div>
 
 </body>

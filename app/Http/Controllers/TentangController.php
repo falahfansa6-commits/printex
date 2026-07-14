@@ -122,22 +122,18 @@ class TentangController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Tentang $tentang, $id)
-    {
-          $tentang = Tentang::findOrFail($id);
+   public function destroy($id)
+{
+    $tentang = Tentang::findOrFail($id);
 
-        if (
-            $tentang->gambar &&
-            file_exists(public_path($tentang->gambar))
-        ) {
-            unlink(public_path($tentang->gambar));
-        }
-
-        $tentang->delete();
-
-        return redirect()
-            ->route('tentang-kami.index')
-            ->with('success','Data berhasil dihapus');
-    
+    if ($tentang->gambar && file_exists(public_path($tentang->gambar))) {
+        unlink(public_path($tentang->gambar));
     }
+
+    $tentang->delete();
+
+    return redirect()
+        ->route('tentang.index')
+        ->with('success', 'Data berhasil dihapus');
+}
 }

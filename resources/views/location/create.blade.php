@@ -4,152 +4,66 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tambah Lokasi</title>
-
-    <style>
-        *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
-            font-family:Arial, Helvetica, sans-serif;
-        }
-
-        body{
-            background:linear-gradient(135deg,#ffffff,#ffffff);
-            min-height:100vh;
-            display:flex;
-            justify-content:center;
-            align-items:center;
-            padding:20px;
-        }
-
-        .container{
-            width:100%;
-            max-width:550px;
-        }
-
-        .card{
-            background:#fff;
-            border-radius:15px;
-            padding:35px;
-            box-shadow:0 10px 30px rgba(0,0,0,.2);
-        }
-
-        h1{
-            text-align:center;
-            color:#333;
-            margin-bottom:30px;
-        }
-
-        .form-group{
-            margin-bottom:20px;
-        }
-
-        label{
-            display:block;
-            margin-bottom:8px;
-            font-weight:bold;
-            color:#444;
-        }
-
-        input,
-        textarea{
-            width:100%;
-            padding:12px 15px;
-            border:1px solid #ccc;
-            border-radius:8px;
-            font-size:15px;
-            transition:.3s;
-            outline:none;
-        }
-
-        input:focus,
-        textarea:focus{
-            border-color:#ff0000;
-            box-shadow:0 0 8px rgba(33,150,243,.3);
-        }
-
-        textarea{
-            resize:vertical;
-        }
-
-        .btn-group{
-            display:flex;
-            justify-content:space-between;
-            margin-top:20px;
-        }
-
-        button{
-            background:#bb0000;
-            color:#fff;
-            border:none;
-            padding:12px 25px;
-            border-radius:8px;
-            cursor:pointer;
-            font-size:16px;
-            transition:.3s;
-        }
-
-        button:hover{
-            background:#ff0000;
-            transform:translateY(-2px);
-        }
-
-        .btn-back{
-            background:#6c757d;
-            color:white;
-            text-decoration:none;
-            padding:12px 25px;
-            border-radius:8px;
-            transition:.3s;
-        }
-
-        .btn-back:hover{
-            background:#5a6268;
-        }
-
-        @media(max-width:600px){
-            .btn-group{
-                flex-direction:column;
-                gap:10px;
-            }
-
-            .btn-back,
-            button{
-                width:100%;
-                text-align:center;
-            }
-        }
-    </style>
-
+    <!-- Tambahkan CDN FontAwesome untuk ikon tombol -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ asset('css/slider.css') }}">
 </head>
 <body>
 
-    <div class="container">
+<div class="main-wrapper">
+    <div class="container" style="max-width: 800px;"> <!-- Membatasi lebar form agar proporsional -->
         <div class="card">
 
-            <h1>Tambah Lokasi</h1>
+            <!-- Header Section -->
+            <div class="header-section" style="margin-bottom: 30px; border-bottom: 1px solid #e2e8f0; padding-bottom: 15px;">
+                <h1 style="font-size: 24px;">
+                    <i class="fa-solid fa-square-plus" style="color: #566270; margin-right: 8px;"></i>Tambah Lokasi
+                </h1>
+            </div>
+
+            <!-- Pesan Error Validasi -->
+            @if ($errors->any())
+                <div class="alert-danger" style="background:#fef2f2; color:#991b1b; border: 1px solid #fca5a5; padding:14px 18px; border-radius:12px; margin-bottom:20px; font-size: 14px;">
+                    <ul style="margin-left: 20px;">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
 
             <form action="{{ route('location.store') }}" method="POST">
-
                 @csrf
 
                 <div class="form-group">
-                    <label>Nama Kota</label>
-                    <input type="text" name="nama_kota" placeholder="Masukkan nama kota" required>
+                    <label for="nama_kota">Nama Kota</label>
+                    <input 
+                        type="text" 
+                        id="nama_kota"
+                        name="nama_kota" 
+                        value="{{ old('nama_kota') }}"
+                        placeholder="Masukkan nama kota" 
+                        required>
                 </div>
 
                 <div class="form-group">
-                    <label>Alamat</label>
-                    <textarea name="alamat" rows="5" placeholder="Masukkan alamat lengkap" required></textarea>
+                    <label for="alamat">Alamat Lengkap</label>
+                    <textarea 
+                        id="alamat"
+                        name="alamat" 
+                        rows="5" 
+                        placeholder="Masukkan alamat lengkap" 
+                        required>{{ old('alamat') }}</textarea>
                 </div>
 
-                <div class="btn-group">
-                    <a href="{{ route('location.index') }}" class="btn-back">
-                        Kembali
+                <!-- Bagian Tombol Aksi Bawah -->
+                <div class="btn-group" style="display: flex; justify-content: space-between; gap: 15px; margin-top: 35px; border-top: 1px solid #e2e8f0; padding-top: 20px;">
+                    <a href="{{ route('location.index') }}" class="btn btn-back" style="background: #64748b; color: #fff;">
+                        <i class="fa-solid fa-arrow-left"></i> Kembali
                     </a>
 
-                    <button type="submit">
-                        Simpan
+                    <button type="submit" class="btn btn-save" style="background: #10b981; color: #fff;">
+                        <i class="fa-solid fa-floppy-disk"></i> Simpan
                     </button>
                 </div>
 
@@ -157,6 +71,19 @@
 
         </div>
     </div>
+
+    <!-- Footer Konsisten -->
+    <footer class="main-footer">
+        <div class="footer-links">
+            <a href="#">Dokumentasi</a>
+            <a href="#">Bantuan</a>
+            <a href="#">Cantast hara</a>
+        </div>
+        <div class="footer-copyright">
+            &copy; 2026 Admin. Intex
+        </div>
+    </footer>
+</div>
 
 </body>
 </html>

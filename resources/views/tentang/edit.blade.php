@@ -3,285 +3,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Edit Tentang Kami</title>
-<style>
-    *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial, Helvetica, sans-serif;
-}
-
-body{
-    background:linear-gradient(135deg,#ffffff,#fafafa);
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    padding:20px;
-}
-
-.container{
-    width:100%;
-    max-width:700px;
-}
-
-.card{
-    background:#fff;
-    border-radius:15px;
-    padding:35px;
-    box-shadow:0 10px 30px rgba(0,0,0,.2);
-}
-
-h1{
-    text-align:center;
-    color:#333;
-    margin-bottom:30px;
-}
-
-.form-group{
-    margin-bottom:20px;
-}
-
-label{
-    display:block;
-    margin-bottom:8px;
-    font-weight:bold;
-    color:#444;
-}
-
-input[type="text"],
-textarea,
-input[type="file"]{
-    width:100%;
-    padding:12px 15px;
-    border:1px solid #ccc;
-    border-radius:8px;
-    font-size:15px;
-    outline:none;
-    transition:.3s;
-}
-
-input[type="text"]:focus,
-textarea:focus,
-input[type="file"]:focus{
-    border-color:#ff0000;
-    box-shadow:0 0 8px rgba(33,150,243,.3);
-}
-
-textarea{
-    resize:vertical;
-}
-
-input[type="file"]::file-selector-button{
-    background:#ff0000;
-    color:#fff;
-    border:none;
-    padding:10px 18px;
-    border-radius:6px;
-    cursor:pointer;
-    margin-right:12px;
-    transition:.3s;
-}
-
-input[type="file"]::file-selector-button:hover{
-    background:#ff0000;
-}
-
-.preview{
-    display:block;
-    width:220px;
-    max-width:100%;
-    border-radius:10px;
-    border:1px solid #ddd;
-    margin-top:10px;
-}
-
-.btn-group{
-    display:flex;
-    justify-content:space-between;
-    gap:10px;
-    margin-top:25px;
-}
-
-.btn{
-    display:inline-block;
-    padding:12px 22px;
-    border:none;
-    border-radius:8px;
-    text-decoration:none;
-    cursor:pointer;
-    font-size:15px;
-    transition:.3s;
-}
-
-.btn:hover{
-    transform:translateY(-2px);
-}
-
-.btn-save{
-    background:#ff0000;
-    color:white;
-}
-
-.btn-save:hover{
-    background:#ff0000;
-}
-
-.btn-back{
-    background:#6c757d;
-    color:white;
-}
-
-.btn-back:hover{
-    background:#5a6268;
-}
-
-/* Tablet */
-@media (max-width:768px){
-
-    body{
-        padding:20px;
-    }
-
-    .container{
-        max-width:100%;
-    }
-
-    .card{
-        padding:25px;
-    }
-
-    h1{
-        font-size:28px;
-    }
-
-    .btn-group{
-        flex-direction:column;
-    }
-
-    .btn{
-        width:100%;
-        text-align:center;
-    }
-
-    .preview{
-        width:180px;
-        margin:auto;
-    }
-
-}
-
-/* Smartphone */
-@media (max-width:576px){
-
-    body{
-        padding:15px;
-    }
-
-    .card{
-        padding:20px;
-    }
-
-    h1{
-        font-size:24px;
-    }
-
-    input,
-    textarea,
-    .btn{
-        font-size:14px;
-    }
-
-    .preview{
-        width:150px;
-    }
-
-}
-
-/* HP kecil */
-@media (max-width:400px){
-
-    h1{
-        font-size:22px;
-    }
-
-    .card{
-        padding:15px;
-    }
-
-    .preview{
-        width:130px;
-    }
-
-}
-</style>
+    <!-- Tambahkan CDN FontAwesome untuk ikon tombol -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ asset('css/slider.css') }}">
 </head>
 <body>
 
-<div class="container">
+<div class="main-wrapper">
+    <div class="container" style="max-width: 800px;"> <!-- Membatasi lebar form agar proporsional -->
+        <div class="card">
 
-    <div class="card">
-
-        <h1>Edit Tentang Kami</h1>
-
-        <form action="{{ route('tentang.update', $tentang->id) }}"
-              method="POST"
-              enctype="multipart/form-data">
-
-            @csrf
-            @method('PUT')
-
-            <div class="form-group">
-                <label>Judul</label>
-                <input type="text"
-                       name="judul"
-                       value="{{ $tentang->judul }}"
-                       required>
+            <!-- Header Section -->
+            <div class="header-section" style="margin-bottom: 30px; border-bottom: 1px solid #e2e8f0; padding-bottom: 15px;">
+                <h1 style="font-size: 24px;">
+                    <i class="fa-solid fa-address-card" style="color: #566270; margin-right: 8px;"></i>Edit Tentang Kami
+                </h1>
             </div>
 
-            <div class="form-group">
-                <label>Isi</label>
-                <textarea name="isi"
-                          rows="6"
-                          required>{{ $tentang->isi }}</textarea>
-            </div>
-
-            @if($tentang->gambar)
-
-                <div class="form-group">
-                    <label>Gambar Saat Ini</label>
-
-                    <img src="{{ asset($tentang->gambar) }}"
-                         class="preview"
-                         style="width:200px;height:auto;">
+            <!-- Pesan Error Validasi -->
+            @if ($errors->any())
+                <div class="alert-danger" style="background:#fef2f2; color:#991b1b; border: 1px solid #fca5a5; padding:14px 18px; border-radius:12px; margin-bottom:20px; font-size: 14px;">
+                    <ul style="margin-left: 20px;">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
                 </div>
-
             @endif
 
-            <div class="form-group">
-                <label>Ganti Gambar</label>
-                <input type="file" name="gambar">
-            </div>
+            <form action="{{ route('tentang.update', $tentang->id) }}"
+                  method="POST"
+                  enctype="multipart/form-data">
 
-            <div class="btn-group">
+                @csrf
+                @method('PUT')
 
-                <a href="{{ route('tentang.index') }}"
-                   class="btn btn-back">
-                    Kembali
-                </a>
+                <div class="form-group">
+                    <label for="judul">Judul Utama</label>
+                    <input 
+                        type="text"
+                        id="judul"
+                        name="judul"
+                        value="{{ old('judul', $tentang->judul) }}"
+                        placeholder="Masukkan judul konten"
+                        required>
+                </div>
 
-                <button type="submit"
-                        class="btn btn-save">
-                    Update
-                </button>
+                <div class="form-group">
+                    <label for="isi">Isi Konten / Deskripsi</label>
+                    <textarea 
+                        id="isi"
+                        name="isi"
+                        rows="6"
+                        placeholder="Masukkan detail teks informasi tentang kami"
+                        required>{{ old('isi', $tentang->isi) }}</textarea>
+                </div>
 
-            </div>
+                @if($tentang->gambar)
+                    <div class="form-group">
+                        <label>Gambar Saat Ini</label>
+                        <div class="image-preview" style="display: flex; justify-content: flex-start; margin-top: 5px;">
+                            <div class="image-wrapper" style="width: 200px; height: 112px; margin: 0;">
+                                <img src="{{ asset($tentang->gambar) }}"
+                                     alt="Tentang Kami"
+                                     class="preview">
+                            </div>
+                        </div>
+                    </div>
+                @endif
 
-        </form>
+                <div class="form-group">
+                    <label for="gambar">Ganti File Gambar</label>
+                    <input 
+                        type="file" 
+                        id="gambar"
+                        name="gambar"
+                        accept="image/*"
+                        style="padding: 8px 12px;">
+                    <small class="text-muted" style="color: #64748b; font-size: 13px; display: block; margin-top: 6px;">
+                        <i class="fa-solid fa-circle-info"></i> Kosongkan jika tidak ingin mengganti gambar.
+                    </small>
+                </div>
 
+                <!-- Bagian Tombol Aksi Bawah -->
+                <div class="btn-group" style="display: flex; justify-content: space-between; gap: 15px; margin-top: 35px; border-top: 1px solid #e2e8f0; padding-top: 20px;">
+                    <a href="{{ route('tentang.index') }}" class="btn btn-back" style="background: #64748b; color: #fff;">
+                        <i class="fa-solid fa-arrow-left"></i> Kembali
+                    </a>
+
+                    <button type="submit" class="btn btn-save" style="background: #10b981; color: #fff;">
+                        <i class="fa-solid fa-floppy-disk"></i> Simpan Perubahan
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
     </div>
 
+    <!-- Footer Konsisten -->
+    <footer class="main-footer">
+        <div class="footer-links">
+            <a href="#">Dokumentasi</a>
+            <a href="#">Bantuan</a>
+            <a href="#">Cantast hara</a>
+        </div>
+        <div class="footer-copyright">
+            &copy; 2026 Admin. Intex
+        </div>
+    </footer>
 </div>
 
 </body>
