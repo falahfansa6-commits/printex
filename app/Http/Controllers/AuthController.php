@@ -8,11 +8,18 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
+    // Halaman Login
     public function index()
     {
+        // Jika sudah login, langsung ke dashboard
+        if (session('login')) {
+            return redirect()->route('admin.dashboard');
+        }
+
         return view('login');
     }
 
+    // Proses Login
     public function authenticate(Request $request)
     {
         $request->validate([
@@ -22,32 +29,37 @@ class AuthController extends Controller
 
         $admin = Admin::where('username', $request->username)->first();
 
-        if ($admin && Hash::check($request->password, $admin->password)) {
-
-            session([
-                'login' => true,
-                'admin' => $admin,
-            ]);
-
-            return redirect('/admin/dashboard');
+        if (!$admin) {
+            return back()->with('error', 'Username tidak ditemukan.');
         }
 
-        return back()->with('error', 'Username atau Password salah');
+        if (!Hash::check($request->password, $admin->password)) {
+            return back()->with('error', 'Password salah.');
+        }
+
+        session([
+            'login' => true,
+            'admin' => $admin,
+        ]);
+
+        return redirect()->route('admin.dashboard');
     }
 
+    // Dashboard
     public function dashboard()
     {
         if (!session('login')) {
-            return redirect('/login');
+            return redirect()->route('login');
         }
 
         return view('admin.dashboard');
     }
 
-    public function logout()
+    // Logout
+    public function logout(Request $request)
     {
-        session()->flush();
+        $request->session()->flush();
 
-        return redirect('/login');
+        return redirect()->route('login');
     }
 }

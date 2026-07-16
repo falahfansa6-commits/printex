@@ -1,3 +1,8 @@
+@extends('layouts.admin')
+
+@section('title', 'Dashboard')
+
+@section('content')
 <link rel="stylesheet" href="{{ asset('css/slider.css') }}">
 
 <div class="container">
@@ -77,3 +82,4 @@
     </div>
 
 </div>
+@endsection

@@ -45,7 +45,7 @@
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="{{ route('empatkontak.index') }}">
                     <i class="fa-solid fa-envelope"></i>
                     <span>Kontak</span>
                 </a>

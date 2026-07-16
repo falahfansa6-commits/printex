@@ -42,7 +42,7 @@
                         type="text"
                         id="username"
                         name="username"
-                        placeholder="admin_user"
+                        placeholder="username"
                         value="{{ old('username') }}"
                         required
                         autocomplete="off"
@@ -62,7 +62,7 @@
                         type="password"
                         id="password"
                         name="password"
-                        placeholder="••••••••••••"
+                        placeholder="Masukan Password"
                         required
                     >
                     <button type="button" class="toggle-password" onclick="togglePasswordVisibility()">

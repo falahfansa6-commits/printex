@@ -105,29 +105,23 @@ Route::get('/kontak', [KontakController::class, 'index'])
     //serach
 Route::get('/search', [SearchController::class, 'index'])->name('search');
 
-
-// dashboard
-Route::prefix('admin')->group(function () {
-Route::get('/dashboard', [DashboardController::class,'index'])->name('admin.dashboard');
-});
-
-//About dashboard
-Route::prefix('admin')->group(function (){
-Route::get('/about', [AboutController::class, 'index'])->name('admin.about');
-});
-
-
-//layanan dashboard
-Route::prefix('admin')->group(function (){ 
-Route::get('/layanan', [LayananController::class, 'index'])->name('admin.layanan');
-
-}
-);
-
-
-//login
+// Login
 Route::get('/login', [AuthController::class, 'index'])->name('login');
 Route::post('/login', [AuthController::class, 'authenticate']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
+// Semua halaman admin wajib login
+Route::middleware('admin.auth')->prefix('admin')->group(function () {
 
+    Route::get('/dashboard', [DashboardController::class, 'index'])
+        ->name('admin.dashboard');
+
+    Route::get('/about', [AboutController::class, 'index'])
+        ->name('admin.about');
+
+    Route::get('/layanan', [LayananController::class, 'index'])
+        ->name('admin.layanan');
+
+    Route::get('/empatkontak', [LayananController::class, 'index'])
+        ->name('admin.empatkontak');
+});

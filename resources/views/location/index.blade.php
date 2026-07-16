@@ -33,8 +33,10 @@
             <!-- Utilities: Search & Bulk Actions (Menjaga konsistensi layout) -->
             <div class="utilities-bar">
                 <div class="search-box">
+                    <form action="{{ route('location.index') }}" method="GET">
                     <i class="fa-solid fa-magnifying-glass search-icon"></i>
-                    <input type="text" placeholder="Cari lokasi...">
+                    <input type="text" placeholder="Cari lokasi..." name="q">
+                    </form>
                 </div>
                 <div class="dropdown-box">
                     <button class="btn-dropdown">

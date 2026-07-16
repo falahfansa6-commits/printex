@@ -11,11 +11,18 @@ class LocationController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        $locations = Location::latest()->get();
-        return view('location.index', compact('locations'));
+ public function index(Request $request)
+{
+    $locations = Location::query();
+
+    if ($request->q) {
+        $locations->where('nama_kota', 'like', '%' . $request->q . '%');
     }
+
+    $locations = $locations->paginate(5);
+
+    return view('location.index', compact('locations'));
+}
 
     /**
      * Show the form for creating a new resource.
