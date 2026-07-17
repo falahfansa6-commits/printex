@@ -1,152 +1,133 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    @extends('layouts.admin')
+@extends('layouts.admin')
 
 @section('title', 'Layanan')
 
 @section('content')
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Layanan</title>
+<!-- Menggunakan stylesheet slider.css dan ikon FontAwesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="{{ asset('css/slider.css') }}">
 
-    <link rel="stylesheet" href="{{ asset('css/service.css') }}">
-</head>
-<body>
-
-<div class="container">
-
-    <div class="card">
-
-        <h1>Edit Layanan</h1>
-
-        @if ($errors->any())
-
-            <div class="alert-danger">
-
-                <ul>
-
-                    @foreach ($errors->all() as $error)
-
-                        <li>{{ $error }}</li>
-
-                    @endforeach
-
-                </ul>
-
+<div class="main-wrapper">
+    <!-- Menggunakan batas max-width kecil agar layout form tetap proporsional -->
+    <div class="container" style="max-width: 600px;">
+        
+        <div class="card">
+            
+            <!-- Bagian Header Form -->
+            <div class="header-section" style="border-bottom: 1px solid #e2e8f0; padding-bottom: 10px; margin-bottom: 20px;">
+                <h1>Edit Layanan</h1>
             </div>
 
-        @endif
+            <!-- Blok Pesan Error Validasi Global -->
+            @if ($errors->any())
+                <div class="alert-danger" style="margin-bottom: 20px;">
+                    <p style="margin: 0; font-weight: bold;">
+                        <i class="fa-solid fa-triangle-exclamation"></i> Harap perbaiki kesalahan pengisian form di bawah ini.
+                    </p>
+                    <ul style="margin: 10px 0 0 0; padding-left: 20px; font-size: 13px;">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
 
-        <form action="{{ route('service.update',$service->id) }}" method="POST">
+            <!-- Form edit data -->
+            <form action="{{ route('service.update', $service->id) }}" method="POST">
+                @csrf
+                @method('PUT')
 
-            @csrf
-            @method('PUT')
+                <!-- Input Judul -->
+                <div class="form-group">
+                    <label for="judul">Judul <span style="color: #ef4444;">*</span></label>
+                    <input 
+                        type="text" 
+                        id="judul" 
+                        name="judul" 
+                        maxlength="30"
+                        value="{{ old('judul', $service->judul) }}" 
+                        placeholder="Masukkan judul layanan"
+                        class="@error('judul') is-invalid @enderror"
+                        required>
+                    <small id="judulCount" class="text-muted" style="display: block; margin-top: 4px; text-align: right; color: #64748b; font-size: 12px;"></small>
+                    @error('judul')
+                        <small style="color: #ef4444; font-size: 12px; margin-top: 4px; display: block;">
+                            <i class="fa-solid fa-circle-exclamation"></i> {{ $message }}
+                        </small>
+                    @enderror
+                </div>
 
-            <!-- Judul -->
+                <!-- Input Deskripsi -->
+                <div class="form-group" style="margin-top: 15px;">
+                    <label for="deskripsi">Deskripsi <span style="color: #ef4444;">*</span></label>
+                    <textarea 
+                        id="deskripsi" 
+                        name="deskripsi" 
+                        rows="6" 
+                        maxlength="200"
+                        placeholder="Masukkan deskripsi layanan"
+                        class="@error('deskripsi') is-invalid @enderror"
+                        required>{{ old('deskripsi', $service->deskripsi) }}</textarea>
+                    <small id="deskCount" class="text-muted" style="display: block; margin-top: 4px; text-align: right; color: #64748b; font-size: 12px;"></small>
+                    @error('deskripsi')
+                        <small style="color: #ef4444; font-size: 12px; margin-top: 4px; display: block;">
+                            <i class="fa-solid fa-circle-exclamation"></i> {{ $message }}
+                        </small>
+                    @enderror
+                </div>
 
-            <div class="form-group">
+                <!-- Input Urutan -->
+                <div class="form-group" style="margin-top: 15px;">
+                    <label for="urutan">Urutan Tampil <span style="color: #ef4444;">*</span></label>
+                    <input 
+                        type="number" 
+                        id="urutan" 
+                        name="urutan" 
+                        min="1"
+                        value="{{ old('urutan', $service->urutan) }}" 
+                        class="@error('urutan') is-invalid @enderror"
+                        required>
+                    @error('urutan')
+                        <small style="color: #ef4444; font-size: 12px; margin-top: 4px; display: block;">
+                            <i class="fa-solid fa-circle-exclamation"></i> {{ $message }}
+                        </small>
+                    @enderror
+                </div>
 
-                <label for="judul">Judul</label>
+                <!-- Kelompok Tombol Aksi menggunakan wrapper .aksi bawaan slider.css -->
+                <div class="aksi" style="justify-content: flex-start; margin-top: 25px; gap: 10px; border-top: 1px solid #e2e8f0; padding-top: 20px;">
+                    <button type="submit" class="btn btn-add" style="background: #10b981;">
+                        <i class="fa-solid fa-floppy-disk"></i> Update
+                    </button>
+                    <a href="{{ route('service.index') }}" class="btn btn-edit" style="background: #64748b; color: white;">
+                        <i class="fa-solid fa-arrow-left"></i> Kembali
+                    </a>
+                </div>
 
-                <input
-                    type="text"
-                    id="judul"
-                    name="judul"
-                    maxlength="30"
-                    value="{{ old('judul',$service->judul) }}"
-                    placeholder="Masukkan judul layanan"
-                    required>
+            </form>
 
-                <small id="judulCount" class="text-muted"></small>
-
-            </div>
-
-            <!-- Deskripsi -->
-
-            <div class="form-group">
-
-                <label for="deskripsi">Deskripsi</label>
-
-                <textarea
-                    id="deskripsi"
-                    name="deskripsi"
-                    rows="6"
-                    maxlength="200"
-                    placeholder="Masukkan deskripsi layanan"
-                    required>{{ old('deskripsi',$service->deskripsi) }}</textarea>
-
-                <small id="deskCount" class="text-muted"></small>
-
-            </div>
-
-            <!-- Urutan -->
-
-            <div class="form-group">
-
-                <label for="urutan">Urutan</label>
-
-                <input
-                    type="number"
-                    id="urutan"
-                    name="urutan"
-                    min="1"
-                    value="{{ old('urutan',$service->urutan) }}"
-                    required>
-
-            </div>
-
-            <div class="btn-group">
-
-                <a href="{{ route('service.index') }}"
-                   class="btn btn-back">
-
-                    Kembali
-
-                </a>
-
-                <button
-                    type="submit"
-                    class="btn btn-save">
-
-                    Update
-
-                </button>
-
-            </div>
-
-        </form>
-
+        </div>
     </div>
-
 </div>
 
+<!-- Script Counter Karakter Real-time -->
 <script>
+    const judul = document.getElementById('judul');
+    const deskripsi = document.getElementById('deskripsi');
+    const judulCount = document.getElementById('judulCount');
+    const deskCount = document.getElementById('deskCount');
 
-const judul = document.getElementById('judul');
-const deskripsi = document.getElementById('deskripsi');
+    function updateCounter() {
+        judulCount.textContent = judul.value.length + " / 30 karakter";
+        deskCount.textContent = deskripsi.value.length + " / 200 karakter";
+    }
 
-const judulCount = document.getElementById('judulCount');
-const deskCount = document.getElementById('deskCount');
+    judul.addEventListener('input', updateCounter);
+    deskripsi.addEventListener('input', updateCounter);
 
-function updateCounter(){
-
-    judulCount.textContent =
-        judul.value.length + " / 30 karakter";
-
-    deskCount.textContent =
-        deskripsi.value.length + " / 200 karakter";
-
-}
-
-judul.addEventListener('input', updateCounter);
-deskripsi.addEventListener('input', updateCounter);
-
-updateCounter();
-
+    // Jalankan counter saat halaman pertama kali dimuat
+    document.addEventListener('DOMContentLoaded', updateCounter);
 </script>
 
-</body>
-</html>
 @endsection

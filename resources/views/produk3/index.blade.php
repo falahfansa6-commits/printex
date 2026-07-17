@@ -1,122 +1,118 @@
-<!DOCTYPE html>
-<html>
-<head>
-    @extends('layouts.admin')
+@extends('layouts.admin')
 
-@section('title', 'Layanan')
+@section('title', 'Dashboard')
 
 @section('content')
 
-    <title>Data Produk 3</title>
+<!-- Memanggil asset CSS utama -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="{{ asset('css/slider.css') }}">
 
-    <style>
-        body{
-            font-family:Arial;
-            margin:40px;
-        }
+<div class="main-wrapper">
+    <div class="container">
+        
+        <!-- Alert dari session success -->
+        @if(session('success'))
+            <div class="alert-success">
+                <i class="fa-solid fa-circle-check"></i> {{ session('success') }}
+            </div>
+        @endif
 
-        table{
-            width:100%;
-            border-collapse:collapse;
-        }
+        <div class="card">
+            
+            <!-- Header Section -->
+            <div class="header-section">
+                <h1>Data Produk 3</h1>
+                <a href="{{ route('produk3.create') }}" class="btn btn-add">
+                    <i class="fa-solid fa-plus"></i> Tambah Data
+                </a>
+            </div>
 
-        table th,table td{
-            border:1px solid #ddd;
-            padding:10px;
-            text-align:center;
-        }
+            <!-- Tabel Data -->
+            <div class="table-responsive">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th width="80">No</th>
+                            <th>Judul</th>
+                            <th>Deskripsi</th>
+                            <th width="180">Gambar</th>
+                            <th width="200">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse($produk3 as $item)
+                        <tr>
+                            <!-- Kolom Nomor Urut Bergaya Badge kotak kecil -->
+                            <td>
+                                <span class="order-number">{{ $loop->iteration }}</span>
+                            </td>
+                            
+                            <!-- Kolom Judul (Teks Tebal Otomatis) -->
+                            <td class="judul-text">{{ $item->judul }}</td>
+                            
+                            <!-- Kolom Deskripsi dengan pembatasan teks agar rapi -->
+                            <td class="text-muted-row">
+                                {{ Str::limit($item->deskripsi, 80) }}
+                            </td>
+                            
+                            <!-- Kolom Gambar memanfaatkan fitur Hover Overlay dari CSS -->
+                            <td>
+                                @if($item->gambar)
+                                    <div class="image-wrapper">
+                                        <img src="{{ asset('upload/produk3/'.$item->gambar) }}" alt="{{ $item->judul }}" class="preview">
+                                        <a href="{{ route('produk3.edit', $item->id) }}" class="quick-edit-overlay">
+                                            <i class="fa-solid fa-pen-to-square"></i>
+                                            <span>Ubah</span>
+                                        </a>
+                                    </div>
+                                @else
+                                    <div class="no-image">
+                                        <i class="fa-regular fa-image"></i>
+                                    </div>
+                                @endif
+                            </td>
+                            
+                            <!-- Kolom Aksi Tombol -->
+                            <td>
+                                <div class="aksi">
+                                    <a href="{{ route('produk3.edit', $item->id) }}" class="btn btn-edit">
+                                        <i class="fa-solid fa-pen"></i> Edit
+                                    </a>
 
-        img{
-            width:150px;
-        }
+                                    <form action="{{ route('produk3.destroy', $item->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-delete" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
+                                            <i class="fa-solid fa-trash"></i> Hapus
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                        @empty
+                        <tr>
+                            <td colspan="5" class="empty-data">
+                                <i class="fa-regular fa-folder-open" style="font-size: 24px; display: block; margin-bottom: 8px;"></i>
+                                Data produk belum tersedia.
+                            </td>
+                        </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
 
-        .btn{
-            padding:8px 15px;
-            text-decoration:none;
-            color:white;
-            border:none;
-            cursor:pointer;
-        }
+        </div>
+    </div>
+    
+    <!-- Footer Terintegrasi bawaan CSS -->
+    <footer class="main-footer">
+        <span class="footer-copyright">&copy; {{ date('Y') }} Admin Dashboard. All rights reserved.</span>
+        <div class="footer-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+        </div>
+    </footer>
+</div>
 
-        .tambah{
-            background:green;
-        }
-
-        .edit{
-            background:orange;
-        }
-
-        .hapus{
-            background:red;
-        }
-
-    </style>
-
-</head>
-<body>
-
-<h2>Data Produk 3</h2>
-
-<a href="{{ route('produk3.create') }}" class="btn tambah">
-Tambah Data
-</a>
-
-<br><br>
-
-@if(session('success'))
-<p style="color:green">{{ session('success') }}</p>
-@endif
-
-<table>
-
-<tr>
-    <th>No</th>
-    <th>Judul</th>
-    <th>Deskripsi</th>
-    <th>Gambar</th>
-    <th>Aksi</th>
-</tr>
-
-@foreach($produk3 as $item)
-
-<tr>
-
-<td>{{ $loop->iteration }}</td>
-
-
-<td>{{ $item->judul }}</td>
-
-<td>{{ $item->deskripsi }}</td>
-
-<td>
-<img src="{{ asset('upload/produk3/'.$item->gambar) }}">
-</td>
-
-<td>
-
-<a href="{{ route('produk3.edit',$item->id) }}" class="btn edit">
-Edit
-</a>
-
-<form action="{{ route('produk3.destroy',$item->id) }}" method="POST" style="display:inline">
-
-@csrf
-@method('DELETE')
-
-<button class="btn hapus">
-Hapus
-</button>
-
-</form>
-
-</td>
-
-</tr>
-
-@endforeach
-
-</table>
-
-</body>
-</html>
 @endsection

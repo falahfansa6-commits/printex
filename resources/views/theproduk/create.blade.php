@@ -9,61 +9,89 @@
 <link rel="stylesheet" href="{{ asset('css/slider.css') }}">
 
 <div class="main-wrapper">
-    <div class="container" style="max-width: 800px; margin: 0 auto;">
+    <!-- Menggunakan batas max-width kecil agar layout form tetap proporsional -->
+    <div class="container" style="max-width: 600px;">
         
-        <!-- Notifikasi Error Utama jika ada validasi yang gagal -->
-        @if($errors->any())
-            <div class="alert alert-danger" style="margin-bottom: 20px; padding: 15px; background-color: #fef2f2; border: 1px solid #fecaca; color: #991b1b; border-radius: 8px; font-size: 14px;">
-                <p style="margin: 0 0 8px 0; font-weight: bold;"><i class="fa-solid fa-triangle-exclamation"></i> Harap perbaiki kesalahan pengisian form di bawah ini.</p>
-            </div>
-        @endif
-
         <div class="card">
             
-            <div class="header-section" style="margin-bottom: 25px; border-bottom: 1px solid #e2e8f0; padding-bottom: 15px;">
-                <h2 style="margin: 0;">Tambah The Product</h2>
+            <!-- Bagian Header Form -->
+            <div class="header-section" style="border-bottom: 1px solid #e2e8f0; padding-bottom: 10px;">
+                <h1>Tambah The Product</h1>
             </div>
+
+            <!-- Blok Pesan Error Validasi Global -->
+            @if($errors->any())
+                <div class="alert-danger">
+                    <p style="margin: 0; font-weight: bold;">
+                        <i class="fa-solid fa-triangle-exclamation"></i> Harap perbaiki kesalahan pengisian form di bawah ini.
+                    </p>
+                </div>
+            @endif
 
             <!-- Form tambah data -->
             <form action="{{ route('theproduk.store') }}" method="POST">
                 @csrf
 
                 <!-- Input Judul -->
-                <div class="form-group" style="margin-bottom: 20px; display: flex; flex-direction: column; gap: 8px;">
-                    <label style="font-weight: 600; color: #334155; font-size: 14px;">Judul <span style="color: #ef4444;">*</span></label>
-                    <input type="text" name="judul" maxlength="20" value="{{ old('judul') }}" placeholder="Masukkan judul produk (maksimal 20 karakter)" style="padding: 10px 14px; border: 1px solid {{ $errors->has('judul') ? '#ef4444' : '#cbd5e1' }}; border-radius: 6px; font-size: 14px; outline: none;" onfocus="this.style.borderColor='#0ea5e9'" onblur="this.style.borderColor='{{ $errors->has('judul') ? '#ef4444' : '#cbd5e1' }}'" required>
+                <div class="form-group">
+                    <label for="judul">Judul <span style="color: #ef4444;">*</span></label>
+                    <input 
+                        type="text" 
+                        id="judul" 
+                        name="judul" 
+                        maxlength="20"
+                        value="{{ old('judul') }}" 
+                        placeholder="Masukkan judul produk (maksimal 20 karakter)"
+                        class="@error('judul') is-invalid @enderror"
+                        required>
                     @error('judul')
-                        <small style="color: #ef4444; font-size: 12px; margin-top: -4px;"><i class="fa-solid fa-circle-exclamation"></i> {{ $message }}</small>
+                        <small style="color: #ef4444; font-size: 12px; margin-top: 4px; display: block;">
+                            <i class="fa-solid fa-circle-exclamation"></i> {{ $message }}
+                        </small>
                     @enderror
                 </div>
 
                 <!-- Input Isi / Deskripsi -->
-                <div class="form-group" style="margin-bottom: 20px; display: flex; flex-direction: column; gap: 8px;">
-                    <label style="font-weight: 600; color: #334155; font-size: 14px;">Isi <span style="color: #ef4444;">*</span></label>
-                    <textarea name="isi" rows="6" placeholder="Masukkan detail isi atau penjelasan produk" style="padding: 10px 14px; border: 1px solid {{ $errors->has('isi') ? '#ef4444' : '#cbd5e1' }}; border-radius: 6px; font-size: 14px; outline: none; resize: vertical;" onfocus="this.style.borderColor='#0ea5e9'" onblur="this.style.borderColor='{{ $errors->has('isi') ? '#ef4444' : '#cbd5e1' }}'" required>{{ old('isi') }}</textarea>
+                <div class="form-group">
+                    <label for="isi">Isi <span style="color: #ef4444;">*</span></label>
+                    <textarea 
+                        id="isi" 
+                        name="isi" 
+                        rows="6" 
+                        placeholder="Masukkan detail isi atau penjelasan produk"
+                        class="@error('isi') is-invalid @enderror"
+                        required>{{ old('isi') }}</textarea>
                     @error('isi')
-                        <small style="color: #ef4444; font-size: 12px; margin-top: -4px;"><i class="fa-solid fa-circle-exclamation"></i> {{ $message }}</small>
+                        <small style="color: #ef4444; font-size: 12px; margin-top: 4px; display: block;">
+                            <i class="fa-solid fa-circle-exclamation"></i> {{ $message }}
+                        </small>
                     @enderror
                 </div>
 
                 <!-- Input Urutan -->
-                <div class="form-group" style="margin-bottom: 30px; display: flex; flex-direction: column; gap: 8px;">
-                    <label style="font-weight: 600; color: #334155; font-size: 14px;">Urutan Tampil <span style="color: #ef4444;">*</span></label>
-                    <input type="number" name="urutan" value="{{ old('urutan') }}" placeholder="Contoh: 1" style="padding: 10px 14px; border: 1px solid {{ $errors->has('urutan') ? '#ef4444' : '#cbd5e1' }}; border-radius: 6px; font-size: 14px; outline: none;" onfocus="this.style.borderColor='#0ea5e9'" onblur="this.style.borderColor='{{ $errors->has('urutan') ? '#ef4444' : '#cbd5e1' }}'" required>
+                <div class="form-group">
+                    <label for="urutan">Urutan Tampil <span style="color: #ef4444;">*</span></label>
+                    <input 
+                        type="number" 
+                        id="urutan" 
+                        name="urutan" 
+                        value="{{ old('urutan') }}" 
+                        placeholder="Contoh: 1"
+                        class="@error('urutan') is-invalid @enderror"
+                        required>
                     @error('urutan')
-                        <small style="color: #ef4444; font-size: 12px; margin-top: -4px;"><i class="fa-solid fa-circle-exclamation"></i> {{ $message }}</small>
+                        <small style="color: #ef4444; font-size: 12px; margin-top: 4px; display: block;">
+                            <i class="fa-solid fa-circle-exclamation"></i> {{ $message }}
+                        </small>
                     @enderror
                 </div>
 
-                <!-- Bagian Tombol Aksi / Submit Form -->
-                <div class="form-actions" style="display: flex; gap: 12px; border-top: 1px solid #e2e8f0; padding-top: 20px;">
-                    <!-- Tombol Simpan -->
-                    <button type="submit" class="btn btn-edit" style="background-color: #10b981; border-color: #10b981; color: white; display: inline-flex; align-items: center; gap: 8px; cursor: pointer; font-weight: 600; padding: 10px 20px;">
+                <!-- Kelompok Tombol Aksi menggunakan wrapper .aksi bawaan CSS -->
+                <div class="aksi" style="justify-content: flex-start; margin-top: 25px; gap: 10px; border-top: 1px solid #e2e8f0; padding-top: 20px;">
+                    <button type="submit" class="btn btn-add" style="background: #10b981;">
                         <i class="fa-solid fa-floppy-disk"></i> Simpan
                     </button>
-
-                    <!-- Tombol Kembali -->
-                    <a href="{{ route('theproduk.index') }}" class="btn btn-edit" style="background-color: #64748b; border-color: #64748b; color: white; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; font-weight: 600; padding: 10px 20px;">
+                    <a href="{{ route('theproduk.index') }}" class="btn btn-edit" style="background: #64748b; color: white;">
                         <i class="fa-solid fa-arrow-left"></i> Kembali
                     </a>
                 </div>

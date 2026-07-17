@@ -59,7 +59,7 @@
 
         @empty
 
-            <div class="slide">
+            <div class="slider">
                 <h3>Tidak ada slider</h3>
             </div>
 
@@ -75,8 +75,8 @@
  <div class="container">
  
     <div class="text">
-        <img src="p.png" height="100px" width="100px">
-        <h1>Tentang<br>Kami</h1>
+        <img src="{{ asset('img/p.png') }}" height="100px" width="100px">
+        <h1 name="k">Tentang<br>Kami</h1>
 <br>
         <p>
             Printex merupakan perusahaaan yang bergerak di bidang jasa
@@ -88,7 +88,7 @@
     </div>
 
     <div class="gambar">
-        <img src="orang.png">
+        <img src="{{ asset('img/orang.png') }}">
     </div>
 
 </div>
@@ -122,7 +122,7 @@
      
  
 <!-- Our Values -->
-<div class="ov-section-wrapper">
+<div class="ov-section-wrapper" name="k">
 
     <!-- Bagian kiri -->
     <div class="ov-left-side">

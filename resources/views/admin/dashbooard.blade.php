@@ -44,7 +44,7 @@
                             <td class="judul-text">Printing Solution</td>
                             <td>
                                 <div class="aksi">
-                                    <a href="#" class="btn btn-edit">
+                                    <a href="{{ route('secound.index') }}" class="btn btn-edit">
                                         <i class="fa-solid fa-pen"></i> Edit
                                     </a>
                                 </div>
@@ -54,7 +54,7 @@
                             <td class="judul-text">Gambar</td>
                             <td>
                                 <div class="aksi">
-                                    <a href="#" class="btn btn-edit">
+                                    <a href="{{ route('ourvalueimage.index') }}" class="btn btn-edit">
                                         <i class="fa-solid fa-pen"></i> Edit
                                     </a>
                                 </div>
@@ -64,7 +64,7 @@
                             <td class="judul-text">Our Value</td>
                             <td>
                                 <div class="aksi">
-                                    <a href="#" class="btn btn-edit">
+                                    <a href="{{ route('ourvalues.index') }}" class="btn btn-edit">
                                         <i class="fa-solid fa-pen"></i> Edit
                                     </a>
                                 </div>

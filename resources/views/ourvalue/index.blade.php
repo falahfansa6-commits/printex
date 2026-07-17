@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Our Value')
+@section('title', 'Dashboard')
 
 @section('content')
 
@@ -11,26 +11,26 @@
 <div class="main-wrapper">
     <div class="container">
         
-        <!-- Notifikasi Sukses dengan gaya card modern -->
+        <!-- Notifikasi Sukses memanfaatkan class bawaan css -->
         @if(session('success'))
-            <div class="alert alert-success" style="margin-bottom: 20px; padding: 12px 16px; background-color: #f0fdf4; color: #16a34a; border: 1px solid #bbf7d0; border-radius: 8px; font-size: 14px; display: flex; align-items: center; gap: 8px;">
+            <div class="alert-success">
                 <i class="fa-solid fa-circle-check"></i> {{ session('success') }}
             </div>
         @endif
 
         <div class="card">
             
-            <!-- Header Section disamakan dengan halaman About / Slider -->
-            <div class="header-section" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; gap: 15px; flex-wrap: wrap;">
-                <h2 style="margin: 0;">Data Our Value</h2>
+            <!-- Header Section diselaraskan dengan class css asli -->
+            <div class="header-section">
+                <h1>Data Our Value</h1>
                 
-                <!-- Tombol Tambah Data menggunakan kelas .btn-edit sebagai basis warna/ukuran -->
-                <a href="{{ route('ourvalues.create') }}" class="btn btn-edit" style="background-color: #0ea5e9; border-color: #0ea5e9; display: inline-flex; align-items: center; gap: 8px; text-decoration: none;">
+                <!-- Tombol Tambah Data disesuaikan dengan warna tema .btn-add -->
+                <a href="{{ route('ourvalues.create') }}" class="btn btn-add">
                     <i class="fa-solid fa-plus"></i> Tambah Data
                 </a>
             </div>
 
-            <!-- Menggunakan pembungkus responsif dan kelas tabel admin-table agar sama dengan Slider / Lokasi -->
+            <!-- Pembungkus responsif dan tabel admin-table agar layout seragam -->
             <div class="table-responsive">
                 <table class="admin-table">
                     <thead>
@@ -44,49 +44,57 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($ourvalues as $item)
+                        @forelse($ourvalues as $item)
                         <tr>
                             <!-- Kolom No -->
                             <td>{{ $loop->iteration }}</td>
                             
-                            <!-- Judul menggunakan kelas .judul-text agar tebalnya sama seperti di halaman Slider -->
+                            <!-- Judul menggunakan class teks tebal bawaan -->
                             <td class="judul-text">{{ $item->judul }}</td>
                             
-                            <!-- Kolom Deskripsi dengan pembatasan style agar tetap rapi -->
-                            <td style="color: #475569; font-size: 14px; max-width: 300px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                            <!-- Kolom Deskripsi dengan memanfaatkan class baris teks bawaan -->
+                            <td class="text-muted-row">
                                 {{ $item->deskripsi }}
                             </td>
                             
                             <!-- Kolom Urutan -->
                             <td>{{ $item->urutan }}</td>
                             
-                            <!-- Kolom Status dengan badge styling minimalis -->
+                            <!-- Kolom Status memanfaatkan kondisi class badge bawaan -->
                             <td>
-                                <span style="display: inline-block; padding: 4px 10px; border-radius: 50px; font-size: 12px; font-weight: 600; {{ $item->status ? 'background-color: #d1e7dd; color: #0f5132;' : 'background-color: #f8d7da; color: #842029;' }}">
+                                <span class="badge {{ $item->status ? 'badge-success' : 'badge-danger' }}">
                                     {{ $item->status ? 'Aktif' : 'Tidak Aktif' }}
                                 </span>
                             </td>
                             
                             <!-- Kolom Aksi dengan tombol Edit & Hapus -->
                             <td>
-                                <div class="aksi" style="display: flex; gap: 8px;">
-                                    <!-- Tombol Edit menggunakan class murni slider.css -->
+                                <div class="aksi">
+                                    <!-- Tombol Edit -->
                                     <a href="{{ route('ourvalues.edit', $item->id) }}" class="btn btn-edit">
                                         <i class="fa-solid fa-pen"></i> Edit
                                     </a>
 
-                                    <!-- Tombol Hapus disamakan ukurannya dengan tombol Edit -->
-                                    <form action="{{ route('ourvalues.destroy', $item->id) }}" method="POST" style="margin: 0; display: inline;">
+                                    <!-- Tombol Hapus dengan class .btn-delete asli -->
+                                    <form action="{{ route('ourvalues.destroy', $item->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <button class="btn btn-delete" onclick="return confirm('Yakin hapus?')" style="background-color: #ef4444; border-color: #ef4444; color: white; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;">
+                                        <button type="submit" class="btn btn-delete" onclick="return confirm('Yakin ingin menghapus data ini?')">
                                             <i class="fa-solid fa-trash"></i> Hapus
                                         </button>
                                     </form>
                                 </div>
                             </td>
                         </tr>
-                        @endforeach
+                        @empty
+                        <tr>
+                            <!-- Menampilkan pesan kosong jika data nihil -->
+                            <td colspan="6" class="empty-data">
+                                <i class="fa-solid fa-lightbulb"></i>
+                                Belum ada data value yang ditambahkan.
+                            </td>
+                        </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>

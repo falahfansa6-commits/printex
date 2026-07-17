@@ -46,7 +46,7 @@
                             <td class="judul-text">Printing Solution</td>
                             <td>
                                 <div class="aksi">
-                                    <a href="#" class="btn btn-edit">
+                                    <a href="{{ route('service.index') }}" class="btn btn-edit">
                                         <i class="fa-solid fa-pen"></i> Edit
                                     </a>
                                 </div>
@@ -56,7 +56,7 @@
                             <td class="judul-text">Gambar</td>
                             <td>
                                 <div class="aksi">
-                                    <a href="#" class="btn btn-edit">
+                                    <a href="{{ route('theprodukimage.index') }}" class="btn btn-edit">
                                         <i class="fa-solid fa-pen"></i> Edit
                                     </a>
                                 </div>
@@ -66,11 +66,47 @@
                             <td class="judul-text">Our Value</td>
                             <td>
                                 <div class="aksi">
-                                    <a href="#" class="btn btn-edit">
+                                    <a href="{{ route('theproduk.index') }}" class="btn btn-edit">
                                         <i class="fa-solid fa-pen"></i> Edit
                                     </a>
                                 </div>
                             </td>
+                        </tr>
+
+                          <tr>
+                            <td class="judul-text">Produk 1</td>
+                            <td>
+                                <div class="aksi">
+                                    <a href="{{ route('produk1.index') }}" class="btn btn-edit">
+                                        <i class="fa-solid fa-pen"></i> Edit
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+
+
+
+                          <tr>
+                            <td class="judul-text">Produk 2</td>
+                            <td>
+                                <div class="aksi">
+                                    <a href="{{ route('produk2.index') }}" class="btn btn-edit">
+                                        <i class="fa-solid fa-pen"></i> Edit
+                                    </a>
+                                </div>
+                            </td>
+
+
+                              <tr>
+                            <td class="judul-text">Produk 3</td>
+                            <td>
+                                <div class="aksi">
+                                    <a href="{{ route('produk3.index') }}" class="btn btn-edit">
+                                        <i class="fa-solid fa-pen"></i> Edit
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
                         </tr>
                     </tbody>
                 </table>

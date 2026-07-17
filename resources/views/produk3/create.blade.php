@@ -1,74 +1,65 @@
-<!DOCTYPE html>
-<html>
-<head>
 @extends('layouts.admin')
 
-@section('title', 'Layanan')
+@section('title', 'Dashboard')
 
 @section('content')
 
-<title>Tambah Produk 3</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="{{ asset('css/slider.css') }}">
 
-<style>
+<div class="main-wrapper">
+    <div class="container" style="max-width: 600px;">
+        
+        <div class="card">
+            
+            <div class="header-section" style="border-bottom: 1px solid #e2e8f0; padding-bottom: 10px;">
+                <h1>Tambah Produk 3</h1>
+            </div>
 
-body{
-    font-family:Arial;
-    margin:40px;
-}
+            <form action="{{ route('produk3.store') }}" method="POST" enctype="multipart/form-data">
+                @csrf
 
-input,textarea{
-    width:500px;
-    padding:10px;
-    margin-bottom:15px;
-}
+                <!-- Field Judul -->
+                <div class="form-group">
+                    <label for="judul">Judul</label>
+                    <input type="text" id="judul" name="judul" value="{{ old('judul') }}" placeholder="Masukkan nama atau judul produk..." required>
+                    @error('judul')
+                        <span style="color: #ef4444; font-size: 12px; margin-top: 4px;">{{ $message }}</span>
+                    @enderror
+                </div>
 
-button{
-    padding:10px 20px;
-    background:green;
-    color:white;
-    border:none;
-}
+                <!-- Field Deskripsi -->
+                <div class="form-group">
+                    <label for="deskripsi">Deskripsi</label>
+                    <textarea id="deskripsi" name="deskripsi" rows="6" placeholder="Tuliskan keterangan lengkap produk..." required>{{ old('deskripsi') }}</textarea>
+                    @error('deskripsi')
+                        <span style="color: #ef4444; font-size: 12px; margin-top: 4px;">{{ $message }}</span>
+                    @enderror
+                </div>
 
-</style>
+                <!-- Field Unggah Gambar -->
+                <div class="form-group">
+                    <label for="gambar">File Gambar</label>
+                    <input type="file" id="gambar" name="gambar" accept="image/*" required>
+                    @error('gambar')
+                        <span style="color: #ef4444; font-size: 12px; margin-top: 4px;">{{ $message }}</span>
+                    @enderror
+                </div>
 
-</head>
+                <!-- Tombol Simpan / Batal -->
+                <div class="aksi" style="justify-content: flex-start; margin-top: 25px; gap: 10px;">
+                    <button type="submit" class="btn btn-add">
+                        <i class="fa-solid fa-floppy-disk"></i> Simpan Data
+                    </button>
+                    <a href="{{ route('produk3.index') }}" class="btn btn-edit" style="background: #64748b; color: white;">
+                        <i class="fa-solid fa-arrow-left"></i> Kembali
+                    </a>
+                </div>
 
-<body>
+            </form>
 
-<h2>Tambah Produk 3</h2>
+        </div>
+    </div>
+</div>
 
-<form action="{{ route('produk3.store') }}" method="POST" enctype="multipart/form-data">
-
-@csrf
-
-
-
-<label>Judul</label><br>
-
-<input type="text" name="judul">
-
-<br>
-
-<label>Deskripsi</label><br>
-
-<textarea name="deskripsi" rows="8"></textarea>
-
-<br>
-
-<label>Gambar</label><br>
-
-<input type="file" name="gambar">
-
-<br><br>
-
-<button type="submit">
-
-Simpan
-
-</button>
-
-</form>
-
-</body>
-</html>
 @endsection

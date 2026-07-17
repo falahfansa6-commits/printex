@@ -1,115 +1,93 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-<meta charset="UTF-8">
-<title>Data Gambar The Produk</title>
+@extends('layouts.admin')
 
-<style>
-body{
-    font-family:Arial;
-    background:#f4f4f4;
-    margin:20px;
-}
-.container{
-    width:90%;
-    margin:auto;
-    background:white;
-    padding:20px;
-    border-radius:8px;
-}
-table{
-    width:100%;
-    border-collapse:collapse;
-    margin-top:20px;
-}
-table th,table td{
-    border:1px solid #ddd;
-    padding:10px;
-    text-align:center;
-}
-table th{
-    background:#333;
-    color:white;
-}
-img{
-    width:120px;
-}
-.btn{
-    padding:8px 15px;
-    color:white;
-    text-decoration:none;
-    border-radius:5px;
-}
-.add{background:green;}
-.edit{background:blue;}
-.delete{
-    background:red;
-    border:none;
-    color:white;
-    padding:8px 15px;
-    cursor:pointer;
-}
-</style>
+@section('title', 'Layanan')
 
-</head>
-<body>
+@section('content')
 
-<div class="container">
+<!-- Memanggil file CSS dan Icon FontAwesome agar gaya visual seragam -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="{{ asset('css/slider.css') }}">
 
-<h2>Data Gambar Theproduk</h2>
+<div class="main-wrapper">
+    <div class="container">
+        
+        <div class="card">
+            
+            <!-- Bagian Header Utama -->
+            <div class="header-section">
+                <h1>Data Gambar The Produk</h1>
+                <!-- Tombol Tambah Data -->
+                <a href="{{ route('theprodukimage.create') }}" class="btn btn-add">
+                    <i class="fa-solid fa-plus"></i> Tambah Gambar
+                </a>
+            </div>
 
-@if(session('success'))
-<p style="color:green">{{ session('success') }}</p>
-@endif
+            <!-- Notifikasi Sukses Berhasil Simpan/Edit/Hapus -->
+            @if(session('success'))
+                <div class="alert-success">
+                    <p style="margin: 0; font-weight: bold;">
+                        <i class="fa-solid fa-circle-check"></i> {{ session('success') }}
+                    </p>
+                </div>
+            @endif
 
-<a href="{{ route('theprodukimage.create') }}" class="btn add">
-Tambah Gambar
-</a>
+            <!-- Tabel Data Gambar -->
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th style="width: 80px; text-align: center;">No</th>
+                        <th>Gambar</th>
+                        <th style="width: 200px; text-align: center;">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse($gambar as $item)
+                        <tr>
+                            <td style="text-align: center; font-weight: 600;">{{ $loop->iteration }}</td>
+                            <td>
+                                <!-- Kotak pembungkus preview gambar agar ukurannya seragam dan rapi -->
+                                <div class="img-preview-box" style="width: 100px; height: 100px; margin: 0;">
+                                    @if($item->gambar)
+                                        <img src="{{ asset($item->gambar) }}" alt="Gambar Produk">
+                                    @else
+                                        <div style="display: flex; align-items: center; justify-content: center; height: 100%; color: #94a3b8; background: #f8fafc;">
+                                            <i class="fa-regular fa-image" style="font-size: 24px;"></i>
+                                        </div>
+                                    @endif
+                                </div>
+                            </td>
+                            <td>
+                                <!-- Wrapper tombol aksi bawaan CSS -->
+                                <div class="aksi" style="justify-content: center; gap: 8px;">
+                                    <!-- Tombol Edit -->
+                                    <a href="{{ route('theprodukimage.edit', $item->id) }}" class="btn btn-edit">
+                                        <i class="fa-solid fa-pen-to-square"></i> Edit
+                                    </a>
 
-<table>
+                                    <!-- Form Hapus Data -->
+                                    <form action="{{ route('theprodukimage.destroy', $item->id) }}" method="POST" style="display: inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-delete" onclick="return confirm('Apakah Anda yakin ingin menghapus gambar ini?')">
+                                            <i class="fa-solid fa-trash-can"></i> Hapus
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="3" style="text-align: center; color: #94a3b8; padding: 30px 10px;">
+                                <i class="fa-regular fa-folder-open" style="font-size: 40px; display: block; margin-bottom: 10px; color: #cbd5e1;"></i>
+                                Belum ada data gambar produk.
+                            </td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
 
-<tr>
-<th>No</th>
-<th>Gambar</th>
-<th>Aksi</th>
-</tr>
-
-@foreach($gambar as $item)
-
-<tr>
-
-<td>{{ $loop->iteration }}</td>
-
-<td>
-<img src="{{ asset($item->gambar) }}">
-</td>
-
-<td>
-
-<a href="{{ route('theprodukimage.edit',$item->id) }}" class="btn edit">
-Edit
-</a>
-
-<form action="{{ route('theprodukimage.destroy',$item->id) }}" method="POST" style="display:inline">
-
-@csrf
-@method('DELETE')
-
-<button class="delete" onclick="return confirm('Hapus gambar?')">
-Hapus
-</button>
-
-</form>
-
-</td>
-
-</tr>
-
-@endforeach
-
-</table>
-
+        </div>
+    </div>
 </div>
 
-</body>
-</html>
+@endsection

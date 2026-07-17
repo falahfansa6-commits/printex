@@ -15,7 +15,7 @@
             <img src="{{ asset('img/printex-merah.png') }}" alt="Logo" class="logo-img">
         </a>
         <div class="search-container">
-           <form action="{{ route('search') }}" method="GET">
+           <form action="{{ route('beranda') }}" method="GET">
     <input type="text" name="keyword" class="search-input"placeholder="Cari...">
 </form>
         </div>

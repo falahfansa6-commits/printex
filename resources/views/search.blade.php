@@ -1,8 +1,9 @@
-<!DOCTYPE html>
+{{-- <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <title>Hasil Pencarian</title>
+    
     <link rel="stylesheet" href="{{ asset('css/search.css') }}">
    <style>
     *{
@@ -146,4 +147,4 @@ body{
 </div>
 
 </body>
-</html>
+</html> --}}

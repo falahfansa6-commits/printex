@@ -102,8 +102,7 @@ Route::get('/telepon', [TeleponController::class, 'index'])
 Route::get('/kontak', [KontakController::class, 'index'])
     ->name('kontak');
 
-    //serach
-Route::get('/search', [SearchController::class, 'index'])->name('search');
+
 
 // Login
 Route::get('/login', [AuthController::class, 'index'])->name('login');

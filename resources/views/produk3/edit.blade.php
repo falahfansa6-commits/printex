@@ -1,95 +1,82 @@
-<!DOCTYPE html>
-<html>
-<head>
-    @extends('layouts.admin')
+@extends('layouts.admin')
 
-@section('title', 'Layanan')
+@section('title', 'Dashboard')
 
 @section('content')
 
-<title>Edit Produk 3</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="{{ asset('css/slider.css') }}">
 
-<style>
+<div class="main-wrapper">
+    <!-- Menggunakan batas max-width kecil via inline style hanya untuk container form agar tidak terlalu meluas -->
+    <div class="container" style="max-width: 600px;">
+        
+        <div class="card">
+            
+            <div class="header-section" style="border-bottom: 1px solid #e2e8f0; padding-bottom: 10px;">
+                <h1>Edit Produk 3</h1>
+            </div>
 
-body{
-    font-family:Arial;
-    margin:40px;
-}
+            <form action="{{ route('produk3.update', $data->id) }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
 
-input,textarea{
-    width:500px;
-    padding:10px;
-    margin-bottom:15px;
-}
+                <!-- Field Judul -->
+                <div class="form-group">
+                    <label for="judul">Judul</label>
+                    <input type="text" id="judul" name="judul" value="{{ old('judul', $data->judul) }}" required>
+                    @error('judul')
+                        <span style="color: #ef4444; font-size: 12px; margin-top: 4px;">{{ $message }}</span>
+                    @enderror
+                </div>
 
-img{
-    width:200px;
-    margin-bottom:15px;
-}
+                <!-- Field Deskripsi -->
+                <div class="form-group">
+                    <label for="deskripsi">Deskripsi</label>
+                    <textarea id="deskripsi" name="deskripsi" rows="6" required>{{ old('deskripsi', $data->deskripsi) }}</textarea>
+                    @error('deskripsi')
+                        <span style="color: #ef4444; font-size: 12px; margin-top: 4px;">{{ $message }}</span>
+                    @enderror
+                </div>
 
-button{
-    padding:10px 20px;
-    background:orange;
-    color:white;
-    border:none;
-}
+                <!-- Preview Gambar Lama -->
+                <div class="form-group">
+                    <label>Gambar Saat Ini</label>
+                    @if($data->gambar)
+                        <div class="image-wrapper" style="margin: 0; width: 160px; height: 90px;">
+                            <img src="{{ asset('upload/produk3/'.$data->gambar) }}" alt="Current Image" class="preview">
+                        </div>
+                    @else
+                        <div class="no-image" style="width: 160px; height: 90px;">
+                            <i class="fa-regular fa-image"></i>
+                        </div>
+                    @endif
+                </div>
 
-</style>
+                <!-- Field Unggah Gambar Baru -->
+                <div class="form-group">
+                    <label for="gambar">Ganti Gambar</label>
+                    <input type="file" id="gambar" name="gambar" accept="image/*">
+                    <small style="color: #94a3b8; font-size: 12px; margin-top: 4px;">*Biarkan kosong jika tidak ingin merubah gambar</small>
+                    @error('gambar')
+                        <span style="color: #ef4444; font-size: 12px; margin-top: 4px;">{{ $message }}</span>
+                    @enderror
+                </div>
 
-</head>
+                <!-- Tombol Navigasi Form -->
+                <div class="aksi" style="justify-content: flex-start; margin-top: 25px; gap: 10px;">
+                    <button type="submit" class="btn btn-add" style="background: #10b981;">
+                        <i class="fa-solid fa-floppy-disk"></i> Update Data
+                    </button>
+                    <a href="{{ route('produk3.index') }}" class="btn btn-edit" style="background: #64748b; color: white;">
+                        <i class="fa-solid fa-arrow-left"></i> Kembali
+                    </a>
+                </div>
 
-<body>
+            </form>
 
-<h2>Edit Produk 3</h2>
+        </div>
+    </div>
+</div>
 
-<form action="{{ route('produk3.update',$data->id) }}" method="POST" enctype="multipart/form-data">
-
-@csrf
-@method('PUT')
-
-<label>Nomor</label><br>
-
-
-
-<br>
-
-<label>Judul</label><br>
-
-<input
-type="text"
-name="judul"
-value="{{ $data->judul }}">
-
-<br>
-
-<label>Deskripsi</label><br>
-
-<textarea
-name="deskripsi"
-rows="8">{{ $data->deskripsi }}</textarea>
-
-<br>
-
-<label>Gambar Saat Ini</label><br>
-
-<img src="{{ asset('upload/produk3/'.$data->gambar) }}">
-
-<br>
-
-<label>Ganti Gambar</label><br>
-
-<input type="file" name="gambar">
-
-<br><br>
-
-<button type="submit">
-
-Update
-
-</button>
-
-</form>
-
-</body>
-</html>
 @endsection

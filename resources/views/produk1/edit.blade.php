@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Layanan')
+@section('title', 'Dashboard')
 
 @section('content')
 
@@ -9,20 +9,24 @@
 <link rel="stylesheet" href="{{ asset('css/slider.css') }}">
 
 <div class="main-wrapper">
-    <div class="container" style="max-width: 800px; margin: 0 auto;">
+    <!-- Menggunakan batas max-width kecil agar layout form tetap proporsional -->
+    <div class="container" style="max-width: 600px;">
         
-        <!-- Notifikasi Error Utama jika ada validasi yang gagal -->
-        @if($errors->any())
-            <div class="alert alert-danger" style="margin-bottom: 20px; padding: 15px; background-color: #fef2f2; border: 1px solid #fecaca; color: #991b1b; border-radius: 8px; font-size: 14px;">
-                <p style="margin: 0 0 8px 0; font-weight: bold;"><i class="fa-solid fa-triangle-exclamation"></i> Harap perbaiki kesalahan pengisian form di bawah ini.</p>
-            </div>
-        @endif
-
         <div class="card">
             
-            <div class="header-section" style="margin-bottom: 25px; border-bottom: 1px solid #e2e8f0; padding-bottom: 15px;">
-                <h2 style="margin: 0;">Edit Produk</h2>
+            <!-- Bagian Header Form -->
+            <div class="header-section" style="border-bottom: 1px solid #e2e8f0; padding-bottom: 10px;">
+                <h1>Edit Produk</h1>
             </div>
+
+            <!-- Blok Pesan Error Validasi Global -->
+            @if($errors->any())
+                <div class="alert-danger">
+                    <p style="margin: 0; font-weight: bold;">
+                        <i class="fa-solid fa-triangle-exclamation"></i> Harap perbaiki kesalahan pengisian form di bawah ini.
+                    </p>
+                </div>
+            @endif
 
             <!-- Form edit produk -->
             <form action="{{ route('produk1.update', $produk1->id) }}" method="POST" enctype="multipart/form-data">
@@ -30,51 +34,69 @@
                 @method('PUT')
 
                 <!-- Input Judul -->
-                <div class="form-group" style="margin-bottom: 20px; display: flex; flex-direction: column; gap: 8px;">
-                    <label style="font-weight: 600; color: #334155; font-size: 14px;">Judul <span style="color: #ef4444;">*</span></label>
-                    <input type="text" name="judul" value="{{ old('judul', $produk1->judul) }}" placeholder="Masukkan judul produk" style="padding: 10px 14px; border: 1px solid {{ $errors->has('judul') ? '#ef4444' : '#cbd5e1' }}; border-radius: 6px; font-size: 14px; outline: none;" onfocus="this.style.borderColor='#0ea5e9'" onblur="this.style.borderColor='{{ $errors->has('judul') ? '#ef4444' : '#cbd5e1' }}'">
+                <div class="form-group">
+                    <label for="judul">Judul <span style="color: #ef4444;">*</span></label>
+                    <input 
+                        type="text" 
+                        id="judul" 
+                        name="judul" 
+                        value="{{ old('judul', $produk1->judul) }}" 
+                        placeholder="Masukkan judul produk"
+                        class="@error('judul') is-invalid @enderror">
                     @error('judul')
-                        <small style="color: #ef4444; font-size: 12px; margin-top: -4px;"><i class="fa-solid fa-circle-exclamation"></i> {{ $message }}</small>
+                        <small style="color: #ef4444; font-size: 12px; margin-top: 4px; display: block;">
+                            <i class="fa-solid fa-circle-exclamation"></i> {{ $message }}
+                        </small>
                     @enderror
                 </div>
 
                 <!-- Input Isi / Deskripsi -->
-                <div class="form-group" style="margin-bottom: 20px; display: flex; flex-direction: column; gap: 8px;">
-                    <label style="font-weight: 600; color: #334155; font-size: 14px;">Isi / Deskripsi <span style="color: #ef4444;">*</span></label>
-                    <textarea name="isi" rows="5" placeholder="Masukkan deskripsi lengkap produk" style="padding: 10px 14px; border: 1px solid {{ $errors->has('isi') ? '#ef4444' : '#cbd5e1' }}; border-radius: 6px; font-size: 14px; outline: none; resize: vertical;" onfocus="this.style.borderColor='#0ea5e9'" onblur="this.style.borderColor='{{ $errors->has('isi') ? '#ef4444' : '#cbd5e1' }}'">{{ old('isi', $produk1->isi) }}</textarea>
+                <div class="form-group">
+                    <label for="isi">Isi / Deskripsi <span style="color: #ef4444;">*</span></label>
+                    <textarea 
+                        id="isi" 
+                        name="isi" 
+                        rows="5" 
+                        placeholder="Masukkan deskripsi lengkap produk"
+                        class="@error('isi') is-invalid @enderror">{{ old('isi', $produk1->isi) }}</textarea>
                     @error('isi')
-                        <small style="color: #ef4444; font-size: 12px; margin-top: -4px;"><i class="fa-solid fa-circle-exclamation"></i> {{ $message }}</small>
+                        <small style="color: #ef4444; font-size: 12px; margin-top: 4px; display: block;">
+                            <i class="fa-solid fa-circle-exclamation"></i> {{ $message }}
+                        </small>
                     @enderror
                 </div>
 
-                <!-- Preview Gambar Saat Ini -->
-                <div class="form-group" style="margin-bottom: 20px; display: flex; flex-direction: column; gap: 8px;">
-                    <label style="font-weight: 600; color: #334155; font-size: 14px;">Gambar Saat Ini</label>
-                    <div style="max-width: 250px; border-radius: 8px; overflow: hidden; border: 1px solid #e2e8f0; background-color: #f8fafc; padding: 8px;">
-                        <img src="{{ asset($produk1->gambar) }}" alt="Preview Gambar" style="width: 100%; height: auto; border-radius: 6px; display: block;">
+                <!-- Preview Gambar Saat Ini memanfaatkan class img-thumbnail-wrapper -->
+                <div class="form-group">
+                    <label>Gambar Saat Ini</label>
+                    <div class="img-thumbnail-wrapper" style="width: 200px; height: auto;">
+                        <img src="{{ asset($produk1->gambar) }}" alt="Preview Gambar">
                     </div>
                 </div>
 
                 <!-- Input Ganti Gambar -->
-                <div class="form-group" style="margin-bottom: 30px; display: flex; flex-direction: column; gap: 8px;">
-                    <label style="font-weight: 600; color: #334155; font-size: 14px;">Ganti Gambar</label>
-                    <input type="file" name="gambar" style="padding: 10px 14px; border: 1px solid {{ $errors->has('gambar') ? '#ef4444' : '#cbd5e1' }}; border-radius: 6px; font-size: 14px; outline: none; background-color: #f8fafc;" onfocus="this.style.borderColor='#0ea5e9'" onblur="this.style.borderColor='{{ $errors->has('gambar') ? '#ef4444' : '#cbd5e1' }}'">
-                    <small style="color: #64748b; font-size: 12px; margin-top: -4px;">*Biarkan kosong jika tidak ingin mengubah gambar.</small>
+                <div class="form-group">
+                    <label for="gambar">Ganti Gambar</label>
+                    <input 
+                        type="file" 
+                        id="gambar" 
+                        name="gambar"
+                        class="@error('gambar') is-invalid @enderror">
+                    <small class="text-muted-row" style="margin-top: 4px; display: block;">*Biarkan kosong jika tidak ingin mengubah gambar.</small>
                     @error('gambar')
-                        <small style="color: #ef4444; font-size: 12px; margin-top: -4px;"><i class="fa-solid fa-circle-exclamation"></i> {{ $message }}</small>
+                        <small style="color: #ef4444; font-size: 12px; margin-top: 4px; display: block;">
+                            <i class="fa-solid fa-circle-exclamation"></i> {{ $message }}
+                        </small>
                     @enderror
                 </div>
 
-                <!-- Bagian Tombol Aksi / Submit Form -->
-                <div class="form-actions" style="display: flex; gap: 12px; border-top: 1px solid #e2e8f0; padding-top: 20px;">
-                    <!-- Tombol Update -->
-                    <button type="submit" class="btn btn-edit" style="background-color: #10b981; border-color: #10b981; color: white; display: inline-flex; align-items: center; gap: 8px; cursor: pointer; font-weight: 600; padding: 10px 20px;">
-                        <i class="fa-solid fa-floppy-disk"></i> Update
+                <!-- Kelompok Tombol Aksi menggunakan wrapper .aksi bawaan CSS -->
+                <div class="aksi" style="justify-content: flex-start; margin-top: 25px; gap: 10px;">
+                    <button type="submit" class="btn btn-add" style="background: #10b981;">
+                        <i class="fa-solid fa-floppy-disk"></i> Update Data
                     </button>
-
-                    <!-- Tombol Kembali -->
-                    <a href="{{ route('produk1.index') }}" class="btn btn-edit" style="background-color: #64748b; border-color: #64748b; color: white; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; font-weight: 600; padding: 10px 20px;">
-                        <i class="fa-solid fa-arrow-left"></i> Kembali
+                    <a href="{{ route('produk1.index') }}" class="btn btn-edit" style="background: #64748b; color: white;">
+                        <i class="fa-solid fa-arrow-left"></i> Batal
                     </a>
                 </div>
 

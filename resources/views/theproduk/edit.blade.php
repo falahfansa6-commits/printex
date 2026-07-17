@@ -1,74 +1,106 @@
-@extends('layouts.app')
+@extends('layouts.admin')
+
+@section('title', 'Layanan')
 
 @section('content')
 
-<div class="form-card">
+<!-- Memanggil file CSS dan Icon FontAwesome agar gaya visual form seragam -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="{{ asset('css/slider.css') }}">
 
-    <h2>Edit The Product</h2>
+<div class="main-wrapper">
+    <!-- Menggunakan batas max-width kecil agar layout form tetap proporsional -->
+    <div class="container" style="max-width: 600px;">
+        
+        <div class="card">
+            
+            <!-- Bagian Header Form -->
+            <div class="header-section" style="border-bottom: 1px solid #e2e8f0; padding-bottom: 10px;">
+                <h1>Edit The Product</h1>
+            </div>
 
-    <form action="{{ route('theproduk.update',$theproduk->id) }}" method="POST">
+            <!-- Blok Pesan Error Validasi Global -->
+            @if($errors->any())
+                <div class="alert-danger">
+                    <p style="margin: 0; font-weight: bold;">
+                        <i class="fa-solid fa-triangle-exclamation"></i> Harap perbaiki kesalahan pengisian form di bawah ini.
+                    </p>
+                </div>
+            @endif
 
-        @csrf
-        @method('PUT')
+            <!-- Form edit the product -->
+            <form action="{{ route('theproduk.update', $theproduk->id) }}" method="POST">
+                @csrf
+                @method('PUT')
 
-        <div class="form-group">
+                <!-- Input Judul -->
+                <div class="form-group">
+                    <label for="judul">Judul <span style="color: #ef4444;">*</span></label>
+                    <input 
+                        type="text" 
+                        id="judul" 
+                        name="judul" 
+                        maxlength="20"
+                        value="{{ old('judul', $theproduk->judul) }}" 
+                        placeholder="Masukkan judul produk (maks. 20 karakter)"
+                        class="@error('judul') is-invalid @enderror"
+                        required>
+                    @error('judul')
+                        <small style="color: #ef4444; font-size: 12px; margin-top: 4px; display: block;">
+                            <i class="fa-solid fa-circle-exclamation"></i> {{ $message }}
+                        </small>
+                    @enderror
+                </div>
 
-            <label>Judul</label>
+                <!-- Input Isi / Deskripsi -->
+                <div class="form-group">
+                    <label for="isi">Isi <span style="color: #ef4444;">*</span></label>
+                    <textarea 
+                        id="isi" 
+                        name="isi" 
+                        rows="6" 
+                        placeholder="Masukkan deskripsi lengkap produk"
+                        class="@error('isi') is-invalid @enderror"
+                        required>{{ old('isi', $theproduk->isi) }}</textarea>
+                    @error('isi')
+                        <small style="color: #ef4444; font-size: 12px; margin-top: 4px; display: block;">
+                            <i class="fa-solid fa-circle-exclamation"></i> {{ $message }}
+                        </small>
+                    @enderror
+                </div>
 
-            <input
-                type="text"
-                name="judul"
-                maxlength="20"
-                value="{{ old('judul',$theproduk->judul) }}"
-                required>
+                <!-- Input Urutan -->
+                <div class="form-group">
+                    <label for="urutan">Urutan <span style="color: #ef4444;">*</span></label>
+                    <input 
+                        type="number" 
+                        id="urutan" 
+                        name="urutan" 
+                        value="{{ old('urutan', $theproduk->urutan) }}" 
+                        placeholder="Masukkan angka nomor urutan tampil"
+                        class="@error('urutan') is-invalid @enderror"
+                        required>
+                    @error('urutan')
+                        <small style="color: #ef4444; font-size: 12px; margin-top: 4px; display: block;">
+                            <i class="fa-solid fa-circle-exclamation"></i> {{ $message }}
+                        </small>
+                    @enderror
+                </div>
 
-            @error('judul')
-                <small class="text-error">{{ $message }}</small>
-            @enderror
+                <!-- Kelompok Tombol Aksi menggunakan wrapper .aksi bawaan CSS -->
+                <div class="aksi" style="justify-content: flex-start; margin-top: 25px; gap: 10px; border-top: 1px solid #e2e8f0; padding-top: 20px;">
+                    <button type="submit" class="btn btn-add" style="background: #10b981;">
+                        <i class="fa-solid fa-floppy-disk"></i> Update
+                    </button>
+                    <a href="{{ route('theproduk.index') }}" class="btn btn-edit" style="background: #64748b; color: white;">
+                        <i class="fa-solid fa-arrow-left"></i> Kembali
+                    </a>
+                </div>
+
+            </form>
 
         </div>
-
-        <div class="form-group">
-
-            <label>Isi</label>
-
-            <textarea
-                name="isi"
-                rows="6"
-                required>{{ old('isi',$theproduk->isi) }}</textarea>
-
-            @error('isi')
-                <small class="text-error">{{ $message }}</small>
-            @enderror
-
-        </div>
-
-        <div class="form-group">
-
-            <label>Urutan</label>
-
-            <input
-                type="number"
-                name="urutan"
-                value="{{ old('urutan',$theproduk->urutan) }}"
-                required>
-
-            @error('urutan')
-                <small class="text-error">{{ $message }}</small>
-            @enderror
-
-        </div>
-
-        <button class="btn-simpan">
-            Update
-        </button>
-
-        <a href="{{ route('theproduk.index') }}" class="btn-kembali">
-            Kembali
-        </a>
-
-    </form>
-
+    </div>
 </div>
 
 @endsection
