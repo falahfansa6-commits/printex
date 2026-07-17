@@ -1,8 +1,4 @@
-@extends('layouts.admin')
 
-@section('title', 'Dashboard')
-
-@section('content')
 
 <!-- Memanggil asset FontAwesome dan CSS utama -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -83,4 +79,3 @@
     </div>
 </div>
 
-@endsection

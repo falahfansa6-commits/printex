@@ -44,8 +44,8 @@
                     <span>Layanan</span>
                 </a>
             </li>
-            <li>
-                <a href="{{ route('empatkontak.index') }}">
+            <li class="{{ request()->routeIs('admin.hubkontak') ? 'active' : '' }}">
+                <a href="{{ route('admin.hubkontak') }}">
                     <i class="fa-solid fa-envelope"></i>
                     <span>Kontak</span>
                 </a>

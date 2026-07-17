@@ -7,17 +7,23 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
 <body>
-    <!-- NAVBAR MIRIP GAMBAR -->
 
+    <!-- NAVBAR -->
     <nav class="navbar">
-        
+
         <a href="#" class="logo-container">
             <img src="{{ asset('img/printex-merah.png') }}" alt="Logo" class="logo-img">
         </a>
+
         <div class="search-container">
-           <form action="{{ route('beranda') }}" method="GET">
-    <input type="text" name="keyword" class="search-input"placeholder="Cari...">
-</form>
+            <form action="{{ route('beranda') }}" method="GET">
+                <input
+                    type="text"
+                    name="q"
+                    value="{{ request('q') }}"
+                    class="search-input"
+                    placeholder="Cari...">
+            </form>
         </div>
 
         <div class="menu-container">
@@ -25,112 +31,112 @@
             <a href="{{ route('about') }}" class="menu-item">Tentang</a>
             <a href="{{ route('pelayanan') }}" class="menu-item">Layanan</a>
             <a href="{{ route('kontak') }}" class="menu-item">Kontak</a>
-            
+
             <button class="btn-utama">Masuk atau Daftar</button>
         </div>
+
     </nav>
 
+    <!-- Tentang -->
     <div class="container">
 
-    @if($tentang)
+        @if($tentang)
 
-        <div class="text">
+            <div class="text">
 
-            <img src="{{ asset('img/p.png') }}"
-                 height="100"
-                 width="100">
+                <img src="{{ asset('img/p.png') }}"
+                     height="100"
+                     width="100">
 
-            <h1>
-                {{ $tentang->judul }}
-            </h1>
+                <h1>{{ $tentang->judul }}</h1>
 
-            <br>
+                <br>
 
-            <p>
-                {!! nl2br(e($tentang->isi)) !!}
-            </p>
-
-        </div>
-
-        <div class="gambar">
-
-            @if($tentang->gambar)
-
-                <img src="{{ asset($tentang->gambar) }}"
-                     alt="{{ $tentang->judul }}">
-
-            @else
-
-                <img src="{{ asset('img/orang.png') }}"
-                     alt="Default">
-
-            @endif
-
-        </div>
-
-    @else
-
-        <div class="text">
-
-            <img src="{{ asset('img/p.png') }}"
-                 height="100"
-                 width="100">
-
-            <h1>Tentang Kami</h1>
-
-            <p>
-                Data Tentang Kami belum tersedia.
-            </p>
-
-        </div>
-
-    @endif
-
-</div>
-
- <!-- Lokasi-->
-  <div class="lk-main-wrapper">
-
-    <div class="lk-header-banner">
-        <h1>Lokasi<br>Kami</h1>
-        <div class="lk-arrow-circle">➔</div>
-    </div>
-
-    <div class="lk-container">
-
-        <div class="lk-location-grid">
-
-            @foreach($locations as $location)
-
-            <div class="lk-location-item">
-
-                <div class="lk-location-title">
-
-                    <svg class="lk-pin-icon" viewBox="0 0 24 24">
-                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-                    </svg>
-
-                    {{ $location->nama_kota }}
-
-                </div>
-
-                <div class="lk-location-address">
-                    {!! nl2br(e($location->alamat)) !!}
-                </div>
+                <p>
+                    {!! nl2br(e($tentang->isi)) !!}
+                </p>
 
             </div>
 
-            @endforeach
+            <div class="gambar">
+
+                @if($tentang->gambar)
+
+                    <img src="{{ asset($tentang->gambar) }}"
+                         alt="{{ $tentang->judul }}">
+
+                @else
+
+                    <img src="{{ asset('img/orang.png') }}"
+                         alt="Default">
+
+                @endif
+
+            </div>
+
+        @else
+
+            <div class="text">
+
+                <img src="{{ asset('img/p.png') }}"
+                     height="100"
+                     width="100">
+
+                <h1>Tentang Kami</h1>
+
+                <p>
+                    Data Tentang Kami belum tersedia.
+                </p>
+
+            </div>
+
+        @endif
+
+    </div>
+
+    <!-- Lokasi -->
+    <div class="lk-main-wrapper">
+
+        <div class="lk-header-banner">
+            <h1>Lokasi<br>Kami</h1>
+            <div class="lk-arrow-circle">➔</div>
+        </div>
+
+        <div class="lk-container">
+
+            <div class="lk-location-grid">
+
+                @foreach($locations as $location)
+
+                    <div class="lk-location-item">
+
+                        <div class="lk-location-title">
+
+                            <svg class="lk-pin-icon" viewBox="0 0 24 24">
+                                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                            </svg>
+
+                            {{ $location->nama_kota }}
+
+                        </div>
+
+                        <div class="lk-location-address">
+                            {!! nl2br(e($location->alamat)) !!}
+                        </div>
+
+                    </div>
+
+                @endforeach
+
+            </div>
 
         </div>
 
     </div>
 
-</div>
     <footer class="printex-footer">
-@include('layouts.footer')
-
-</footer>
+        @include('layouts.footer')
+    </footer>
 
 </body>
 </html>

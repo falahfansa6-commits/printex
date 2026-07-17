@@ -17,7 +17,7 @@ class BerandaController extends Controller
         $beranda = Beranda::query();
 
         if ($request->filled('q')) {
-            $beranda->where('secound','nama_kota', 'like', '%' . $request->q . '%');
+            $beranda->where('nama_kota', 'like', '%' . $request->q . '%');
         }
 
        

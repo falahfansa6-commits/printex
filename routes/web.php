@@ -19,7 +19,6 @@ use App\Http\Controllers\TheprodukController;
 use App\Http\Controllers\Admin\BaruController;
 use App\Models\Location;
 use App\Models\Tentang;
-use App\Http\Controllers\SearchController;
 use App\Http\Controllers\TeleponController;
 use App\Http\Controllers\TheprodukimageController;
 use App\Http\Controllers\Admin\EmpatKontakController;
@@ -28,7 +27,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\AboutController;
 use App\Http\Controllers\Admin\LayananController;
 use App\Http\Controllers\AuthController;
-
+use App\Http\Controllers\admin\HubKontakController;
 
 
 
@@ -44,7 +43,7 @@ Route::post('/hub_kami', [HubKamiController::class, 'store'])
 // Halaman admin untuk melihat data
 Route::get('/hub_kami', [HubKamiController::class, 'index'])
     ->name('hub.index');
-    Route::resource('Hub_kami', HubKamiController::class);
+    Route::resource('hub_kami', HubKamiController::class);
 
 
 
@@ -121,6 +120,7 @@ Route::middleware('admin.auth')->prefix('admin')->group(function () {
     Route::get('/layanan', [LayananController::class, 'index'])
         ->name('admin.layanan');
 
-    Route::get('/empatkontak', [LayananController::class, 'index'])
-        ->name('admin.empatkontak');
+    Route::get('/kontak', [HubKontakController::class, 'index'])
+           ->name('admin.hubkontak');
+  
 });
