@@ -8,7 +8,7 @@ class OurValue extends Model
 {
     protected $fillable = [
         'judul',
-        'deskripsi',
+        'isi',
         'urutan',
         'status',
     ];

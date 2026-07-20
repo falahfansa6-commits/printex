@@ -17,7 +17,7 @@ return new class extends Migration
 
             $table->string('judul',30);
 
-            $table->text('deskripsi');
+            $table->text('isi');
 
             $table->integer('urutan')->default(1);
 

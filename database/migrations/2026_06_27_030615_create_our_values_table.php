@@ -11,7 +11,7 @@ return new class extends Migration
         Schema::create('our_values', function (Blueprint $table) {
             $table->id();
             $table->string('judul');
-            $table->text('deskripsi');
+            $table->text('isi');
             $table->integer('urutan')->default(0);
             $table->boolean('status')->default(true);
             $table->timestamps();

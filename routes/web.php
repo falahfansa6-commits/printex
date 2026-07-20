@@ -31,6 +31,7 @@ use App\Http\Controllers\admin\HubKontakController;
 
 
 
+
 // Halaman kontak (form)
 Route::get('/kontak', function () {
     return view('kontak');
@@ -124,3 +125,6 @@ Route::middleware('admin.auth')->prefix('admin')->group(function () {
            ->name('admin.hubkontak');
   
 });
+
+//search
+Route::get('/search', [App\Http\Controllers\SearchController::class, 'index'])->name('search');

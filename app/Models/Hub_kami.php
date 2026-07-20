@@ -11,6 +11,6 @@ class Hub_kami extends Model
         'nama',
         'no_wa',
         'email',
-        'des'
+        'isi'
     ];
 }

@@ -64,7 +64,7 @@
 
                             <!-- Kolom Pesan / Deskripsi -->
                             <td style="color: #475569;">
-                                {{ \Illuminate\Support\Str::limit($item->des, 100) }}
+                                {{ \Illuminate\Support\Str::limit($item->isi, 100) }}
                             </td>
 
                             <!-- Kolom Aksi -->

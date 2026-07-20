@@ -11,7 +11,7 @@ class Produk3 extends Model
     protected $fillable = [
      
         'judul',
-        'deskripsi',
+        'isi',
         'gambar',
     ];
 }

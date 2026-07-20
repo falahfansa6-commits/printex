@@ -1,6 +1,3 @@
-<!-- ========================= -->
-<!-- FILE : index.html -->
-<!-- ========================= -->
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -8,121 +5,96 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PRINTEX | Beranda</title>
 
-   <style>
- 
-   </style>
-<link rel="stylesheet" href="{{ asset('css/style.css') }}">
-   
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- CSS Utama -->
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
 <body>
 
     <!-- NAVBAR -->
-  
-
-<!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>PRINTEX</title>
-
-  {{-- <link rel="stylesheet" href="style.css"> --}}
-
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-</head>
-<body>
-
-  <!-- ========================= -->
-<!-- NAVBAR MIRIP GAMBAR -->
-
-    <nav >
+    <nav>
         @include('layouts.navbar')
     </nav>
 
     <!-- SLIDER -->
     <section class="slider-container">
+        <button class="prev" onclick="prevSlide()">❮</button>
 
-    <button class="prev" onclick="prevSlide()">❮</button>
+        <div class="slider" id="slider">
+            @forelse($sliderBeranda as $slider)
+                <div class="slide">
+                    <img src="{{ asset('uploads/slider/'.$slider->gambar) }}" alt="{{ $slider->judul }}">
+                </div>
+            @empty
+                <div class="slide">
+                    <h3>Tidak ada slider</h3>
+                </div>
+            @endforelse
+        </div>
 
-    <div class="slider" id="slider">
+        <button class="next" onclick="nextSlide()">❯</button>
+    </section>
 
-        @forelse($sliderBeranda as $slider)
-
-            <div class="slide">
-
-                <img
-                    src="{{ asset('uploads/slider/'.$slider->gambar) }}"
-                    alt="{{ $slider->judul }}">
-
-            </div>
-
-        @empty
-
-            <div class="slider">
-                <h3>Tidak ada slider</h3>
-            </div>
-
-        @endforelse
-
-    </div>
-
-    <button class="next" onclick="nextSlide()">❯</button>
-
-</section>
-<br><br>
-    <!-- TENTANG -->
- <div class="container">
- 
+   @if(empty($keyword))
+<section class="container">
     <div class="text">
-        <img src="{{ asset('img/p.png') }}" height="100px" width="100px">
-        <h1 name="k">Tentang<br>Kami</h1>
-<br>
+        <img src="{{ asset('img/p.png') }}" alt="Logo P" height="100" width="100">
+        <h1>Tentang<br>Kami</h1>
         <p>
-            Printex merupakan perusahaaan yang bergerak di bidang jasa
-            printing textile, sablon digital dan kaos premium.
-            kami menyediakan solusi cetak kain berkualitas tinggi
+            Printex merupakan perusahaan yang bergerak di bidang jasa
+            printing textile, sablon digital, dan kaos premium.
+            Kami menyediakan solusi cetak kain berkualitas tinggi
             untuk kebutuhan industri fashion, konveksi,
-            hingga usaha kecil dan menengah
+            hingga usaha kecil dan menengah.
         </p>
     </div>
 
     <div class="gambar">
-        <img src="{{ asset('img/orang.png') }}">
+        <img src="{{ asset('img/orang.png') }}" alt="Tentang Kami Printex">
     </div>
+</section>
+@endif
 
-</div>
-<br>
-    <!-- HASIL SABLON -->
- @foreach ($secounds as $item)
+   <!-- HASIL SABLON / SECOUNDS -->
+@if($secounds->count())
 
-    @if($item->gambar)
-        <img src="{{ asset('uploads/secound/' . $item->gambar) }}"
-             alt="{{ $item->judul }}"
-             style="width: 100%; height: 400px; object-fit: cover;">
-    @endif
+<section class="secounds-section">
 
-    <div class="pts-section-container">
+    @foreach ($secounds as $item)
 
-        <div class="pts-left-title">
-            <h2 class="pts-main-heading">
-                {{ $item->judul }}
-            </h2>
+        @if($item->gambar)
+            <img src="{{ asset('uploads/secound/' . $item->gambar) }}"
+                 alt="{{ $item->judul }}"
+                 style="width: 100%; height: 400px; object-fit: cover;">
+        @endif
+
+        <div class="pts-section-container">
+
+            <div class="pts-left-title">
+                <h2 class="pts-main-heading">
+                    {{ $item->judul }}
+                </h2>
+            </div>
+
+            <div class="pts-right-description">
+                <p class="pts-small-text">
+                    {!! nl2br(e($item->isi)) !!}
+                </p>
+            </div>
+
         </div>
 
-        <div class="pts-right-description">
-            <p class="pts-small-text">
-                {!! nl2br(e($item->isi)) !!}
-            </p>
-        </div>
+    @endforeach
 
-    </div>
+</section>
 
-@endforeach
-     
- 
-<!-- Our Values -->
-<div class="ov-section-wrapper" name="k">
+@endif
+  <!-- OUR VALUES -->
+@if($ourvalues->count())
+
+<section class="ov-section-wrapper">
 
     <!-- Bagian kiri -->
     <div class="ov-left-side">
@@ -136,9 +108,7 @@
         </div>
 
         <div class="ov-title-container">
-            <h2 class="ov-main-title">
-                Our Values
-            </h2>
+            <h2 class="ov-main-title">Our Values</h2>
 
             <div class="ov-arrow-button">
                 ➔
@@ -159,7 +129,7 @@
                 </h3>
 
                 <p class="ov-card-text">
-                    {!! nl2br(e($item->deskripsi)) !!}
+                    {!! nl2br(e($item->isi)) !!}
                 </p>
 
             </div>
@@ -172,53 +142,35 @@
 
     </div>
 
-</div>
-   <!-- ========================= -->
-<!-- FOOTER -->
-<!-- ========================= -->
+</section>
 
-<footer class="printex-footer">
-@include('layouts.footer')
-</footer>
-   
-     
+@endif
+    <!-- FOOTER -->
+    <footer class="printex-footer">
+        @include('layouts.footer')
+    </footer>
 
-   <script>
+    <!-- JAVASCRIPT SLIDER -->
+    <script>
+        let slider = document.getElementById('slider');
+        let slides = document.querySelectorAll('.slide');
+        let index = 0;
 
-let slider = document.getElementById('slider');
-let slides = document.querySelectorAll('.slide');
+        function nextSlide() {
+            if (slides.length <= 1) return;
+            index = (index + 1) % slides.length;
+            slider.style.transform = `translateX(-${index * 100}%)`;
+        }
 
-let index = 0;
+        function prevSlide() {
+            if (slides.length <= 1) return;
+            index = (index - 1 + slides.length) % slides.length;
+            slider.style.transform = `translateX(-${index * 100}%)`;
+        }
 
-function nextSlide()
-{
-    index++;
-
-    if(index >= slides.length)
-    {
-        index = 0;
-    }
-
-    slider.style.transform =
-        `translateX(-${index * 100}%)`;
-}
-
-function prevSlide()
-{
-    index--;
-
-    if(index < 0)
-    {
-        index = slides.length - 1;
-    }
-
-    slider.style.transform =
-        `translateX(-${index * 100}%)`;
-}
-
-setInterval(nextSlide, 4000);
-
-</script>
-
+        if (slides.length > 1) {
+            setInterval(nextSlide, 4000);
+        }
+    </script>
 </body>
 </html>

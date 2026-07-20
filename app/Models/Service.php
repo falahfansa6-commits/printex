@@ -8,7 +8,7 @@ class Service extends Model
 {
     protected $fillable = [
         'judul',
-        'deskripsi',
+        'isi',
         'urutan'
     ];
 }

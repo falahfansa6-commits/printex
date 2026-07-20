@@ -48,13 +48,13 @@
 
                 <!-- Input Deskripsi -->
                 <div class="form-group">
-                    <label for="deskripsi">Deskripsi</label>
+                    <label for="isi">Deskripsi</label>
                     <textarea 
-                        id="deskripsi"
-                        name="deskripsi" 
+                        id="isi"
+                        name="isi" 
                         rows="5" 
                         placeholder="Tuliskan deskripsi lengkap di sini..." 
-                        required>{{ old('deskripsi', $ourvalue->deskripsi) }}</textarea>
+                        required>{{ old('isi', $ourvalue->isi) }}</textarea>
                 </div>
 
                 <!-- Input Urutan -->

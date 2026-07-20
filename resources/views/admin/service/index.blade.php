@@ -60,7 +60,7 @@
 
                             <!-- Kolom Deskripsi -->
                             <td style="color: #64748b;">
-                                {{ \Illuminate\Support\Str::limit($service->deskripsi, 80) }}
+                                {{ \Illuminate\Support\Str::limit($service->isi, 80) }}
                             </td>
 
                             <!-- Kolom Urutan -->

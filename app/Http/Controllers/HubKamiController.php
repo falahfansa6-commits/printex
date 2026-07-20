@@ -33,7 +33,7 @@ class HubKamiController extends Controller
         $request->validate([
             'nama'  => 'required|min:7',
             'no_wa' => 'required',
-            'des'   => 'required',
+            'isi'   => 'required',
             'email' => [
                 'required',
                 'email',
@@ -46,7 +46,7 @@ class HubKamiController extends Controller
         Hub_kami::create([
             'nama'  => $request->nama,
             'no_wa' => $request->no_wa,
-            'des'   => $request->des,
+            'isi'   => $request->isi,
             'email' => $request->email,
         ]);
 
@@ -78,7 +78,7 @@ class HubKamiController extends Controller
         $request->validate([
             'nama'  => 'required|min:7',
             'no_wa' => 'required',
-            'des'   => 'required',
+            'isi'   => 'required',
             'email' => [
                 'required',
                 'email',
@@ -91,7 +91,7 @@ class HubKamiController extends Controller
         $hub_kami->update([
             'nama'  => $request->nama,
             'no_wa' => $request->no_wa,
-            'des'   => $request->des,
+            'isi'   => $request->isi,
             'email' => $request->email,
         ]);
 

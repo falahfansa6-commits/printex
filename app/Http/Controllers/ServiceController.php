@@ -35,7 +35,7 @@ class ServiceController extends Controller
 
             'judul'=>'required|max:30',
 
-            'deskripsi'=>'required|max:200',
+            'isi'=>'required|max:200',
 
             'urutan'=>'required|integer'
 
@@ -45,7 +45,7 @@ class ServiceController extends Controller
 
             'judul'=>$request->judul,
 
-            'deskripsi'=>$request->deskripsi,
+            'isi'=>$request->isi,
 
             'urutan'=>$request->urutan
 
@@ -83,7 +83,7 @@ class ServiceController extends Controller
 
             'judul'=>'required|max:30',
 
-            'deskripsi'=>'required|max:200',
+            'isi'=>'required|max:200',
 
             'urutan'=>'required|integer'
 
@@ -93,7 +93,7 @@ class ServiceController extends Controller
 
             'judul'=>$request->judul,
 
-            'deskripsi'=>$request->deskripsi,
+            'isi'=>$request->isi,
 
             'urutan'=>$request->urutan
 

@@ -60,17 +60,17 @@
 
                 <!-- Input Deskripsi -->
                 <div class="form-group" style="margin-top: 15px;">
-                    <label for="deskripsi">Deskripsi <span style="color: #ef4444;">*</span></label>
+                    <label for="isi">Deskripsi <span style="color: #ef4444;">*</span></label>
                     <textarea 
-                        id="deskripsi" 
-                        name="deskripsi" 
+                        id="isi" 
+                        name="isi" 
                         rows="6" 
                         maxlength="200"
                         placeholder="Masukkan deskripsi layanan"
-                        class="@error('deskripsi') is-invalid @enderror"
-                        required>{{ old('deskripsi', $service->deskripsi) }}</textarea>
+                        class="@error('isi') is-invalid @enderror"
+                        required>{{ old('isi', $service->isi) }}</textarea>
                     <small id="deskCount" class="text-muted" style="display: block; margin-top: 4px; text-align: right; color: #64748b; font-size: 12px;"></small>
-                    @error('deskripsi')
+                    @error('isi')
                         <small style="color: #ef4444; font-size: 12px; margin-top: 4px; display: block;">
                             <i class="fa-solid fa-circle-exclamation"></i> {{ $message }}
                         </small>
@@ -114,17 +114,17 @@
 <!-- Script Counter Karakter Real-time -->
 <script>
     const judul = document.getElementById('judul');
-    const deskripsi = document.getElementById('deskripsi');
+    const isi = document.getElementById('isi');
     const judulCount = document.getElementById('judulCount');
     const deskCount = document.getElementById('deskCount');
 
     function updateCounter() {
         judulCount.textContent = judul.value.length + " / 30 karakter";
-        deskCount.textContent = deskripsi.value.length + " / 200 karakter";
+        deskCount.textContent = isi.value.length + " / 200 karakter";
     }
 
     judul.addEventListener('input', updateCounter);
-    deskripsi.addEventListener('input', updateCounter);
+    isi.addEventListener('input', updateCounter);
 
     // Jalankan counter saat halaman pertama kali dimuat
     document.addEventListener('DOMContentLoaded', updateCounter);

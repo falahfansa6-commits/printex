@@ -3,11 +3,12 @@
         <a href="#" class="logo-container">
             <img src="{{ asset('img/printex-merah.png') }}" alt="Logo" class="logo-img">
         </a>
-        <div class="search-container">
-            <form action="{{ route('beranda') }}" method="GET">
-    <input type="text" name="k" class="search-input"placeholder="Cari...">
-</form>
-        </div>
+       <div class="search-container">
+    <form action="{{ route('search') }}" method="GET">
+        <input type="text" name="k" class="search-input" placeholder="Cari..." value="{{ request('k') }}">
+        <!-- Anda bisa menambahkan button jika mau, atau biarkan user tekan Enter -->
+    </form>
+</div>
 
         <div class="menu-container">
             <a href="{{ route('beranda') }}" class="menu-item">Beranda</a>

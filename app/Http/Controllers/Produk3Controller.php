@@ -33,7 +33,7 @@ class Produk3Controller extends Controller
     {
         $request->validate([
             'judul' => 'required',
-            'deskripsi' => 'required',
+            'isi' => 'required',
             'gambar' => 'required|image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
 
@@ -48,7 +48,7 @@ class Produk3Controller extends Controller
         Produk3::create([
             
             'judul' => $request->judul,
-            'deskripsi' => $request->deskripsi,
+            'isi' => $request->isi,
             'gambar' => $gambar,
         ]);
 
@@ -82,7 +82,7 @@ class Produk3Controller extends Controller
         $request->validate([
             
             'judul' => 'required',
-            'deskripsi' => 'required',
+            'isi' => 'required',
             'gambar' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
 
@@ -102,7 +102,7 @@ class Produk3Controller extends Controller
         $produk3->update([
             
             'judul' => $request->judul,
-            'deskripsi' => $request->deskripsi,
+            'isi' => $request->isi,
             'gambar' => $gambar,
         ]);
 

@@ -11,14 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('hub_kami', function (Blueprint $table) {
-            $table->id();
-            $table->string('nama');
-            $table->string('no_wa');
-            $table->string('email');
-            $table->string('isi');
-            $table->timestamps();
-        });
+       Schema::create('berandas', function (Blueprint $table) {
+    $table->id();
+    $table->string('judul');
+    $table->text('isi');
+    $table->timestamps();
+});
     }
 
     /**
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('hub_kamis');
+        Schema::dropIfExists('berandas');
     }
 };

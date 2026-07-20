@@ -94,15 +94,15 @@
 
                 <!-- Input Pesan -->
                 <div class="form-group" style="margin-top: 15px;">
-                    <label for="des">Pesan <span style="color: #ef4444;">*</span></label>
+                    <label for="isi">Pesan <span style="color: #ef4444;">*</span></label>
                     <textarea 
-                        id="des" 
-                        name="des" 
+                        id="isi" 
+                        name="isi" 
                         rows="6" 
                         placeholder="Masukkan pesan atau isi deskripsi"
-                        class="@error('des') is-invalid @enderror"
-                        required>{{ old('des', $hub_kami->des) }}</textarea>
-                    @error('des')
+                        class="@error('isi') is-invalid @enderror"
+                        required>{{ old('isi', $hub_kami->isi) }}</textarea>
+                    @error('isi')
                         <small style="color: #ef4444; font-size: 12px; margin-top: 4px; display: block;">
                             <i class="fa-solid fa-circle-exclamation"></i> {{ $message }}
                         </small>

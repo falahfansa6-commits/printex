@@ -32,9 +32,9 @@
 
                 <!-- Field Deskripsi -->
                 <div class="form-group">
-                    <label for="deskripsi">Deskripsi</label>
-                    <textarea id="deskripsi" name="deskripsi" rows="6" required>{{ old('deskripsi', $data->deskripsi) }}</textarea>
-                    @error('deskripsi')
+                    <label for="isi">Deskripsi</label>
+                    <textarea id="isi" name="isi" rows="6" required>{{ old('isi', $data->isi) }}</textarea>
+                    @error('isi')
                         <span style="color: #ef4444; font-size: 12px; margin-top: 4px;">{{ $message }}</span>
                     @enderror
                 </div>

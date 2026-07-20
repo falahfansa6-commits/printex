@@ -53,7 +53,7 @@
                             
                             <!-- Kolom Deskripsi dengan pembatasan teks agar rapi -->
                             <td class="text-muted-row">
-                                {{ Str::limit($item->deskripsi, 80) }}
+                                {{ Str::limit($item->isi, 80) }}
                             </td>
                             
                             <!-- Kolom Gambar memanfaatkan fitur Hover Overlay dari CSS -->

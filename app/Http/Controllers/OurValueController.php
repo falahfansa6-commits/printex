@@ -24,13 +24,13 @@ class OurValueController extends Controller
     {
         $request->validate([
             'judul'=>'required|max:255',
-            'deskripsi'=>'required',
+            'isi'=>'required',
             'urutan'=>'required|integer',
         ]);
 
         OurValue::create([
             'judul'=>$request->judul,
-            'deskripsi'=>$request->deskripsi,
+            'isi'=>$request->isi,
             'urutan'=>$request->urutan,
             'status'=>$request->status ?? 1,
         ]);
@@ -48,13 +48,13 @@ class OurValueController extends Controller
     {
         $request->validate([
             'judul'=>'required|max:255',
-            'deskripsi'=>'required',
+            'isi'=>'required',
             'urutan'=>'required|integer',
         ]);
 
         $ourvalue->update([
             'judul'=>$request->judul,
-            'deskripsi'=>$request->deskripsi,
+            'isi'=>$request->isi,
             'urutan'=>$request->urutan,
             'status'=>$request->status ?? 1,
         ]);

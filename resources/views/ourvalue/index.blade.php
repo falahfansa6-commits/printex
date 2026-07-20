@@ -54,7 +54,7 @@
                             
                             <!-- Kolom Deskripsi dengan memanfaatkan class baris teks bawaan -->
                             <td class="text-muted-row">
-                                {{ $item->deskripsi }}
+                                {{ $item->isi }}
                             </td>
                             
                             <!-- Kolom Urutan -->
