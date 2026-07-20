@@ -1,13 +1,45 @@
- <nav class="navbar">
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    if (window.location.hash) {
+
+        const target = document.querySelector(window.location.hash);
+
+        if (target) {
+
+            target.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+
+            target.classList.add("search-highlight");
+
+            setTimeout(() => {
+                target.classList.remove("search-highlight");
+            }, 3000);
+        }
+
+    }
+
+});
+</script>
+<nav class="navbar">
         
         <a href="#" class="logo-container">
             <img src="{{ asset('img/printex-merah.png') }}" alt="Logo" class="logo-img">
         </a>
        <div class="search-container">
-    <form action="{{ route('search') }}" method="GET">
-        <input type="text" name="k" class="search-input" placeholder="Cari..." value="{{ request('k') }}">
-        <!-- Anda bisa menambahkan button jika mau, atau biarkan user tekan Enter -->
-    </form>
+   <form action="{{ route('search') }}" method="GET" >
+
+    <input
+    class="search-input"
+        type="text"
+        name="k"
+        placeholder="Cari..."
+        value="{{ request('k') }}">
+        
+
+</form>
 </div>
 
         <div class="menu-container">

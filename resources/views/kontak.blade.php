@@ -20,7 +20,7 @@
         @include('layouts.navbar')
     </nav>
 
-    
+    <section id="hubkami">
     <div class="hk-section-wrapper">
         <div class="hk-badge">Kontak Kami</div>
         <h2 class="hk-main-title">Hubungi <span class="hk-title-underline">Kami</span></h2>
@@ -112,6 +112,9 @@
 </form>
         </div>
     </div>
+    </section>
+
+    <section id="empatkontak">
 
    <div class="ic-cards-section-wrapper">
     <div class="ic-cards-grid">
@@ -216,7 +219,7 @@
     </div>
 
 </div>
-
+</section>
 <footer class="printex-footer">
 @include('layouts.footer')
 

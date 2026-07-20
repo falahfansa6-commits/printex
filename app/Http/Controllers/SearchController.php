@@ -3,54 +3,148 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
 use App\Models\Slider;
-use App\Models\Tentang;
-use App\Models\Service;
 use App\Models\OurValue;
 use App\Models\Secound;
-use App\Models\TheProduk;
+use App\Models\Service;
+use App\Models\Tentang;
+use App\Models\Location;
+use App\Models\Theproduk;
 use App\Models\Produk1;
 use App\Models\Produk2;
 use App\Models\Produk3;
+use App\Models\EmpatKontak;
 use App\Models\Hub_kami;
-use App\Models\Kontak;
-use App\Models\Location;
-use Illuminate\Support\Facades\Schema;
 
 class SearchController extends Controller
 {
     public function index(Request $request)
     {
-        $keyword = $request->k;
-        $results = collect();
+        $keyword = trim($request->k);
 
-        $models = [
-            Slider::class,
-            Tentang::class,
-            Service::class,
-            OurValue::class,
-            Secound::class,
-            TheProduk::class,
-            Produk1::class,
-            Produk2::class,
-            Produk3::class,
-            Hub_kami::class,
-            Kontak::class,
-            Location::class,
-        ];
-
-        foreach ($models as $model) {
-            if (Schema::hasColumn((new $model)->getTable(), 'judul') &&
-                Schema::hasColumn((new $model)->getTable(), 'isi')) {
-
-                $data = $model::where('judul', 'like', "%{$keyword}%")
-                    ->orWhere('isi', 'like', "%{$keyword}%")
-                    ->get();
-
-                $results = $results->merge($data);
-            }
+        if (!$keyword) {
+            return back();
         }
 
-        return view('search_results', compact('results', 'keyword'));
+        $search = [
+
+            // ================= BERANDA =================
+
+            [
+                'model' => Slider::class,
+                'route' => route('beranda'),
+                'anchor' => 'slider',
+                'columns' => ['judul'],
+            ],
+
+            [
+                'model' => OurValue::class,
+                'route' => route('beranda'),
+                'anchor' => 'ourvalue',
+                'columns' => ['judul','isi'],
+            ],
+
+            [
+                'model' => Secound::class,
+                'route' => route('beranda'),
+                'anchor' => 'secound',
+                'columns' => ['judul','isi'],
+            ],
+
+            // ================= ABOUT =================
+
+            [
+                'model' => Tentang::class,
+                'route' => route('about'),
+                'anchor' => 'tentang',
+                'columns' => ['judul','isi'],
+            ],
+
+            [
+                'model' => Location::class,
+                'route' => route('about'),
+                'anchor' => 'location',
+                'columns' => ['nama_kota', 'alamat'],
+            ],
+
+            // ================= LAYANAN =================
+
+            [
+                'model' => Service::class,
+                'route' => route('pelayanan'),
+                'anchor' => 'service',
+                'columns' => ['judul','isi'],
+            ],
+
+            [
+                'model' => Theproduk::class,
+                'route' => route('pelayanan'),
+                'anchor' => 'theproduk',
+                'columns' => ['judul','isi'],
+            ],
+
+            [
+                'model' => Produk1::class,
+                'route' => route('pelayanan'),
+                'anchor' => 'produk1',
+                'columns' => ['judul','isi'],
+            ],
+
+            [
+                'model' => Produk2::class,
+                'route' => route('pelayanan'),
+                'anchor' => 'produk2',
+                'columns' => ['judul','isi'],
+            ],
+
+            [
+                'model' => Produk3::class,
+                'route' => route('pelayanan'),
+                'anchor' => 'produk3',
+                'columns' => ['judul','isi'],
+            ],
+
+            // ================= KONTAK =================
+
+            [
+                'model' => EmpatKontak::class,
+                'route' => route('kontak'),
+                'anchor' => 'empatkontak',
+                'columns' => ['jenis','isi','link'],
+            ],
+
+            [
+                'model' => Hub_kami::class,
+                'route' => route('kontak'),
+                'anchor' => 'hubkami',
+                'columns' => ['nama','no_wa','email','isi'],
+            ],
+
+        ];
+
+        foreach ($search as $item) {
+
+            $query = $item['model']::query();
+
+            $query->where(function ($q) use ($item,$keyword){
+
+                foreach($item['columns'] as $column){
+
+                    $q->orWhere($column,'LIKE',"%{$keyword}%");
+
+                }
+
+            });
+
+            if($query->exists()){
+
+                return redirect($item['route'].'#'.$item['anchor']);
+
+            }
+
+        }
+
+        return redirect()->back()->with('error','Data tidak ditemukan');
     }
 }

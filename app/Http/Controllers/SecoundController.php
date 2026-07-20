@@ -10,10 +10,22 @@ class SecoundController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $secounds = Secound::latest()->get();
 
+ $query = $request->input('k');
+
+if ($query) {
+    $secounds = Secound::when($query, function ($queryBuilder) use ($query) {
+        $queryBuilder->where(function ($k) use ($query) {
+            $k->where('judul', 'like', '%' . $query . '%')
+              ->orWhere('isi', 'like', '%' . $query . '%');
+        });
+    })->paginate(5);
+} else {
+    $secounds = Secound::latest()->paginate(5);
+}
+       
         return view('secound.index', compact('secounds'));
     }
 

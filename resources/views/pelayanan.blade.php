@@ -46,7 +46,7 @@
     <br>
 
     <!-- LAYANAN SECTION -->
-    <section class="printex-section">
+   <section id="service" class="printex-section">
         <div class="printex-top">
             <div class="printex-left">
                 <div class="printex-logo">
@@ -79,7 +79,7 @@
     </section>
 
     <!-- GRID PRODUCTS & PROCESS 01 -->
-    <div class="ks-full-page-container">
+   <div id="theproduk" class="ks-full-page-container"> 
         @if($theprodukimage)
             <div class="ks-box-top-left" style="background-image: url('{{ asset($theprodukimage->gambar) }}');"></div>
         @else
@@ -109,7 +109,7 @@
             </div>
         </div>
 
-        <div class="ks-box-bottom-left">
+       <div id="produk1" class="ks-box-bottom-left"> 
             @foreach ($produk1 as $item)
                 <div class="ks-process-title">
                     <h2><span class="ks-number">01</span>{{ $item->judul }}</h2>
@@ -131,7 +131,7 @@
     </div>
 
     <!-- PROCESS 02 SECTION -->
-    <section class="ptx-section-container">
+  <section id="produk2" class="ptx-section-container">
         <div class="ptx-left-side">
             <div class="ptx-header-wrapper">
                 <div class="ptx-process-badge">
@@ -167,7 +167,7 @@
     </section>
 
     <!-- PROCESS 03 SECTION -->
-    <div class="kp-main-card-container">
+   <div id="produk3" class="kp-main-card-container"> 
         <div class="kp-text-section">
             <div class="kp-title-group">
                 <span class="kp-badge-number">03</span>

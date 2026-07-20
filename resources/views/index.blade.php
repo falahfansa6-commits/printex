@@ -19,7 +19,7 @@
     </nav>
 
     <!-- SLIDER -->
-    <section class="slider-container">
+    <section class="slider-container" id="slider">
         <button class="prev" onclick="prevSlide()">❮</button>
 
         <div class="slider" id="slider">
@@ -60,7 +60,7 @@
    <!-- HASIL SABLON / SECOUNDS -->
 @if($secounds->count())
 
-<section class="secounds-section">
+<section class="secounds-section" id="secound">
 
     @foreach ($secounds as $item)
 
@@ -94,7 +94,7 @@
   <!-- OUR VALUES -->
 @if($ourvalues->count())
 
-<section class="ov-section-wrapper">
+<section class="ov-section-wrapper" id="ourvalue">
 
     <!-- Bagian kiri -->
     <div class="ov-left-side">

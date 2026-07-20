@@ -28,7 +28,7 @@ use App\Http\Controllers\Admin\AboutController;
 use App\Http\Controllers\Admin\LayananController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\admin\HubKontakController;
-
+use App\Http\Controllers\SearchController;
 
 
 
@@ -127,4 +127,4 @@ Route::middleware('admin.auth')->prefix('admin')->group(function () {
 });
 
 //search
-Route::get('/search', [App\Http\Controllers\SearchController::class, 'index'])->name('search');
+Route::get('/search', [SearchController::class, 'index'])->name('search');

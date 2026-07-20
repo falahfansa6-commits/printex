@@ -14,6 +14,7 @@
     </nav>
 
     <!-- Tentang -->
+    <section id="tentang">
     <div class="container">
 
         @if($tentang)
@@ -69,8 +70,12 @@
         @endif
 
     </div>
+    </section>
 
     <!-- Lokasi -->
+    <section id="location">
+
+   
     <div class="lk-main-wrapper">
 
         <div class="lk-header-banner">
@@ -109,7 +114,7 @@
         </div>
 
     </div>
-
+ </section>
     <footer class="printex-footer">
         @include('layouts.footer')
     </footer>

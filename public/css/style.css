@@ -1162,13 +1162,15 @@ body {
             max-width: 40%;
         }
 
-        .pts-main-heading {
-            color: #e11d24; /* Warna merah sesuai brand */
-            font-size: calc(2.5rem + 1vw); /* Ukuran teks dinamis dan proporsional */
-            font-weight: 800;
-            line-height: 1.05;
-            letter-spacing: -1.5px;
-        }
+       .pts-main-heading {
+    color: #e11d24;
+    font-size: calc(2.5rem + 1vw);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -1.5px;
+
+    max-width: 250px; /* Sesuaikan sampai menjadi 3 baris */
+}
 
         /* --- SISI KANAN: DESKRIPSI (TULISAN KECIL) --- */
         .pts-right-description {
@@ -1940,5 +1942,27 @@ body {
 
 .login-btn:hover{
     background:#0b5ed7;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+.search-highlight {
+    animation: highlight 3s ease;
+}
+
+@keyframes highlight {
+    0% {
+        background-color: #ffe066;
+    }
+
+    50% {
+        background-color: #ffd43b;
+    }
+
+    100% {
+        background-color: transparent;
+    }
 }
 
