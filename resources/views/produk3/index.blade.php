@@ -106,7 +106,11 @@
     </div>
     
     <!-- Footer Terintegrasi bawaan CSS -->
-    <footer class="main-footer">
+    <footer class="main-footer"
+     <br>
+  <a href="{{ route('admin.layanan') }}" class="btn btn-back" style="background: #64748b; color: #fff;">
+                        <i class="fa-solid fa-arrow-left"></i> Kembali
+                    </a>>
         <span class="footer-copyright">&copy; {{ date('Y') }} Admin Dashboard. All rights reserved.</span>
         <div class="footer-links">
             <a href="#">Privacy Policy</a>

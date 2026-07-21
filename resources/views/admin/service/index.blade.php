@@ -100,7 +100,9 @@
                     </tbody>
                 </table>
             </div>
-
+  <a href="{{ route('admin.layanan') }}" class="btn btn-back" style="background: #64748b; color: #fff;">
+                        <i class="fa-solid fa-arrow-left"></i> Kembali
+                    </a>
         </div>
     </div>
 </div>

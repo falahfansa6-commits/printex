@@ -60,6 +60,6 @@ class AuthController extends Controller
     {
         $request->session()->flush();
 
-        return redirect()->route('login');
+        return redirect()->route('beranda');
     }
 }

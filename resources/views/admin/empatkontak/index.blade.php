@@ -94,6 +94,9 @@
     
     <!-- Footer Terintegrasi bawaan CSS -->
     <footer class="main-footer">
+  <a href="{{ route('admin.hubkontak') }}" class="btn btn-back" style="background: #64748b; color: #fff;">
+                        <i class="fa-solid fa-arrow-left"></i> Kembali
+                    </a>
         <span class="footer-copyright">&copy; {{ date('Y') }} Admin Dashboard. All rights reserved.</span>
         <div class="footer-links">
             <a href="#">Privacy Policy</a>

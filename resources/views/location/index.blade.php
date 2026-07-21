@@ -103,6 +103,9 @@
 
             <!-- Pagination Section (Komponen Statis) -->
             <div class="pagination-container">
+                 <a href="{{ route('admin.about') }}" class="btn btn-back" style="background: #64748b; color: #fff;">
+                        <i class="fa-solid fa-arrow-left"></i> Kembali
+                    </a>
                 <div class="pagination-info">Menampilkan {{ $locations->count() }} data</div>
                 <div class="pagination-nav">
                     <button class="btn-nav" disabled><i class="fa-solid fa-chevron-left"></i></button>
